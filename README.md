@@ -1,0 +1,2 @@
+# corewar
+compiling for kittens
