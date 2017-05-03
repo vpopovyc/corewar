@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striter.c                                       :+:      :+:    :+:   */
+/*   striter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 16:52:09 by mkrutik           #+#    #+#             */
-/*   Updated: 2016/11/24 17:15:46 by mkrutik          ###   ########.fr       */
+/*   Created: 2016/11/25 14:48:47 by vpopovyc          #+#    #+#             */
+/*   Updated: 2016/12/01 20:09:00 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-void	ft_striter(char *s, void (*f)(char*))
+void	ft_striter(char *s, void (*f)(char *))
 {
 	if (s && f)
 	{
 		while (*s)
 		{
-			(f)(s);
+			f(s);
 			s++;
 		}
 	}

@@ -3,57 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 14:33:00 by mkrutik           #+#    #+#             */
-/*   Updated: 2016/11/28 17:15:36 by mkrutik          ###   ########.fr       */
+/*   Created: 2016/11/26 20:16:49 by vpopovyc          #+#    #+#             */
+/*   Updated: 2016/11/28 12:46:41 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-static	size_t		count_len(int n)
+static int		ft_get_len(long tmp)
 {
-	size_t			i;
-	unsigned int	un;
+	int		i;
 
-	i = 1;
-	un = n;
-	if (n < 0)
+	i = 0;
+	if (tmp <= 0)
 	{
-		un = -n;
+		i++;
+		tmp = -tmp;
+	}
+	while (tmp)
+	{
+		tmp = tmp / 10;
 		i++;
 	}
-	while ((un /= 10) >= 1)
-		i++;
 	return (i);
 }
 
-char				*ft_itoa(int n)
+static void		ft_beer(char *s, long tmp, int i)
 {
-	unsigned int	un;
-	int				len;
-	int				start;
-	char			*ptr;
-
-	len = count_len(n);
-	un = n;
-	start = 0;
-	if ((ptr = (char*)malloc(len + 1)))
+	if (tmp >= 10)
 	{
-		ptr[len] = '\0';
-		if (n < 0)
-		{
-			ptr[0] = '-';
-			un = -n;
-			start = 1;
-		}
-		while (len-- > start)
-		{
-			ptr[len] = (un % 10) + 48;
-			un /= 10;
-		}
-		return (ptr);
+		ft_beer(s, tmp / 10, i - 1);
+		ft_beer(s, tmp % 10, i);
 	}
-	return (NULL);
+	if (tmp < 10)
+		s[i - 1] = tmp + 48;
+}
+
+char			*ft_itoa(int n)
+{
+	int		blen;
+	long	temp;
+	char	*beer;
+
+	temp = n;
+	blen = ft_get_len(temp);
+	beer = ft_strnew(blen);
+	if (!beer)
+		return (NULL);
+	beer[blen] = '\0';
+	if (temp < 0)
+	{
+		temp = -temp;
+		beer[0] = '-';
+	}
+	ft_beer(beer, temp, blen);
+	return (beer);
 }

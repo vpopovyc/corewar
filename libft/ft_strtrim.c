@@ -3,39 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 14:50:51 by mkrutik           #+#    #+#             */
-/*   Updated: 2016/11/29 16:56:55 by mkrutik          ###   ########.fr       */
+/*   Created: 2016/11/25 18:57:21 by vpopovyc          #+#    #+#             */
+/*   Updated: 2016/11/28 12:59:54 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-static int		whitespace(char c)
+char	*ft_strtrim(char const *s)
 {
-	if (c == ' ' || c == '\n' || c == '\t')
-		return (1);
-	else
-		return (0);
-}
-
-char			*ft_strtrim(char const *s)
-{
-	unsigned int	start;
-	unsigned int	finish;
-	unsigned int	len;
+	char	*beer;
+	int		st;
+	int		ed;
 
 	if (!s)
 		return (NULL);
-	start = 0;
-	while (s[start] != '\0' && whitespace(s[start]))
-		start++;
-	finish = ft_strlen(s);
-	while (start < finish && whitespace(s[finish - 1]))
-		finish--;
-	if (start == finish)
-		return (ft_strnew(1));
-	len = finish - start;
-	return (ft_strsub(s, start, len));
+	st = 0;
+	ed = (int)ft_strlen(s) - 1;
+	while (s[st] && (s[st] == ' ' || s[st] == '\n' || s[st] == '\t'))
+		st++;
+	if (st == (int)ft_strlen(s))
+		return (ft_strnew(0));
+	while (s[ed] && (s[ed] == ' ' || s[ed] == '\n' || s[ed] == '\t'))
+		ed--;
+	beer = ft_strsub(s, st, ed - st + 1);
+	return (beer);
 }
