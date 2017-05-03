@@ -3,26 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/23 12:43:53 by mkrutik           #+#    #+#             */
-/*   Updated: 2016/12/01 15:18:26 by mkrutik          ###   ########.fr       */
+/*   Created: 2016/11/24 13:30:49 by vpopovyc          #+#    #+#             */
+/*   Updated: 2016/11/28 12:52:41 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-int		ft_strncmp(const char *src1, const char *src2, size_t n)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (n == 0)
-		return (0);
-	while (n != 0)
+	int				beer;
+	unsigned char	*pt1;
+	unsigned char	*pt2;
+
+	pt1 = (unsigned char*)s1;
+	pt2 = (unsigned char*)s2;
+	while (((*pt1) || (*pt2)) && (n--))
 	{
-		if (*src1 != *src2++)
-			return (*(unsigned char*)src1 - *(unsigned char*)--src2);
-		if (*src1++ == 0)
-			return (0);
-		n--;
+		if (*pt1 != *pt2)
+		{
+			beer = *pt1 - *pt2;
+			return (beer);
+		}
+		pt1++;
+		pt2++;
 	}
 	return (0);
 }

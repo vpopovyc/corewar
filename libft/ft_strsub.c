@@ -3,28 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 18:18:40 by mkrutik           #+#    #+#             */
-/*   Updated: 2016/11/25 11:12:10 by mkrutik          ###   ########.fr       */
+/*   Created: 2016/11/25 18:08:36 by vpopovyc          #+#    #+#             */
+/*   Updated: 2016/12/17 17:44:54 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	unsigned int	index;
-	char			*res;
+	size_t	i;
+	char	*beer;
 
-	if (!s || !len || !(res = ft_strnew(len)))
-		return (NULL);
-	index = 0;
-	while (index < len)
-	{
-		res[index] = s[start];
-		start++;
-		index++;
-	}
-	return (res);
+	i = 0;
+	beer = NULL;
+	if (s && (beer = ft_strnew(len)))
+		while (i < len)
+			beer[i++] = s[start++];
+	return (beer);
 }

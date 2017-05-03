@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 11:58:40 by mkrutik           #+#    #+#             */
-/*   Updated: 2016/11/25 12:27:02 by mkrutik          ###   ########.fr       */
+/*   Created: 2016/11/22 20:32:20 by vpopovyc          #+#    #+#             */
+/*   Updated: 2016/12/02 14:45:17 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	unsigned int position;
-	unsigned int index;
+	char *beer;
 
-	position = ft_strlen(s1);
-	index = 0;
-	while (n && s2[index])
+	beer = s1;
+	beer = beer + ft_strlen(s1);
+	while ((n--) && (*s2))
 	{
-		s1[position] = s2[index];
-		position++;
-		index++;
-		n--;
+		*beer = *s2;
+		beer++;
+		s2++;
 	}
-	s1[position] = '\0';
+	*beer = '\0';
 	return (s1);
 }

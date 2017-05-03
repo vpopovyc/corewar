@@ -3,26 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/23 17:50:52 by mkrutik           #+#    #+#             */
-/*   Updated: 2016/11/28 14:38:25 by mkrutik          ###   ########.fr       */
+/*   Created: 2016/11/22 16:31:00 by vpopovyc          #+#    #+#             */
+/*   Updated: 2016/12/03 17:20:44 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned const char *ps1;
-	unsigned const char *ps2;
+	int				i;
+	unsigned char	*beer;
+	unsigned char	*beer2;
 
-	ps1 = (unsigned char*)s1;
-	ps2 = (unsigned char*)s2;
+	i = 0;
+	beer = (unsigned char*)s1;
+	beer2 = (unsigned char*)s2;
 	while (n--)
 	{
-		if (*ps1++ != *ps2++)
-			return (*--ps1 - *--ps2);
+		if ((*beer > *beer2) || (*beer < *beer2))
+			return (i = *beer - *beer2);
+		beer++;
+		beer2++;
 	}
-	return (0);
+	return (i);
 }

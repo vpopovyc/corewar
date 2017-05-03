@@ -3,30 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/26 12:49:53 by mkrutik           #+#    #+#             */
-/*   Updated: 2016/11/29 10:34:25 by mkrutik          ###   ########.fr       */
+/*   Created: 2016/11/24 12:42:41 by vpopovyc          #+#    #+#             */
+/*   Updated: 2016/12/04 18:26:55 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-char	*ft_strnstr(const char *s, const char *find, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	char			*ps;
-	unsigned int	len_find;
+	size_t	i;
+	size_t	j;
+	size_t	beer;
 
-	ps = (char*)s;
-	if (!*ps && !*find)
-		return (ps);
-	len_find = ft_strlen(find);
-	while (*ps && len >= len_find)
+	i = 0;
+	j = 0;
+	if (ft_strlen(little) == 0)
+		return ((char*)big);
+	while (big[i] && i <= len)
 	{
-		if (!(ft_strncmp(ps, find, len_find)))
-			return (ps);
-		ps++;
-		len--;
+		beer = i;
+		while (little[j] == big[i] && little[j] && i < len)
+		{
+			j++;
+			i++;
+		}
+		if (j == ft_strlen(little))
+			return ((char*)&big[i - j]);
+		j = 0;
+		i = beer + 1;
 	}
 	return (NULL);
 }

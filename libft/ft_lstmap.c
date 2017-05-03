@@ -3,27 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 15:05:29 by mkrutik           #+#    #+#             */
-/*   Updated: 2016/11/29 15:41:21 by mkrutik          ###   ########.fr       */
+/*   Created: 2016/11/29 11:41:46 by vpopovyc          #+#    #+#             */
+/*   Updated: 2016/11/29 12:41:35 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list *newlist;
+	t_list		*beer;
+	t_list		*head;
 
-	if (lst)
+	if (!(lst) || (!(f)))
+		return (NULL);
+	beer = f(lst);
+	head = beer;
+	lst = lst->next;
+	while (lst)
 	{
-		newlist = (t_list*)ft_memalloc(sizeof(t_list));
-		if (!newlist)
-			return (NULL);
-		newlist = (f)(lst);
-		newlist->next = ft_lstmap(lst->next, f);
-		return (newlist);
+		beer->next = f(lst);
+		beer = beer->next;
+		lst = lst->next;
 	}
-	return (NULL);
+	return (head);
 }
