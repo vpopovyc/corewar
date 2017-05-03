@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/26 21:51:58 by vpopovyc          #+#    #+#             */
-/*   Updated: 2016/11/26 21:55:41 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/26 14:39:58 by mkrutik           #+#    #+#             */
+/*   Updated: 2016/11/28 17:14:12 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-void	ft_putendl(const char *s)
+void	ft_putendl(char const *s)
 {
-	ft_putstr(s);
+	char *ps;
+
+	ps = (char*)s;
+	ft_putstr(ps);
 	ft_putchar('\n');
 }

@@ -3,35 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 13:38:37 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/02/10 15:04:10 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/28 11:59:12 by mkrutik           #+#    #+#             */
+/*   Updated: 2016/12/01 15:19:39 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 int		ft_atoi(const char *str)
 {
-	char	i;
-	int		beer;
+	int		res;
+	int		sign;
 
-	i = 0;
-	beer = 0;
-	while ((((*str >= 9) && (*str <= 13)) || (*str == 32)) && (*str))
+	res = 0;
+	sign = 1;
+	while (ft_isspace(*str))
 		str++;
-	if (*str == 45)
-		i = 1;
-	if ((*str == 45) || (*str == 43))
+	if (*str == '-')
+		sign = -1;
+	if (*str == '-' || *str == '+')
 		str++;
-	while (((*str >= 48) && (*str <= 57)) && (*str))
+	while (ft_isdigit(*str))
 	{
-		beer = (beer * 10) + (*str - 48);
+		res *= 10;
+		res += *str - '0';
 		str++;
 	}
-	if (i)
-		return (beer = -beer);
-	else
-		return (beer);
+	return (sign * res);
 }

@@ -3,61 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/26 20:16:49 by vpopovyc          #+#    #+#             */
-/*   Updated: 2016/11/28 12:46:41 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/28 14:33:00 by mkrutik           #+#    #+#             */
+/*   Updated: 2016/11/28 17:15:36 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-static int		ft_get_len(long tmp)
+static	size_t		count_len(int n)
 {
-	int		i;
+	size_t			i;
+	unsigned int	un;
 
-	i = 0;
-	if (tmp <= 0)
+	i = 1;
+	un = n;
+	if (n < 0)
 	{
-		i++;
-		tmp = -tmp;
-	}
-	while (tmp)
-	{
-		tmp = tmp / 10;
+		un = -n;
 		i++;
 	}
+	while ((un /= 10) >= 1)
+		i++;
 	return (i);
 }
 
-static void		ft_beer(char *s, long tmp, int i)
+char				*ft_itoa(int n)
 {
-	if (tmp >= 10)
-	{
-		ft_beer(s, tmp / 10, i - 1);
-		ft_beer(s, tmp % 10, i);
-	}
-	if (tmp < 10)
-		s[i - 1] = tmp + 48;
-}
+	unsigned int	un;
+	int				len;
+	int				start;
+	char			*ptr;
 
-char			*ft_itoa(int n)
-{
-	int		blen;
-	long	temp;
-	char	*beer;
-
-	temp = n;
-	blen = ft_get_len(temp);
-	beer = ft_strnew(blen);
-	if (!beer)
-		return (NULL);
-	beer[blen] = '\0';
-	if (temp < 0)
+	len = count_len(n);
+	un = n;
+	start = 0;
+	if ((ptr = (char*)malloc(len + 1)))
 	{
-		temp = -temp;
-		beer[0] = '-';
+		ptr[len] = '\0';
+		if (n < 0)
+		{
+			ptr[0] = '-';
+			un = -n;
+			start = 1;
+		}
+		while (len-- > start)
+		{
+			ptr[len] = (un % 10) + 48;
+			un /= 10;
+		}
+		return (ptr);
 	}
-	ft_beer(beer, temp, blen);
-	return (beer);
+	return (NULL);
 }

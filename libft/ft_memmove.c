@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/22 16:31:50 by vpopovyc          #+#    #+#             */
-/*   Updated: 2016/12/03 16:45:47 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/24 13:14:26 by mkrutik           #+#    #+#             */
+/*   Updated: 2016/11/29 16:39:08 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t	b;
+	unsigned char *pdest;
+	unsigned char *psrc;
 
-	b = -1;
-	if (dst < src)
-		while (++b < len)
-			((unsigned char*)dst)[b] = ((unsigned char*)src)[b];
+	pdest = (unsigned char*)dest;
+	psrc = (unsigned char*)src;
+	if (psrc < pdest)
+	{
+		pdest += n;
+		psrc += n;
+		while (n--)
+			*--pdest = *--psrc;
+	}
 	else
-		while (++b < len)
-			((unsigned char*)dst)[len - b - 1] =
-				((unsigned char*)src)[len - b - 1];
-	return (dst);
+		while (n--)
+		{
+			*pdest++ = *psrc++;
+		}
+	return (dest);
 }

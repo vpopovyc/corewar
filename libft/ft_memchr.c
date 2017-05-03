@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/22 16:30:23 by vpopovyc          #+#    #+#             */
-/*   Updated: 2016/12/03 16:40:31 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/23 15:03:50 by mkrutik           #+#    #+#             */
+/*   Updated: 2016/11/24 10:18:01 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	beer;
+	const unsigned char *p;
 
-	beer = -1;
-	while (++beer < n)
+	p = (unsigned char*)s;
+	while (n--)
 	{
-		if (((unsigned char*)s)[beer] == (unsigned char)c)
-			return ((void*)&s[beer]);
+		if (*p++ == (unsigned char)c)
+			return ((void*)(p - 1));
 	}
 	return (NULL);
 }

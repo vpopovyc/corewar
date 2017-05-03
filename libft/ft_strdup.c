@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strdup.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/22 17:13:24 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/02/06 15:11:13 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/22 14:28:31 by mkrutik           #+#    #+#             */
+/*   Updated: 2016/11/29 15:54:58 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *str)
 {
-	size_t		i;
-	char		*beer;
+	size_t	size;
+	char	*copy;
 
-	i = ft_strlen(s1);
-	beer = (char*)malloc(sizeof(char) * (i + 1));
-	if (beer)
+	size = ft_strlen(str) + 1;
+	copy = (char*)malloc(sizeof(char) * size);
+	if (copy == NULL)
 	{
-		*beer = *ft_strcpy(beer, s1);
-		return (beer);
-	}
-	else
 		return (NULL);
+	}
+	ft_memcpy(copy, str, size);
+	return (copy);
 }

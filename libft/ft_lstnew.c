@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 21:05:37 by vpopovyc          #+#    #+#             */
-/*   Updated: 2016/11/28 22:06:12 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/29 12:20:12 by mkrutik           #+#    #+#             */
+/*   Updated: 2016/11/29 15:41:42 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-t_list		*ft_lstnew(void const *content, size_t content_size)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list	*beer;
+	t_list	*newlist;
 
-	beer = (t_list*)malloc(sizeof(t_list));
-	if (beer)
+	newlist = (t_list*)ft_memalloc(sizeof(t_list));
+	if (!newlist)
+		return (NULL);
+	if (!content)
 	{
-		if (!(content))
-		{
-			beer->content_size = 0;
-			beer->content = NULL;
-		}
-		else
-		{
-			beer->content = malloc(content_size);
-			ft_memcpy(beer->content, content, content_size);
-			beer->content_size = content_size;
-		}
-		beer->next = NULL;
-		return (beer);
+		newlist->content = NULL;
+		newlist->content_size = 0;
+		newlist->next = NULL;
 	}
-	return (NULL);
+	else
+	{
+		newlist->content = (void*)ft_memalloc(content_size);
+		newlist->content = ft_memcpy(newlist->content, content, content_size);
+		newlist->content_size = content_size;
+		newlist->next = NULL;
+	}
+	return (newlist);
 }

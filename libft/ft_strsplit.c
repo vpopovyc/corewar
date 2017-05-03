@@ -3,72 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 21:01:33 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/02/02 16:47:21 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/29 11:38:11 by mkrutik           #+#    #+#             */
+/*   Updated: 2017/03/23 10:29:43 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-static size_t	ft_count_words(const char *s, char c)
+static	int		words(char const *s, char c)
 {
-	size_t		i;
+	int		word;
+	int		index;
 
-	i = 0;
-	while (*s)
+	index = 0;
+	word = 0;
+	while (s[index] != '\0')
 	{
-		if (*s != c)
-		{
-			i++;
-			while (*s != c && *s)
-				s++;
-			if (*s == '\0')
-				break ;
-		}
-		s++;
+		if (s[index] != c && s[index + 1] != '\0' && s[index + 1] != '\0')
+			word++;
+		index++;
 	}
-	return (i);
+	return (++word);
 }
 
-static size_t	ft_count_chars(const char *s, char c)
+static	int		length(char const *s, int index, char c)
 {
-	size_t		i;
+	int		result;
 
-	i = 0;
-	while (*s != c && *s)
+	result = 0;
+	if (!*s)
+		return (0);
+	while (s[index] != '\0' && s[index] != c)
 	{
-		i++;
-		s++;
+		index++;
+		result++;
 	}
-	return (i);
+	return (result);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char		**beer;
-	size_t		len;
-	size_t		i;
+	char	**res;
+	char	*string;
+	int		index;
+	int		word;
+	int		len;
 
-	if (!s)
+	if (!s || (!(res = (char**)malloc(sizeof(char*) * words(s, c) + 1))))
 		return (NULL);
-	if (!(beer = (char**)malloc(sizeof(char*) * (ft_count_words(s, c) + 1))))
-		return (NULL);
-	i = 0;
-	while (*s != '\0')
-	{
-		if (*s != c)
+	index = -1;
+	word = 0;
+	while (s[++index] != '\0')
+		if (s[index] != c)
 		{
-			len = ft_count_chars(s, c);
-			beer[i] = ft_strnew(len);
-			ft_strncpy(beer[i++], s, len);
-			s += len;
+			len = length(s, index, c);
+			string = ft_strnew(len);
+			ft_strncpy(string, s + index, len);
+			string[len] = '\0';
+			res[word++] = string;
+			index += len - 1;
 		}
-		if (*s == '\0')
-			break ;
-		s++;
-	}
-	beer[i] = NULL;
-	return (beer);
+	res[word] = NULL;
+	return (res);
 }

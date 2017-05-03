@@ -3,28 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 17:33:00 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/02/06 15:07:19 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/24 17:45:19 by mkrutik           #+#    #+#             */
+/*   Updated: 2016/11/24 17:56:07 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*beer;
-	unsigned int	i;
+	unsigned int	index;
+	char			*res;
 
-	i = -1;
-	beer = NULL;
-	if (s && f)
+	index = 0;
+	if (!s || !(res = ft_strnew(ft_strlen(s))))
+		return (NULL);
+	while (s[index])
 	{
-		if (!(beer = ft_strnew(ft_strlen(s))))
-			return (NULL);
-		while (s[++i])
-			beer[i] = f(i, s[i]);
+		res[index] = (f)(index, s[index]);
+		index++;
 	}
-	return (beer);
+	return (res);
 }

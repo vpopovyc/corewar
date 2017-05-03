@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/23 17:10:38 by vpopovyc          #+#    #+#             */
-/*   Updated: 2016/11/24 22:14:32 by vpopovyc         ###   ########.fr       */
+/*   Created: 2016/11/26 11:31:10 by mkrutik           #+#    #+#             */
+/*   Updated: 2016/12/01 13:21:00 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-char	*ft_strstr(const char *big, const char *little)
+char	*ft_strstr(const char *s, const char *find)
 {
-	size_t beer;
+	char			*ps;
+	unsigned int	len_find;
 
-	if (!(*little))
-		return ((char*)big);
-	beer = ft_strlen(little);
-	while (*big)
+	ps = (char*)s;
+	if (!*ps && !*find)
+		return (ps);
+	len_find = ft_strlen(find);
+	while (*ps)
 	{
-		if (!(ft_strncmp(big, little, beer)))
-			return ((char*)big);
-		big++;
+		if (!(ft_strncmp(ps, find, len_find)))
+			return (ps);
+		ps++;
 	}
 	return (NULL);
 }
