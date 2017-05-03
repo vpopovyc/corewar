@@ -4,9 +4,12 @@ void	ft_open(char *name, t_gamer *src)
 {
 	char s[2];
 
-	((src->fd = open(name, O_RDONLY)) < 0) ? ft_error(3) : 0;
-	(read(src->fd, s, 0) < 0) ? ft_error(4) : 0;
-	(close(src->fd) < 0) ? ft_error(5) : 0;
+	if ((src->fd = open(name, O_RDONLY)) < 0)
+		ft_error(3);
+	if (read(src->fd, s, 0) < 0)
+		ft_error(4);
+	if (close(src->fd) < 0)
+		ft_error(5);
 	src->fd = open(name, O_RDONLY);
 }
 
