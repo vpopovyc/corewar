@@ -12,26 +12,6 @@
 
 #include "byte_code_header.h"
 
-char 	char_to_hex(char pv)
-{
-	return ((char)HEX_CHARS[pv % BASE]);
-}
-
-char 	erase_high_bits(char pv)
-{
-	return (pv ^ ((pv >> 4) << 4));
-}
-
-char 	erase_low_bits(char pv)
-{
-	return (pv >> 4 ^ ((pv >> 8) << 4));
-}
-
-int 	find_num_of_bytes(int length)
-{
-	return ((4 - (length % 4)) + length);
-}
-
 static void		header_uint_bc(char *magic, int key)
 {
 	char 	current_4_bits;
@@ -54,44 +34,6 @@ static void		header_uint_bc(char *magic, int key)
 		++i;
 	}
 	magic[MAX_UINT_SIZE] = '\0';
-}
-
-static void		place_space(char *prog_name, int *space)
-{
-	*prog_name = ' ';
-	*space = NO_SPACE;
-}
-
-static void		place_new_line(char *prog_name, int *space, int *new_line)
-{
-	*prog_name = '\n';
-	*space = NO_SPACE; 
-	*new_line = BEGIN_OF_LINE;
-}
-
-static int 		count_number_of_bytes(int key_length)
-{
-	if ((key_length + 1) % 4)
-		return (find_num_of_bytes(key_length + 1));
-	else
-		return (key_length + 1);
-}
-
-static void		write_bc_to_header(char **prog, char **reference, int i)
-{
-	**prog = char_to_hex(erase_low_bits(**reference));
-	++(*prog);
-	**prog = char_to_hex(erase_high_bits(**reference));
-	++(*prog);
-	if (i < COMMENT_LENGTH)
-		++(*reference);
-}
-
-static void		variables_moves(int *space, int *new_line, int *i)
-{
-	*space = (*space) << 1;
-	++(*new_line);
-	++(*i);
 }
 
 static void		header_name_bc(char *prog_name, char *reference)

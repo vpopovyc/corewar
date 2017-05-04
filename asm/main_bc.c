@@ -21,7 +21,7 @@ void	fill_header(header_t *sv)
 	sv->prog_name[PROG_NAME_LENGTH] = '\0';
 
 	for (int j = 0; j < COMMENT_LENGTH; j++)
-		sv->comment[j] = 0;
+		sv->comment[j] = 'B';
 	sv->comment[COMMENT_LENGTH] = '\0';
 
 	sv->prog_size = PROG_SIZE;
