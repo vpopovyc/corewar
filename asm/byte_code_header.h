@@ -15,7 +15,6 @@
 
 # include "../libft/includes/libft.h"
 # include "../op.h"
-
 /*
 ** Header magic
 */
@@ -71,4 +70,27 @@ void		variables_moves(int *space, int *new_line, int *i);
 void		write_bc_to_header(char **prog, char **reference, int i);
 void		place_new_line(char *prog_name, int *space, int *new_line);
 void		place_space(char *prog_name, int *space);
+/*
+** Validation struct
+*/
+typedef struct		s_gamer
+{
+	header_t		*src;
+	t_bc_header		header_bc;
+	char			*name;
+	char			*comment;
+	int				header;
+	int				fd;
+	unsigned int	len_def_name;
+	unsigned int	len_def_comment;
+}					t_gamer;
+/*
+** ft_error.c
+*/
+void			ft_error(int n);
+int				ft_isspace(char c);
+/*
+** ft_validation_header.c
+*/
+void			ft_validation(t_gamer *src);
 #endif

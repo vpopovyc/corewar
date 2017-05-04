@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "byte_code_header.h"
 
 void	ft_check_len(t_gamer *data)
 {
@@ -18,10 +18,13 @@ void	ft_check_len(t_gamer *data)
 		ft_error(7);
 	if (ft_strlen(data->comment) > COMMENT_LENGTH)
 		ft_error(8);
-	ft_bzero(data->src->prog_name, data->len_def_name);
-	ft_bzero(data->src->comment, data->len_def_comment);
+	ft_bzero(data->src->prog_name, PROG_NAME_LENGTH);
+	ft_bzero(data->src->comment, COMMENT_LENGTH);
 	ft_strcpy(data->src->prog_name, data->name);
 	ft_strcpy(data->src->comment, data->comment);
+	data->src->magic = COREWAR_EXEC_MAGIC;
+	free(data->name);
+	free(data->comment);
 }
 
 void	ft_next_line(t_gamer *src, int dest, int b, unsigned int len)

@@ -88,14 +88,23 @@ static void		header_comment_bc(char *comment, char *reference)
 	*comment = '\0';
 }
 
+/*
+** POPRAVIT', PRINTF NE PODKLUCHAT'
+** ESLI HOCHESH' PRINTF, PERESTAN' HOTET'
+*/
+
 void	header_bc_init(t_bc_header *sv, header_t *header)
 {
 	header_uint_bc(sv->magic, header->magic);
-	printf("%s ", sv->magic);
+	write(1, sv->magic, ft_strlen(sv->magic));
+	write(1, " ", 1);
 	header_name_bc(sv->prog_name, header->prog_name);
-	printf("%s ", sv->prog_name);
+	write(1, sv->prog_name, ft_strlen(sv->prog_name));
+	write(1, " ", 1);
 	header_uint_bc(sv->prog_size, header->prog_size);
-	printf("%s ", sv->prog_size);
+	write(1, sv->prog_size, ft_strlen(sv->prog_size));
+	write(1, " ", 1);
 	header_comment_bc(sv->comment, header->comment);
-	printf("%s\n", sv->comment);
+	write(1, sv->comment, ft_strlen(sv->comment));
+	write(1, "\n", 1);
 }

@@ -28,11 +28,11 @@ void		place_new_line(char *prog_name, int *space, int *new_line)
 	*space = NO_SPACE; 
 	*new_line = BEGIN_OF_LINE;
 }
-/* 
+/*
 ** Counts number of bytes in accordance to data structure alignment
 ** And returns aligned size
 */
-int 		count_number_of_bytes(int key_length)
+int			count_number_of_bytes(int key_length)
 {
 	if ((key_length + 1) % 4)
 		return (find_num_of_bytes(key_length + 1));
@@ -58,7 +58,7 @@ void		write_bc_to_header(char **prog, char **reference, int i)
 */
 void		variables_moves(int *space, int *new_line, int *i)
 {
-	*space = (*space) << 1;
+	*space <<= 1;
 	++(*new_line);
 	++(*i);
 }
