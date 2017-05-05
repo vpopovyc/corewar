@@ -6,7 +6,7 @@
 /*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 17:49:01 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/02 17:49:07 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:56:07 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,27 @@
 */
 # define BC_COMMENT_LENGTH			COMMENT_LENGTH + (COMMENT_LENGTH / 2)
 # define BEGIN_OF_LINE_AFTER_PS		12
+
+
+typedef struct		s_comand
+{
+	char			*name;
+	int				op_code;
+	char			*arg1;
+	char			*arg2;
+	char			*arg3;
+	char			*hex_code;
+	struct s_comand *next;
+}					t_comand;
+
+typedef struct		s_label_list
+{
+	char			*name;
+	t_comand		*comand;
+	struct s_label_list *next;
+}					t_label;
+
+
 /*
 ** Struct that contain header bc
 */
@@ -77,6 +98,7 @@ typedef struct		s_gamer
 {
 	header_t		*src;
 	t_bc_header		header_bc;
+	t_label			*label;
 	char			*name;
 	char			*comment;
 	int				header;
