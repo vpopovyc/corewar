@@ -90,6 +90,7 @@ char			**all_delims_split(char *string)
 		s++;
 	}
 	return (new);
+<<<<<<< HEAD
 }
 
 /*
@@ -110,3 +111,6 @@ char			**all_delims_split(char *string)
 ** 	}
 ** }
 */
+=======
+}
+>>>>>>> a70dd302b41904b366b5764a34cf59fe670ab0f3

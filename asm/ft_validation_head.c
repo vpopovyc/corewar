@@ -23,8 +23,8 @@ void	ft_check_len(t_gamer *data)
 	ft_strcpy(data->src->prog_name, data->name);
 	ft_strcpy(data->src->comment, data->comment);
 	data->src->magic = COREWAR_EXEC_MAGIC;
-	free(data->name);
-	free(data->comment);
+    ft_strdel(&data->name);
+    ft_strdel(&data->comment);
 }
 
 void	ft_next_line(t_gamer *src, int dest, int b, unsigned int len)
