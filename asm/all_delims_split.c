@@ -6,11 +6,16 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/06 14:33:22 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/06 15:04:21 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/06 16:10:57 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "byte_code_header.h"
+
+/*
+**	RETURNS LENGTH OF CONTINIOUS SEQUENCE OF CHARS THAT ARE NOT DELIMETERS
+**	'\n', '\t', '\r', ' ', '\f', '\v'
+*/
 
 static int		word_len_in_str(char *string)
 {
@@ -26,6 +31,11 @@ static int		word_len_in_str(char *string)
 	}
 	return (len);
 }
+
+/*
+**	RETURNS NUMBER OF WORDS IN A STRING DELIMITED BY
+**	 '\n', '\t', '\r', ' ', '\f', '\v'
+*/
 
 static int		count_words_in_string(char *string)
 {
@@ -49,6 +59,11 @@ static int		count_words_in_string(char *string)
 	}
 	return (words);
 }
+
+/*
+**	SPLITS A STRING BY '\n', '\t', '\r', ' ', '\f', '\v'
+**	AND RETURNS AN ARRAY OF STRINGS
+*/
 
 char			**all_delims_split(char *string)
 {
@@ -75,4 +90,27 @@ char			**all_delims_split(char *string)
 		s++;
 	}
 	return (new);
+<<<<<<< HEAD
 }
+
+/*
+**	JUST UNCOMMENT IT TO CHECK all_delims_split() FUNCTION
+**
+** int		main(void)
+** {
+** 	char	**ptr;
+** 	char	*str;
+**
+**	str = "\v\v\t\n\naaaasdfdsagadgd \t\v\nwojskf \nsdfsadfd sd  \0  dghfghgf ";
+** 	printf("there are %d words\n", count_words_in_string(str));
+** 	ptr = all_delims_split(str);
+** 	while (*ptr != NULL)
+** 	{
+** 		printf("%s\n", *ptr);
+** 		ptr++;
+** 	}
+** }
+*/
+=======
+}
+>>>>>>> a70dd302b41904b366b5764a34cf59fe670ab0f3
