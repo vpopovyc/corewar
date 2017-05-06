@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/06 16:45:27 by vpopovyc          #+#    #+#             */
+/*   Updated: 2017/05/06 16:45:30 by vpopovyc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "byte_code_header.h"
 
 void		ft_open(char *name, t_gamer *src)
@@ -19,6 +31,7 @@ t_gamer		*init_validation(int argc, char **argv)
 
 	(!(new = (t_gamer*)malloc(sizeof(t_gamer)))) ? ft_error(1) : 0;
 	(!(new->src = (header_t*)malloc(sizeof(header_t)))) ? ft_error(1) : 0;
+	new->header_bc = (t_bc_header*)ft_memalloc(sizeof(t_bc_header));
 	(argc != 2) ? ft_error(2) : ft_open(argv[1], new);
 	new->header = 0;
 	new->name = NULL;
@@ -30,12 +43,9 @@ t_gamer		*init_validation(int argc, char **argv)
 int		main(int ac, char **av)
 {
 	t_gamer		*root;
-    int         fd;
 
 	root = init_validation(ac, av);
-    fd = root->fd;
-    header_bc_init(&(root->header_bc), root->src);
-    root->fd = fd;
+    header_bc_init(root->header_bc, root->src);
     // ft_write_comands(root, 0, NULL);
 	return (0);
 }

@@ -41,7 +41,6 @@
 */
 # define BC_COMMENT_LENGTH			COMMENT_LENGTH + (COMMENT_LENGTH / 2)
 # define BEGIN_OF_LINE_AFTER_PS		12
-
 /*
 ** Comands
 */
@@ -62,7 +61,6 @@
 # define LFORK "lfork"
 # define AFF "aff"
 
-
 typedef struct		s_comand
 {
 	char			*name;
@@ -81,7 +79,6 @@ typedef struct		s_label_list
 	struct s_label_list *next;
 }					t_label;
 
-
 /*
 ** Struct that contain header bc
 */
@@ -93,7 +90,7 @@ typedef struct		s_bc_header
   char				comment[BC_COMMENT_LENGTH + 1];
 }					t_bc_header;
 /*
-** 
+** main.c
 */
 void		header_bc_init(t_bc_header *sv, header_t *header);
 /*
@@ -117,7 +114,7 @@ void		place_space(char *prog_name, int *space);
 typedef struct		s_gamer
 {
 	header_t		*src;
-	t_bc_header		header_bc;
+	t_bc_header		*header_bc;
 	t_label			*label;
 	char			*name;
 	char			*comment;
