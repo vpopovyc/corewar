@@ -76,17 +76,3 @@ char			**all_delims_split(char *string)
 	}
 	return (new);
 }
-
-int		main(void)
-{
-	char	**ptr;
-	char	*str = "\v\v\t\n\naaaasdfdsagadgd \t\v\nwojskf \nsdfsadfd sd  \0  dghfghgf ";
-
-	printf("there are %d words\n", count_words_in_string(str));
-	ptr = all_delims_split(str);
-	while (*ptr != NULL)
-	{
-		printf("%s\n", *ptr);
-		ptr++;
-	}
-}

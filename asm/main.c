@@ -30,9 +30,12 @@ t_gamer		*init_validation(int argc, char **argv)
 int		main(int ac, char **av)
 {
 	t_gamer		*root;
-
+    int         fd;
 
 	root = init_validation(ac, av);
-	header_bc_init(&(root->header_bc), root->src);
+    fd = root->fd;
+    header_bc_init(&(root->header_bc), root->src);
+    root->fd = fd;
+    // ft_write_comands(root, 0, NULL);
 	return (0);
 }

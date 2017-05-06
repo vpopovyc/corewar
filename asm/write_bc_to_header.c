@@ -47,7 +47,7 @@ int			count_number_of_bytes(int key_length)
 void		write_bc_to_header(char **prog, char **reference, int i)
 {
 	**prog = char_to_hex(erase_low_bits(**reference));
-	++(*prog);
+    ++(*prog);
 	**prog = char_to_hex(erase_high_bits(**reference));
 	++(*prog);
 	if (i < COMMENT_LENGTH)
