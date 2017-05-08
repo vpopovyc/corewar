@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   byte_code_header.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 17:49:01 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/06 15:46:22 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/08 16:55:16 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/includes/libft.h"
 # include "../op.h"
+
 /*
 ** Header magic
 */
@@ -31,7 +32,7 @@
 # define BEGIN_OF_LINE_AFTER_MAGIC	4
 # define SPACE_NEEDED 				4
 # define NEW_LINE_NEEDED			16
-# define BC_PROG_LENGTH 			PROG_NAME_LENGTH + (PROG_NAME_LENGTH / 2)
+# define BC_PROG_LENGTH 			PROG_NAME_LENGTH * 2 + (PROG_NAME_LENGTH / 2) + 9
 /*
 ** Header program size
 */
@@ -39,8 +40,32 @@
 /*
 ** Header comment
 */
-# define BC_COMMENT_LENGTH			COMMENT_LENGTH + (COMMENT_LENGTH / 2)
+# define BC_COMMENT_LENGTH			COMMENT_LENGTH * 2 + (COMMENT_LENGTH / 2) + 9
 # define BEGIN_OF_LINE_AFTER_PS		12
+/*
+**	hash table constants
+*/
+# define MAGIC_NUMBER_FNV			16777619
+# define HASH_FNV					2166136261
+# define SIZEOFTABLE					32
+# define FIRST_COLLISION				NULL
+
+typedef unsigned					t_uint;
+
+typedef struct						s_hash
+{
+	char							*key;
+	int 							bytes;
+	struct s_hash					*collision;
+}									t_hash;
+/*
+**	hash.c
+*/
+void								set_to_null(t_hash *table);
+int									key_exist(char *newkey, t_hash *table);
+t_hash								*append_key_hash(char *newkey, t_hash *table, int id, int bytes);
+void								add_key_hash(char *newkey, int bytes, t_hash *table);
+t_hash								*get_item(char *key, t_hash *table);
 /*
 ** Comands
 */
@@ -68,7 +93,8 @@ typedef struct		s_comand
 	char			*arg1;
 	char			*arg2;
 	char			*arg3;
-	char			*hex_code;
+	// char			*hex_code;
+	char			hex_code;
 	struct s_comand *next;
 }					t_comand;
 
@@ -78,7 +104,15 @@ typedef struct		s_label_list
 	t_comand		*comand;
 	struct s_label_list *next;
 }					t_label;
-
+/*
+** compile_to_hex.c
+*/
+# define SECONDARG		0x3F
+# define THIRDARG 		0xF
+/* tmp */
+void fill_label_list(t_label **head);
+void printlabel(t_label *head);
+/* tmp */
 /*
 ** Struct that contain header bc
 */
@@ -89,9 +123,11 @@ typedef struct		s_bc_header
   char				prog_size[MAX_UINT_SIZE + 1];
   char				comment[BC_COMMENT_LENGTH + 1];
 }					t_bc_header;
+void 	fill_hash_table(t_hash *table, t_label *head, t_bc_header *header_bc, char *name);
 /*
-** main.c
+** header_bc.c
 */
+void		header_uint_bc(char *magic, int key);
 void		header_bc_init(t_bc_header *sv, header_t *header);
 /*
 ** inline_fts_bc_header.c
@@ -109,6 +145,10 @@ void		write_bc_to_header(char **prog, char **reference, int i);
 void		place_new_line(char *prog_name, int *space, int *new_line);
 void		place_space(char *prog_name, int *space);
 /*
+**	compile_to_hex_addition.c
+*/
+void step_to_byte_code(t_hash *table, t_label *head, t_bc_header *h_bc, int fd);
+/*
 ** Validation struct
 */
 typedef struct		s_gamer
@@ -116,6 +156,7 @@ typedef struct		s_gamer
 	header_t		*src;
 	t_bc_header		*header_bc;
 	t_label			*label;
+	t_hash			*table;
 	char			*name;
 	char			*comment;
 	int				header;
@@ -138,4 +179,6 @@ int				ft_isspace(char c);
 ** ft_validation_header.c
 */
 void			ft_validation(t_gamer *src);
+
+void print_header_bc(t_bc_header *sv, int fd);
 #endif

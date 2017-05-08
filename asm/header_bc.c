@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   header_bc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 15:19:26 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/03 15:19:45 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/05/08 14:27:44 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "byte_code_header.h"
 
-static void		header_uint_bc(char *magic, int key)
+void		header_uint_bc(char *magic, int key)
 {
 	char 	current_4_bits;
 	char 	step_right;
@@ -46,7 +46,7 @@ static void		header_name_bc(char *prog_name, char *reference)
 	i = 0;
 	space = NO_SPACE;
 	new_line = BEGIN_OF_LINE_AFTER_MAGIC;
-	num_of_bytes = count_number_of_bytes(PROG_NAME_LENGTH);
+	num_of_bytes = count_number_of_bytes(BC_PROG_LENGTH);
 	while (i < num_of_bytes)
 	{
 		if (new_line == NEW_LINE_NEEDED)
@@ -96,15 +96,17 @@ static void		header_comment_bc(char *comment, char *reference)
 void	header_bc_init(t_bc_header *sv, header_t *header)
 {
 	header_uint_bc(sv->magic, header->magic);
-	write(1, sv->magic, ft_strlen(sv->magic));
-	write(1, " ", 1);
+	// write(1, sv->magic, ft_strlen(sv->magic));
+	// write(1, " ", 1);
+
 	header_name_bc(sv->prog_name, header->prog_name);
-	write(1, sv->prog_name, ft_strlen(sv->prog_name));
-	write(1, " ", 1);
+	// write(1, sv->prog_name, ft_strlen(sv->prog_name));
+	// write(1, " ", 1);
+	// while(1);
 	header_uint_bc(sv->prog_size, header->prog_size);
-	write(1, sv->prog_size, ft_strlen(sv->prog_size));
+	/*write(1, sv->prog_size, ft_strlen(sv->prog_size));
 	write(1, " ", 1);
-	header_comment_bc(sv->comment, header->comment);
-	write(1, sv->comment, ft_strlen(sv->comment));
+	*/header_comment_bc(sv->comment, header->comment);
+/*	write(1, sv->comment, ft_strlen(sv->comment));
 	write(1, "\n", 1);
-}
+*/}

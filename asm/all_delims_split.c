@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/06 14:33:22 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/06 16:10:57 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/06 16:12:28 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ char			**all_delims_split(char *string)
 		s++;
 	}
 	return (new);
-<<<<<<< HEAD
 }
 
 /*
@@ -111,6 +110,4 @@ char			**all_delims_split(char *string)
 ** 	}
 ** }
 */
-=======
 }
->>>>>>> a70dd302b41904b366b5764a34cf59fe670ab0f3

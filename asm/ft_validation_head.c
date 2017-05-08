@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_validation_head.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mkrutik <mkrutik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 16:07:23 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/05/03 16:15:33 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/08 15:56:30 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	ft_check_len(t_gamer *data)
 	ft_strcpy(data->src->prog_name, data->name);
 	ft_strcpy(data->src->comment, data->comment);
 	data->src->magic = COREWAR_EXEC_MAGIC;
-    ft_strdel(&data->name);
-    ft_strdel(&data->comment);
 }
 
 void	ft_next_line(t_gamer *src, int dest, int b, unsigned int len)

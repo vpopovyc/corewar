@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_bc_to_header.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 14:02:08 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/04 14:02:40 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/05/08 14:27:45 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		place_space(char *prog_name, int *space)
 void		place_new_line(char *prog_name, int *space, int *new_line)
 {
 	*prog_name = '\n';
-	*space = NO_SPACE; 
+	*space = NO_SPACE;
 	*new_line = BEGIN_OF_LINE;
 }
 /*
@@ -40,8 +40,8 @@ int			count_number_of_bytes(int key_length)
 		return (key_length + 1);
 }
 /*
-** Writes byte-code of char reference to prog array 
-** It splits one char of reference into two diff chars 
+** Writes byte-code of char reference to prog array
+** It splits one char of reference into two diff chars
 ** First char contain four high bits of char reference, as second contain four lower
 */
 void		write_bc_to_header(char **prog, char **reference, int i)

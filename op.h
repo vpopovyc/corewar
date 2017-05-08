@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/05/02 19:39:22 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/08 16:55:18 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 ** Toutes les tailles sont en octets.
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
 */
+#ifndef	__OP_H
+#define __OP_H
 
 #define IND_SIZE				2
 #define REG_SIZE				4
@@ -59,10 +61,6 @@ typedef char	t_arg_type;
 #define T_IND					4
 #define T_LAB					8
 
-/*
-**
-*/
-
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
@@ -74,3 +72,17 @@ typedef struct		header_s
   unsigned int		prog_size;
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+typedef struct 		s_op
+{
+	char			*name;
+	char 			num_args;
+	char			args[3];
+	char			op_code;
+	int				cycles;
+	char			code_byte;
+	char			label_size;
+}					t_op;
+
+extern t_op 		g_op[];
+#endif
