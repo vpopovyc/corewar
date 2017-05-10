@@ -48,85 +48,116 @@ char    *ft_find_and_check_comand(char *src)
     return (res);
 }
 
-int     ft_is_empty_line(char *src)
-{
-    int i;
-    
-    i = 0;
-    while (src[i])
-    {
-        if (!ft_isspace(src[i]))
-            return (1);
-        i++;
-    }
-    return (0);
-}
-
-
 /*
 ** незаконченно
 */
 
+void    ft_free_two_dimensional_array(char **array)
+{
+    int i;
+    
+    i = 0;
+    while (array[i])
+    {
+        ft_strdel(&array[i]);
+        i++;
+    }
+    free(array);
+}
+
+//void    print(char **line)
+//{
+//    int i;
+//    
+//    i = 0;
+//    while (line[i])
+//    {
+//        ft_putstr(line[i]);
+//        ft_putstr("\n");
+//        i++;
+//    }
+//}
+
+t_comand    *ft_current(t_comand *src)
+{
+    t_comand *res;
+    
+    res = src;
+    while (res->next)
+        res = res->next;
+    return (res);
+}
+
+t_comand    *ft_end(t_comand *src)
+{
+    t_comand *new;
+    
+    new = src;
+    while (new->next)
+        new = new->next;
+    new->next = ft_add_comand();
+    new = new->next;
+    return (new);
+}
+
+
 void    ft_write_comands(t_gamer *src, int i, char *tmp)
 {
-    char    **line;
-    char    **arguments;
-    t_label *point;
-    
-    int first;
-    int second;
-    int third;
+    char            **line;
+    t_label         *point;
+    t_comand        *comand;
     
     src->label = ft_add_label();
+    src->label->comand = ft_add_comand();
     point = src->label;
     while (get_next_line(src->fd, &tmp) > 0)
     {
-        line = ft_strsplit(tmp, ' '); /// написать сплит по пробелам и табуляциям
-        // разбить строку на лейбл, имя команди , аргументы
-        free(tmp);
-        i = 0;
-        if (line[i] && ft_is_empty_line(line[i]) == 1)
+        if (tmp && tmp[0] != '\0')
         {
-            if (i == 0 && line[i])
+            line = all_delims_split(tmp);
+            free(tmp);
+            if (line)
             {
-                // создает новую метку
-                if ((tmp = ft_find_label(line[i])))
+                if (!ft_strcmp(line[0], NAME_CMD_STRING) || !ft_strcmp(line[0], COMMENT_CMD_STRING)) // если еще одно имя и комент игрока вывести ошибку
+                    ft_error(6);
+                if (line[0][0] == COMMENT_CHAR) // если коментарий пропустить
+                    ft_free_two_dimensional_array(line);// функция очистки двухмерного масива
+                else
                 {
-                    if (point->name)
+                    i = 0;
+                    if (i == 0 && line[i]) // проверка на вхождение метки
                     {
-                        point->next = ft_add_label();
-                        point = point->next;
+                        if ((tmp = ft_find_label(line[i]))) // если метка найдена
+                        {
+                            if (point->name)
+                            {
+                                point->next = ft_add_label();
+                                point = point->next;
+                                point->comand = ft_add_comand();
+                            }
+                            point->name = tmp;
+                            i++;
+                        }
+                        else if (!point->name)
+                            point->name = ft_strdup("empty"); // если метки нет
                     }
-                    point->name = tmp;
-                    i++;
+                    if (line[i] && (tmp = ft_find_and_check_comand(line[i])))
+                    {
+                        if (point->comand->name != NULL)
+                            comand = ft_end(point->comand);
+                        else
+                            comand = ft_current(point->comand);
+                        comand->name = ft_strdup(tmp);
+                        i++;
+                    }
+                    else
+                        ft_error(10);
+                    ft_find_arguments(comand, line, i, 0);
+                    ft_free_two_dimensional_array(line);
+//                    printf("%s|%hhx|%s|%s|%s\n", comand->name, comand->op_code, comand->arg1, comand->arg2, comand->arg3);
                 }
-                else if (!point->name)
-                    point->name = ft_strdup("empty");
-            }
-            if (line[i] && (tmp = ft_find_and_check_comand(line[i])))
-            {
-                // создет команду
-                if (point->comand->name)
-                {
-                    point->comand->next = ft_add_comand();
-                    point->comand = point->comand->next;
-                }
-                point->comand = ft_add_comand();
-                point->comand->name = tmp;
-            }
-            arguments = ft_strsplit(line[i], SEPARATOR_CHAR);
-            if (arguments)
-            {
-                first = ft_valid_comand_arguments(arguments[0], &point->comand->arg1);
-                
             }
         }
-        i = 0;
-        while (line[i])
-        {
-            ft_strdel(&line[i]);
-            i++;
-        }
-        free(line);
     }
+    printf("\n\n");
 }

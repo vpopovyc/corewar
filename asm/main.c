@@ -56,12 +56,33 @@ void print_header_bc(t_bc_header *sv, int fd)
 	write(fd, "\n", 1);
 }
 
+#include <stdio.h>
+
+void    print(t_label *head)
+{
+    while (head)
+    {
+        printf("%s\n", head->name);
+        while (head->comand)
+        {
+            printf("%s|%hhx|%s|%s|%s\n", head->comand->name, head->comand->op_code, head->comand->arg1, head->comand->arg2, head->comand->arg3);
+            head->comand = head->comand->next;
+        }
+        head = head->next;
+        printf("-----------------------------------\n");
+    }
+    
+}
+
 int		main(int ac, char **av)
 {
 	t_gamer		*root;
 
 	root = init_validation(ac, av);
     header_bc_init(root->header_bc, root->src);
+    ft_write_comands(root, 0, NULL);
+    print(root->label);
+    
 	/* temp */
 	fill_label_list(&(root->label));
 	/* temp */
@@ -78,6 +99,5 @@ int		main(int ac, char **av)
 	/* asm */
 	/* bc */
 	/* bc */
-	// ft_write_comands(root, 0, NULL);
 	return (0);
 }

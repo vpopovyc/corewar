@@ -9,7 +9,7 @@ t_comand    *ft_add_comand(void)
     new->arg1 = NULL;
     new->arg2 = NULL;
     new->arg3 = NULL;
-    new->hex_code = NULL;
+    new->hex_code = 0;
     new->next = NULL;
     return (new);
 }

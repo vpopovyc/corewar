@@ -24,7 +24,7 @@ static int		word_len_in_str(char *string)
 
 	len = 0;
 	ptr = string;
-	while (!ft_isspace(*ptr))
+	while (!ft_isspace(*ptr) && *ptr)
 	{
 		len++;
 		ptr++;
@@ -109,5 +109,4 @@ char			**all_delims_split(char *string)
 ** 		ptr++;
 ** 	}
 ** }
-*/
-}
+}*/
