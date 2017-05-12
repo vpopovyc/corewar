@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 17:49:01 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/08 16:55:16 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/12 12:00:55 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ t_hash								*get_item(char *key, t_hash *table);
 typedef struct		s_comand
 {
 	char			*name;
-	int				op_code;
+	char			op_code;
 	char			*arg1;
 	char			*arg2;
 	char			*arg3;
-	// char			*hex_code;
 	char			hex_code;
 	struct s_comand *next;
 }					t_comand;
@@ -168,7 +167,13 @@ typedef struct		s_gamer
 t_label     *ft_add_label(void); /////////////
 t_comand    *ft_add_comand(void); ///
 int		ft_valid_comand_arguments(char *src, char **arg); //////
-void    ft_write_comands(t_gamer *src, int i, char *tmp);
+void    ft_write_comands(t_gamer *src, char *tmp);
+char			**all_delims_split(char *string);//
+void    ft_free_two_dimensional_array(char **array);
+void    ft_find_arguments(t_comand *src, char **line, int i, int index);
+t_comand	*ft_current(t_comand *src);
+t_comand	*ft_end(t_comand *src);
+char		ft_arg_to_binary(char b1, char b2, char b3);
 
 /*
 ** ft_error.c

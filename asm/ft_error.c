@@ -6,7 +6,7 @@
 /*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 16:08:29 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/05/05 10:36:24 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/12 12:02:51 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_error(int n)
 	(n == 6) ? ft_putstr("Invalid header !\n") : 0;
 	(n == 7) ? ft_putstr("Name is too long !\n") : 0;
 	(n == 8) ? ft_putstr("Comment is too long !\n") : 0;
-    (n == 9) ? ft_putstr("Invalid label !\n") : 0;
-    (n == 10) ? ft_putstr("Invalid comand !\n") : 0;
-    (n == 11) ? ft_putstr("Invalid argument !\n") : 0;
+	(n == 9) ? ft_putstr("Invalid label !\n") : 0;
+	(n == 10) ? ft_putstr("Invalid comand !\n") : 0;
+	(n == 11) ? ft_putstr("Invalid argument !\n") : 0;
 	ft_putstr("USAGE: ./asm <gamer_file_name.s>\n");
 	exit(-1);
 }

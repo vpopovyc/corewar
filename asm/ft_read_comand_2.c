@@ -1,38 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_comand_struct.c                          :+:      :+:    :+:   */
+/*   ft_read_comand_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/12 11:20:45 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/05/12 11:20:54 by mkrutik          ###   ########.fr       */
+/*   Created: 2017/05/12 11:44:35 by mkrutik           #+#    #+#             */
+/*   Updated: 2017/05/12 11:46:11 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "byte_code_header.h"
 
-t_comand	*ft_add_comand(void)
+void		ft_free_two_dimensional_array(char **array)
 {
-	t_comand *new;
+	int	i;
 
-	(!(new = (t_comand*)malloc(sizeof(t_comand)))) ? ft_error(1) : 0;
-	new->name = NULL;
-	new->arg1 = NULL;
-	new->arg2 = NULL;
-	new->arg3 = NULL;
-	new->hex_code = 0;
-	new->next = NULL;
-	return (new);
+	i = 0;
+	while (array[i])
+	{
+		ft_strdel(&array[i]);
+		i++;
+	}
+	free(array);
 }
 
-t_label		*ft_add_label(void)
+t_comand	*ft_current(t_comand *src)
 {
-	t_label	*new;
+	t_comand	*res;
 
-	(!(new = (t_label*)malloc(sizeof(t_label)))) ? ft_error(1) : 0;
-	new->name = NULL;
-	new->comand = NULL;
-	new->next = NULL;
+	res = src;
+	while (res->next)
+		res = res->next;
+	return (res);
+}
+
+t_comand	*ft_end(t_comand *src)
+{
+	t_comand	*new;
+
+	new = src;
+	while (new->next)
+		new = new->next;
+	new->next = ft_add_comand();
+	new = new->next;
 	return (new);
 }

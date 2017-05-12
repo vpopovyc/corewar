@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/06 16:45:27 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/08 18:29:11 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/12 11:39:52 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ int		main(int ac, char **av)
 	t_gamer		*root;
 
 	root = init_validation(ac, av);
-    header_bc_init(root->header_bc, root->src);
-    ft_write_comands(root, 0, NULL);
+ //   header_bc_init(root->header_bc, root->src);
+    ft_write_comands(root, NULL);
     print(root->label);
-    
+
 	/* temp */
-	fill_label_list(&(root->label));
+//	fill_label_list(&(root->label));
 	/* temp */
-	fill_hash_table(root->table, root->label, root->header_bc, root->name);
+//	fill_hash_table(root->table, root->label, root->header_bc, root->name);
 	/* asm */
 	// printlabel(root->label);
 	// t_hash		*elem;

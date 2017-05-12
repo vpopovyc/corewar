@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_valid_arguments.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/12 12:01:55 by mkrutik           #+#    #+#             */
+/*   Updated: 2017/05/12 12:01:58 by mkrutik          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "byte_code_header.h"
 
-char    *ft_direct_arg(char *src, int i)
+char	*ft_direct_arg(char *src, int i)
 {
-    char *res;
-    char *tmp;
+	char *res;
+	char *tmp;
 
-    res = NULL;
+	res = NULL;
 	if (src[1] == LABEL_CHAR)
 	{
 		tmp = ft_strsub(src, 2, ft_strlen(src) - 2);
@@ -16,111 +28,104 @@ char    *ft_direct_arg(char *src, int i)
 			i++;
 		}
 		if (tmp[i] == '\0' && i != 0)
-            res = tmp;
+			res = tmp;
 	}
 	else
 	{
-        i = (src[1] == '-') ? 2 : 1;
+		i = (src[1] == '-') ? 2 : 1;
 		while (ft_isdigit(src[i]))
 			i++;
 		if (src[i] == '\0' && i != 1)
-            res = ft_strsub(src, 1, ft_strlen(src) - 1);
+			res = ft_strsub(src, 1, ft_strlen(src) - 1);
 	}
-    return (res);
+	return (res);
 }
 
-char 	*ft_indirect_arg(char *src, int i)
+char	*ft_indirect_arg(char *src, int i)
 {
-    char    *res;
-    
-    res = NULL;
-    if (src[i] == '-')
-        i++;
+	char	*res;
+
+	res = NULL;
+	if (src[i] == '-')
+		i++;
 	while (ft_isdigit(src[i]))
-			i++;
+		i++;
 	if (src[i] == '\0')
 		res = ft_strsub(src, 0, ft_strlen(src));
-    return (res);
+	return (res);
 }
 
-char 	*ft_reg_arg(char *src, int i)
+char	*ft_reg_arg(char *src, int i)
 {
-    char *res;
-    char *tmp;
-    
-    res = NULL;
+	char	*res;
+	char	*tmp;
+
+	res = NULL;
 	while (ft_isdigit(src[i]))
 		i++;
 	if (src[i] == '\0')
 	{
 		tmp = ft_strsub(src, 1, ft_strlen(src) - 1);
 		i = ft_atoi(tmp);
-		if (i >= 1 && i <= 16)
-            res = tmp;;
+		if (i >= 0 && i <= 16)
+			res = tmp;
 	}
-    return (res);
+	return (res);
 }
-
-/*
-** возвращает тип аргумента (T_DIR == 2, T_IND == 3, T_REG == 1, invalid == 0)
-** записывает аргумент в строку по адресу **arg, если невалидный аргумент arg == NULL
-*/
 
 int		ft_valid_comand_arguments(char *src, char **arg)
 {
 	int		res;
-    char    *comand;
+	char	*comand;
 
 	res = 0;
-    comand = NULL;
+	comand = NULL;
 	if (src[0] == DIRECT_CHAR)
-        ((comand = ft_direct_arg(src, 0)) != NULL) ? (res = 2) : 0;
+	{
+		if ((comand = ft_direct_arg(src, 0)))
+			res = 2;
+	}
 	else if (ft_isdigit(src[0]) || src[0] == '-')
-        ((comand = ft_indirect_arg(src, 0)) != NULL) ? (res = 3) : 0;
+	{
+		if ((comand = ft_indirect_arg(src, 0)))
+			res = 3;
+	}
 	else if (src[0] == 'r')
-        ((comand = ft_reg_arg(src, 1)) != NULL) ? (res = 1) : 0;
-    if (res == 0)
-        ft_error(11);
-    *arg = comand;
+	{
+		if ((comand = ft_reg_arg(src, 1)))
+			res = 1;
+	}
+	if (res == 0)
+		ft_error(11);
+	*arg = comand;
 	return (res);
 }
 
-char        arg_to_binary(char b1, char b2, char b3)
+void	ft_find_arguments(t_comand *src, char **line, int i, int index)
 {
-    char byte;
-    
-    byte = 0;
-    byte |= b3 << 2;
-    byte |= b2 << 4;
-    byte |= b1 << 6;
-    return (byte);
-}
+	int		j;
+	int		n_arg[3];
+	char	**arguments;
+	char	*tmp;
 
-void    ft_find_arguments(t_comand *src, char **line, int i, int index)
-{
-    int     j;
-    int     n_arg[3];
-    char    **arguments;
-    char    *tmp;
-    
-    n_arg[0] = 0;
-    n_arg[1] = 0;
-    n_arg[2] = 0;
-    while (line[i] != NULL)
-    {
-        if ((arguments = ft_strsplit(line[i++], SEPARATOR_CHAR)))
-        {
-            j = 0;
-            while (arguments[j])
-            {
-                (index > 2) ? ft_error(11) : 0;
-                n_arg[index] = ft_valid_comand_arguments(arguments[j++], &tmp);
-                (index == 0) ? (src->arg1 = tmp) : 0;
-                (index == 1) ? (src->arg2 = tmp) : 0;
-                (index++ == 2) ? (src->arg3 = tmp) : 0;
-            }
-            ft_free_two_dimensional_array(arguments);
-        }
-    }
-    src->op_code = arg_to_binary((char)n_arg[0], (char)n_arg[1], (char)n_arg[2]);
+	n_arg[0] = 0;
+	n_arg[1] = 0;
+	n_arg[2] = 0;
+	while (line[i] != NULL)
+	{
+		arguments = ft_strsplit(line[i++], SEPARATOR_CHAR);
+		if (!arguments || !arguments[0] || arguments[0][0] == COMMENT_CHAR)
+			break ;
+		j = 0;
+		while (arguments[j])
+		{
+			(index > 2) ? ft_error(11) : 0;
+			n_arg[index] = ft_valid_comand_arguments(arguments[j++], &tmp);
+			(index == 0) ? (src->arg1 = tmp) : 0;
+			(index == 1) ? (src->arg2 = tmp) : 0;
+			(index++ == 2) ? (src->arg3 = tmp) : 0;
+		}
+		ft_free_two_dimensional_array(arguments);
+	}
+	src->op_code = ft_arg_to_binary(n_arg[0], n_arg[1], n_arg[2]);
 }
