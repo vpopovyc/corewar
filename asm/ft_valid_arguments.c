@@ -28,7 +28,7 @@ char	*ft_direct_arg(char *src, int i)
 			i++;
 		}
 		if (tmp[i] == '\0' && i != 0)
-			res = tmp;
+			res = ft_strdup(src);
 	}
 	else
 	{
@@ -36,7 +36,7 @@ char	*ft_direct_arg(char *src, int i)
 		while (ft_isdigit(src[i]))
 			i++;
 		if (src[i] == '\0' && i != 1)
-			res = ft_strsub(src, 1, ft_strlen(src) - 1);
+			res = ft_strdup(src);
 	}
 	return (res);
 }
@@ -46,12 +46,26 @@ char	*ft_indirect_arg(char *src, int i)
 	char	*res;
 
 	res = NULL;
-	if (src[i] == '-')
-		i++;
-	while (ft_isdigit(src[i]))
-		i++;
-	if (src[i] == '\0')
-		res = ft_strsub(src, 0, ft_strlen(src));
+    if (src[0] == LABEL_CHAR)
+    {
+        i = 1;
+        while (src[i])
+        {
+            if (!ft_strchr(LABEL_CHARS, src[i]))
+                return NULL;
+            i++;
+        }
+        res = ft_strdup(src);
+    }
+    else
+    {
+        if (src[i] == '-')
+            i++;
+        while (ft_isdigit(src[i]))
+            i++;
+        if (src[i] == '\0')
+            res = ft_strsub(src, 0, ft_strlen(src));
+    }
 	return (res);
 }
 
@@ -68,7 +82,7 @@ char	*ft_reg_arg(char *src, int i)
 		tmp = ft_strsub(src, 1, ft_strlen(src) - 1);
 		i = ft_atoi(tmp);
 		if (i >= 0 && i <= 16)
-			res = tmp;
+			res = ft_strdup(src);
 	}
 	return (res);
 }
@@ -85,7 +99,7 @@ int		ft_valid_comand_arguments(char *src, char **arg)
 		if ((comand = ft_direct_arg(src, 0)))
 			res = 2;
 	}
-	else if (ft_isdigit(src[0]) || src[0] == '-')
+	else if (ft_isdigit(src[0]) || src[0] == '-' || src[0] == LABEL_CHAR)
 	{
 		if ((comand = ft_indirect_arg(src, 0)))
 			res = 3;
@@ -101,31 +115,38 @@ int		ft_valid_comand_arguments(char *src, char **arg)
 	return (res);
 }
 
+
 void	ft_find_arguments(t_comand *src, char **line, int i, int index)
 {
 	int		j;
-	int		n_arg[3];
+    int  n_arg[3];
 	char	**arguments;
 	char	*tmp;
 
 	n_arg[0] = 0;
 	n_arg[1] = 0;
 	n_arg[2] = 0;
-	while (line[i] != NULL)
+    while (line[i] != NULL)
 	{
 		arguments = ft_strsplit(line[i++], SEPARATOR_CHAR);
-		if (!arguments || !arguments[0] || arguments[0][0] == COMMENT_CHAR)
-			break ;
-		j = 0;
-		while (arguments[j])
-		{
-			(index > 2) ? ft_error(11) : 0;
-			n_arg[index] = ft_valid_comand_arguments(arguments[j++], &tmp);
-			(index == 0) ? (src->arg1 = tmp) : 0;
-			(index == 1) ? (src->arg2 = tmp) : 0;
-			(index++ == 2) ? (src->arg3 = tmp) : 0;
-		}
-		ft_free_two_dimensional_array(arguments);
+		if (arguments && arguments[0] && arguments[0][0] == COMMENT_CHAR)
+        {
+            ft_free_two_dimensional_array(arguments);
+            break ;
+        }
+        else if (arguments)
+        {
+            j = 0;
+            while (arguments[j])
+            {
+                n_arg[index] = ft_valid_comand_arguments(arguments[j++], &tmp);
+                (index == 0) ? (src->arg1 = tmp) : 0;
+                (index == 1) ? (src->arg2 = tmp) : 0;
+                (index++ == 2) ? (src->arg3 = tmp) : 0;
+            }
+        }
+        (arguments && arguments[0]) ? ft_free_two_dimensional_array(arguments) : 0;
 	}
 	src->op_code = ft_arg_to_binary(n_arg[0], n_arg[1], n_arg[2]);
+    ft_check_for_comand(src->name, (unsigned int)src->op_code);
 }

@@ -81,7 +81,7 @@ t_label		*ft_parse(t_label *p, char **line, t_comand *comand, char *tmp)
 	(!line[i] || !(tmp = ft_find_check_comand(line[i++]))) ? ft_error(10) : 0;
 	comand = (p->comand->name) ? ft_end(p->comand) : ft_current(p->comand);
 	comand->name = ft_strdup(tmp);
-	ft_find_arguments(comand, line, i, 0);
+    ft_find_arguments(comand, line, i, 0);
 	ft_free_two_dimensional_array(line);
 	return (p);
 }

@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 17:49:01 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/12 12:00:55 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/13 12:39:49 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void    ft_find_arguments(t_comand *src, char **line, int i, int index);
 t_comand	*ft_current(t_comand *src);
 t_comand	*ft_end(t_comand *src);
 char		ft_arg_to_binary(char b1, char b2, char b3);
+void		ft_check_for_comand(char *s, int op);
 
 /*
 ** ft_error.c
