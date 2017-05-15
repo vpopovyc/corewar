@@ -13,8 +13,8 @@
 #ifndef __BYTE_CODE_HEADER_H
 # define __BYTE_CODE_HEADER_H
 
-# include "../libft/includes/libft.h"
-# include "../op.h"
+# include "libft.h"
+# include "op.h"
 
 /*
 ** Header magic
@@ -167,7 +167,7 @@ typedef struct		s_gamer
 t_label     *ft_add_label(void); /////////////
 t_comand    *ft_add_comand(void); ///
 int		ft_valid_comand_arguments(char *src, char **arg); //////
-void    ft_write_comands(t_gamer *src, char *tmp);
+void    ft_write_comands(t_gamer *src, char *tmp, int f, char **line);
 char			**all_delims_split(char *string);//
 void    ft_free_two_dimensional_array(char **array);
 void    ft_find_arguments(t_comand *src, char **line, int i, int index);

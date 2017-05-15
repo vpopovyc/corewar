@@ -80,7 +80,9 @@ int		main(int ac, char **av)
 
 	root = init_validation(ac, av);
  //   header_bc_init(root->header_bc, root->src);
-    ft_write_comands(root, NULL);
+    root->label = ft_add_label();
+    root->label->comand = ft_add_comand();
+    ft_write_comands(root, NULL, 0, NULL);
     print(root->label);
 
 	/* temp */

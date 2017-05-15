@@ -116,12 +116,26 @@ int		ft_valid_comand_arguments(char *src, char **arg)
 }
 
 
+int ft_arg(t_comand *src, char **arguments, int index, int *n_arg)
+{
+    int j;
+    char *tmp;
+    
+    j = 0;
+    while (arguments[j])
+    {
+        n_arg[index] = ft_valid_comand_arguments(arguments[j++], &tmp);
+        (index == 0) ? (src->arg1 = tmp) : 0;
+        (index == 1) ? (src->arg2 = tmp) : 0;
+        (index++ == 2) ? (src->arg3 = tmp) : 0;
+    }
+    return (index);
+}
+
 void	ft_find_arguments(t_comand *src, char **line, int i, int index)
 {
-	int		j;
-    int  n_arg[3];
+    int     n_arg[3];
 	char	**arguments;
-	char	*tmp;
 
 	n_arg[0] = 0;
 	n_arg[1] = 0;
@@ -135,16 +149,7 @@ void	ft_find_arguments(t_comand *src, char **line, int i, int index)
             break ;
         }
         else if (arguments)
-        {
-            j = 0;
-            while (arguments[j])
-            {
-                n_arg[index] = ft_valid_comand_arguments(arguments[j++], &tmp);
-                (index == 0) ? (src->arg1 = tmp) : 0;
-                (index == 1) ? (src->arg2 = tmp) : 0;
-                (index++ == 2) ? (src->arg3 = tmp) : 0;
-            }
-        }
+            index = ft_arg(src, arguments, index, n_arg);
         (arguments && arguments[0]) ? ft_free_two_dimensional_array(arguments) : 0;
 	}
 	src->op_code = ft_arg_to_binary(n_arg[0], n_arg[1], n_arg[2]);

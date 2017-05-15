@@ -78,39 +78,38 @@ t_label		*ft_parse(t_label *p, char **line, t_comand *comand, char *tmp)
 		else if (!p->name)
 			p->name = ft_strdup("empty");
 	}
-	(!line[i] || !(tmp = ft_find_check_comand(line[i++]))) ? ft_error(10) : 0;
-	comand = (p->comand->name) ? ft_end(p->comand) : ft_current(p->comand);
+    if (!line[i])
+        return (p);
+    (!(tmp = ft_find_check_comand(line[i++]))) ? ft_error(10) : 0;
+    comand = (p->comand->name) ? ft_end(p->comand) : ft_current(p->comand);
 	comand->name = ft_strdup(tmp);
     ft_find_arguments(comand, line, i, 0);
 	ft_free_two_dimensional_array(line);
 	return (p);
 }
 
-void		ft_write_comands(t_gamer *src, char *tmp)
+void		ft_write_comands(t_gamer *src, char *tmp, int f, char **line)
 {
-	char		**line;
 	t_label		*point;
 	t_comand	*comand;
 
 	comand = NULL;
-	src->label = ft_add_label();
-	src->label->comand = ft_add_comand();
 	point = src->label;
 	while (get_next_line(src->fd, &tmp) > 0)
 	{
+        (!tmp || tmp[0] == '\0') ? (f = 1) : 0;
 		if (tmp && tmp[0] != '\0')
 		{
 			line = all_delims_split(tmp);
-			if (line)
+            (!line) ? (f = 1) : (f = 0);
+            if (line)
 			{
 				(!ft_strcmp(line[0], NAME_CMD_STRING) || !ft_strcmp(line[0],
 							COMMENT_CMD_STRING)) ? ft_error(6) : 0;
-				if (line[0][0] == COMMENT_CHAR)
-					ft_free_two_dimensional_array(line);
-				else
-					point = ft_parse(point, line, comand, NULL);
+                (line[0][0] == COMMENT_CHAR) ? ft_free_two_dimensional_array(line) : (point = ft_parse(point, line, comand, NULL));
 			}
 		}
 		free(tmp);
 	}
+    (f == 0) ? ft_error(12) : 0;
 }
