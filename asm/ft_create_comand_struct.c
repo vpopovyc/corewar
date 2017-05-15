@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_comand_struct.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mkrutik <mkrutik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 11:20:45 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/05/12 11:20:54 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/15 10:52:21 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_comand	*ft_add_comand(void)
 
 	(!(new = (t_comand*)malloc(sizeof(t_comand)))) ? ft_error(1) : 0;
 	new->name = NULL;
-	new->arg1 = NULL;
-	new->arg2 = NULL;
-	new->arg3 = NULL;
+	new->arg1 = "";
+	new->arg2 = "";
+	new->arg3 = "";
 	new->hex_code = 0;
 	new->next = NULL;
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 17:49:01 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/13 12:39:49 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/15 13:55:43 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ t_hash								*get_item(char *key, t_hash *table);
 typedef struct		s_comand
 {
 	char			*name;
-	char			op_code;
+	char			hex_code;
 	char			*arg1;
 	char			*arg2;
 	char			*arg3;
-	char			hex_code;
 	struct s_comand *next;
 }					t_comand;
 
@@ -103,6 +102,8 @@ typedef struct		s_label_list
 	t_comand		*comand;
 	struct s_label_list *next;
 }					t_label;
+
+
 /*
 ** compile_to_hex.c
 */
@@ -122,7 +123,24 @@ typedef struct		s_bc_header
   char				prog_size[MAX_UINT_SIZE + 1];
   char				comment[BC_COMMENT_LENGTH + 1];
 }					t_bc_header;
-void 	fill_hash_table(t_hash *table, t_label *head, t_bc_header *header_bc, char *name);
+/*
+** Validation struct
+*/
+typedef struct		s_gamer
+{
+	header_t		*src;
+	t_bc_header		*header_bc;
+	t_label			*label;
+	t_hash			*table;
+	char			*name;
+	char			*path;
+	char			*comment;
+	int				header;
+	int				fd;
+	unsigned int	len_def_name;
+	unsigned int	len_def_comment;
+}					t_gamer;
+void 	fill_hash_table(t_gamer *root, char *filename);
 /*
 ** header_bc.c
 */
@@ -147,22 +165,23 @@ void		place_space(char *prog_name, int *space);
 **	compile_to_hex_addition.c
 */
 void step_to_byte_code(t_hash *table, t_label *head, t_bc_header *h_bc, int fd);
-/*
-** Validation struct
-*/
-typedef struct		s_gamer
-{
-	header_t		*src;
-	t_bc_header		*header_bc;
-	t_label			*label;
-	t_hash			*table;
-	char			*name;
-	char			*comment;
-	int				header;
-	int				fd;
-	unsigned int	len_def_name;
-	unsigned int	len_def_comment;
-}					t_gamer;
+// /*
+// ** Validation struct
+// */
+// typedef struct		s_gamer
+// {
+// 	header_t		*src;
+// 	t_bc_header		*header_bc;
+// 	t_label			*label;
+// 	t_hash			*table;
+// 	char			*name;
+// 	char			*path;
+// 	char			*comment;
+// 	int				header;
+// 	int				fd;
+// 	unsigned int	len_def_name;
+// 	unsigned int	len_def_comment;
+// }					t_gamer;
 
 t_label     *ft_add_label(void); /////////////
 t_comand    *ft_add_comand(void); ///

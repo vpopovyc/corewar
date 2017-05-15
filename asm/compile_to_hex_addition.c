@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 12:26:32 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/08 22:00:28 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/15 11:41:06 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void 	man_var(char flag, int fd)
 		++g_new_line;
 		++g_carrige;
 		if (g_new_line == NEW_LINE_NEEDED)
+		{
 			write(fd, "\n", 1);
+			g_new_line = 0;
+		}
 		else if (!(g_carrige % 2))
 			write(fd, " ", 1);
 		--flag;
@@ -62,37 +65,43 @@ void 	write_bc_shr(short key, int fd)
 
 	i = 0;
 	step_right = HIGH_FOUR_BITS_SHR;
-	while (i < MAX_SHR_SIZE)
+	while (i < MAX_SHR_SIZE + 1)
 	{
 		if (i == 2)
-			man_var(SHRT, fd);
-		current_4_bits = (char)(key >> step_right);
-		current_4_bits = char_to_hex(erase_high_bits(current_4_bits));
-		write(fd, &(current_4_bits), 1);
-		step_right -= 4;
+			man_var(CHAR, fd);
+		else
+		{
+			current_4_bits = (char)(key >> step_right);
+			current_4_bits = char_to_hex(erase_high_bits(current_4_bits));
+			write(fd, &(current_4_bits), 1);
+			step_right -= 4;
+		}
 		++i;
 	}
+	man_var(CHAR, fd);
 }
 
 void 	write_bc_int(int key, int fd)
 {
-	char 	current_4_bits;
-	char 	step_right;
-	int 	i;
-
-	i = 0;
-	step_right = HIGH_FOUR_BITS;
-	while (i < MAX_UINT_SIZE - 1)
-	{
-		if (i == TWO_BYTES_SPR)
-			man_var(UINT, fd);
-		current_4_bits = (char)(key >> step_right);
-		current_4_bits = char_to_hex(erase_high_bits(current_4_bits));
-		write(fd, &(current_4_bits), 1);
-		step_right -= 4;
-		++i;
-	}
-	man_var(CHAR, fd);
+	write_bc_shr((short)(key >> 16), fd);
+	write_bc_shr((short)key, fd);
+	// char 	current_4_bits;
+	// char 	step_right;
+	// int 	i;
+	//
+	// i = 0;
+	// step_right = HIGH_FOUR_BITS;
+	// while (i < MAX_UINT_SIZE - 1)
+	// {
+	// 	if (i == TWO_BYTES_SPR)
+	// 		man_var(UINT, fd);
+	// 	current_4_bits = (char)(key >> step_right);
+	// 	current_4_bits = char_to_hex(erase_high_bits(current_4_bits));
+	// 	write(fd, &(current_4_bits), 1);
+	// 	step_right -= 4;
+	// 	++i;
+	// }
+	// man_var(CHAR, fd);
 }
 
 void 	insert_op_code(char op_code, char *name, int fd)

@@ -6,95 +6,95 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 16:28:45 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/08 21:43:34 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/15 15:32:21 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "byte_code_header.h"
 
-void printlabel(t_label *head)
-{
-	t_label		*label;
-	t_comand	*comand;
-
-	label = head;
-	while (label)
-	{
-		printf("%s:\n", label->name);
-		comand = label->comand;
-		while (comand)
-		{
-			printf("%s %s %s %s\n", comand->name, comand->arg1, comand->arg2, comand->arg3);
-			comand = comand->next;
-		}
-		printf("\n");
-		label = label->next;
-	}
-}
-static void			push_command(char *label, t_comand *new, t_label *head)
-{
-	t_label		*ptr_lab;
-	t_comand	*ptr_com;
-
-	ptr_lab = head;
-	while (ptr_lab)
-	{
-		if (ft_strequ(label, ptr_lab->name))
-			break ;
-		ptr_lab = ptr_lab->next;
-	}
-	ptr_com = ptr_lab->comand;
-	if (!ptr_com)
-		ptr_com = new;
-	else
-	{
-		while (ptr_com->next)
-			ptr_com = ptr_com->next;
-		ptr_com->next = new;
-	}
-}
-static t_comand    *ft_addcomand(char *name, char *arg1, char *arg2, char *arg3, char opcode)
-{
-	t_comand *new;
-
-    new = (t_comand*)malloc(sizeof(t_comand));
-    new->name = ft_strdup(name);
-    new->arg1 = ft_strdup(arg1);
-    new->arg2 = ft_strdup(arg2);
-    new->arg3 = ft_strdup(arg3);
-    new->hex_code = opcode;
-    new->next = NULL;
-    return (new);
-}
-static t_label     *ft_addlabel(t_label *head, char *name, t_comand *comand)
-{
-	t_label	*new;
-	t_label	*ptr;
-
-    new = (t_label*)malloc(sizeof(t_label));
-    new->name = ft_strdup(name);
-    new->comand = comand;
-    new->next = NULL;
-	ptr = head;
-	if (!head)
-		head = new;
-	else
-	{
-		while (ptr->next)
-			ptr = ptr->next;
-		ptr->next = new;
-	}
-    return (head);
-}
-void fill_label_list(t_label **head)
-{
-	// (*head) = ft_addlabel(*head, "command", ft_addcomand("\0", "\0", "\0", "\0", 0));
-	(*head) = ft_addlabel(*head, "l2", ft_addcomand("sti", "r1", "%:live", "%1", 0x68));
-	push_command("l2", ft_addcomand("and",  "r1", "%0", "r1", 0x64), *head);
-	(*head) = ft_addlabel(*head, "live", ft_addcomand("live", "%1", "\0", "\0", 0x80));
-	push_command("live", ft_addcomand("zjmp",  "%:live", "\0", "\0", 0x80), *head);
-	// (*head) = ft_addlabel(*head, "empty", ft_addcomand("\0", "\0", "\0", "\0", 0));
-}
+// void printlabel(t_label *head)
+// {
+// 	t_label		*label;
+// 	t_comand	*comand;
+//
+// 	label = head;
+// 	while (label)
+// 	{
+// 		printf("%s:\n", label->name);
+// 		comand = label->comand;
+// 		while (comand)
+// 		{
+// 			printf("%s %s %s %s\n", comand->name, comand->arg1, comand->arg2, comand->arg3);
+// 			comand = comand->next;
+// 		}
+// 		printf("\n");
+// 		label = label->next;
+// 	}
+// }
+// static void			push_command(char *label, t_comand *new, t_label *head)
+// {
+// 	t_label		*ptr_lab;
+// 	t_comand	*ptr_com;
+//
+// 	ptr_lab = head;
+// 	while (ptr_lab)
+// 	{
+// 		if (ft_strequ(label, ptr_lab->name))
+// 			break ;
+// 		ptr_lab = ptr_lab->next;
+// 	}
+// 	ptr_com = ptr_lab->comand;
+// 	if (!ptr_com)
+// 		ptr_com = new;
+// 	else
+// 	{
+// 		while (ptr_com->next)
+// 			ptr_com = ptr_com->next;
+// 		ptr_com->next = new;
+// 	}
+// }
+// static t_comand    *ft_addcomand(char *name, char *arg1, char *arg2, char *arg3, char opcode)
+// {
+// 	t_comand *new;
+//
+//     new = (t_comand*)malloc(sizeof(t_comand));
+//     new->name = ft_strdup(name);
+//     new->arg1 = ft_strdup(arg1);
+//     new->arg2 = ft_strdup(arg2);
+//     new->arg3 = ft_strdup(arg3);
+//     new->hex_code = opcode;
+//     new->next = NULL;
+//     return (new);
+// }
+// static t_label     *ft_addlabel(t_label *head, char *name, t_comand *comand)
+// {
+// 	t_label	*new;
+// 	t_label	*ptr;
+//
+//     new = (t_label*)malloc(sizeof(t_label));
+//     new->name = ft_strdup(name);
+//     new->comand = comand;
+//     new->next = NULL;
+// 	ptr = head;
+// 	if (!head)
+// 		head = new;
+// 	else
+// 	{
+// 		while (ptr->next)
+// 			ptr = ptr->next;
+// 		ptr->next = new;
+// 	}
+//     return (head);
+// }
+// void fill_label_list(t_label **head)
+// {
+// 	// (*head) = ft_addlabel(*head, "command", ft_addcomand("\0", "\0", "\0", "\0", 0));
+// 	(*head) = ft_addlabel(*head, "l2", ft_addcomand("sti", "r1", "%:live", "%1", 0x68));
+// 	push_command("l2", ft_addcomand("and",  "r1", "%0", "r1", 0x64), *head);
+// 	(*head) = ft_addlabel(*head, "live", ft_addcomand("live", "%1", "\0", "\0", 0x80));
+// 	push_command("live", ft_addcomand("zjmp",  "%:live", "\0", "\0", 0x80), *head);
+// 	// (*head) = ft_addlabel(*head, "empty", ft_addcomand("\0", "\0", "\0", "\0", 0));
+// }
 /*
 **	volosataya_podmyshka returns byte size of argument, invocates jajco_japonki()
 */
@@ -130,7 +130,7 @@ static int		jajco_japonki(t_comand *comand)//заносить опкод в им
 	if (g_op[i].code_byte)
 	{
 		n++;
-		n += volosataya_podmyshka(comand->hex_code >> 6, g_op[i].label_size);
+		n += volosataya_podmyshka((comand->hex_code >> 6) & 3, g_op[i].label_size);
 		n += volosataya_podmyshka((comand->hex_code & SECONDARG) >> 4, g_op[i].label_size);
 		n += volosataya_podmyshka((comand->hex_code & THIRDARG) >> 2, g_op[i].label_size);
 	}
@@ -160,42 +160,25 @@ static int		num_bytes(t_label *node)
 /*
 **	fills hash table with keys and bytes len of label
 */
-void 	fill_hash_table(t_hash *table, t_label *head, t_bc_header *header_bc, char *name)
+void 	fill_hash_table(t_gamer *root, char *filename)
 {
 	t_label		*label;
 	int			i;
 	char		*tmp;
 
 	i = 0;
-	label = head;
+	label = root->label;
+	printf("file %s\n", filename);
 	while (label)
 	{
-		add_key_hash(label->name, i, table);
+		add_key_hash(label->name, i, root->table);
 		i += num_bytes(label);
 		label = label->next;
 	}
-	header_uint_bc(header_bc->prog_size, i);
-	tmp = ft_strjoin(name, ".cor");
-	step_to_byte_code(table, head, header_bc, open(tmp, O_CREAT | O_RDWR | O_TRUNC));
+	tmp = ft_strjoin(filename, ".cor");
+	printf("[%s]\n", tmp);
+	header_uint_bc(root->header_bc->prog_size, i);
+	step_to_byte_code(root->table, root->label, root->header_bc, open(tmp, O_CREAT | O_RDWR | O_TRUNC, S_IRWXG | S_IRWXO | S_IRWXU));
+	free(filename);
 	free(tmp);
 }
-
-// int		main(void)
-// {
-// 	t_label		*head;
-// 	t_hash		table[SIZEOFTABLE];
-//
-// 	head = NULL;
-// 	set_to_null(table);
-// 	fill_label_list(&head);
-// 	fill_hash_table(table, head);
-// 	printlabel(head);
-// 	t_hash		*elem;
-// 	elem = get_item("l2", table);
-// 	printf("key %s byte len %d\n", elem->key, elem->bytes);
-// 	elem = get_item("live", table);
-// 	printf("key %s byte len %d\n", elem->key, elem->bytes);
-// 	elem = get_item("empty", table);
-// 	printf("key %s byte len %d\n", elem->key, elem->bytes);
-// 	return (0);
-// }

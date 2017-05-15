@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_arguments.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mkrutik <mkrutik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 12:01:55 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/05/12 12:01:58 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/15 10:45:57 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,6 @@ void	ft_find_arguments(t_comand *src, char **line, int i, int index)
         }
         (arguments && arguments[0]) ? ft_free_two_dimensional_array(arguments) : 0;
 	}
-	src->op_code = ft_arg_to_binary(n_arg[0], n_arg[1], n_arg[2]);
-    ft_check_for_comand(src->name, (unsigned int)src->op_code);
+	src->hex_code = ft_arg_to_binary(n_arg[0], n_arg[1], n_arg[2]);
+    ft_check_for_comand(src->name, (unsigned int)src->hex_code);
 }

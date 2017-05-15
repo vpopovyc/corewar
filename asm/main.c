@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/06 16:45:27 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/12 11:39:52 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/15 17:37:57 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,28 @@ void    print(t_label *head)
         printf("%s\n", head->name);
         while (head->comand)
         {
-            printf("%s|%hhx|%s|%s|%s\n", head->comand->name, head->comand->op_code, head->comand->arg1, head->comand->arg2, head->comand->arg3);
+            printf("%s|%hhx|%s|%s|%s\n", head->comand->name, head->comand->hex_code, head->comand->arg1, head->comand->arg2, head->comand->arg3);
             head->comand = head->comand->next;
         }
         head = head->next;
         printf("-----------------------------------\n");
     }
-    
+
+}
+
+char	*filepath(char *str)
+{
+	char	*ptr;
+	char	*dot;
+
+	ptr = str;
+	while (*ptr)
+	{
+		if (*ptr == '.')
+			dot = ptr;
+		ptr++;
+	}
+	return (ft_strsub(str, 0, dot - str));
 }
 
 int		main(int ac, char **av)
@@ -79,14 +94,15 @@ int		main(int ac, char **av)
 	t_gamer		*root;
 
 	root = init_validation(ac, av);
- //   header_bc_init(root->header_bc, root->src);
+	header_bc_init(root->header_bc, root->src);
     ft_write_comands(root, NULL);
-    print(root->label);
-
+	printf("path to file %s\n", av[1]);
+    // print(root->label);
 	/* temp */
-//	fill_label_list(&(root->label));
+	// print(root->label);
+	// fill_label_list(&(root->label));
 	/* temp */
-//	fill_hash_table(root->table, root->label, root->header_bc, root->name);
+	fill_hash_table(root, filepath(av[1]));
 	/* asm */
 	// printlabel(root->label);
 	// t_hash		*elem;
