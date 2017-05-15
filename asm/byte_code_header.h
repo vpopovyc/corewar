@@ -6,7 +6,11 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 17:49:01 by vpopovyc          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2017/05/15 13:55:43 by rvolovik         ###   ########.fr       */
+=======
+/*   Updated: 2017/05/15 12:19:58 by mkrutik          ###   ########.fr       */
+>>>>>>> 899fbfbd276d1765daaed290242b715fa7567817
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +190,7 @@ void step_to_byte_code(t_hash *table, t_label *head, t_bc_header *h_bc, int fd);
 t_label     *ft_add_label(void); /////////////
 t_comand    *ft_add_comand(void); ///
 int		ft_valid_comand_arguments(char *src, char **arg); //////
-void    ft_write_comands(t_gamer *src, char *tmp);
+void    ft_write_comands(t_gamer *src, char *tmp, int f, char **line);
 char			**all_delims_split(char *string);//
 void    ft_free_two_dimensional_array(char **array);
 void    ft_find_arguments(t_comand *src, char **line, int i, int index);
@@ -194,6 +198,7 @@ t_comand	*ft_current(t_comand *src);
 t_comand	*ft_end(t_comand *src);
 char		ft_arg_to_binary(char b1, char b2, char b3);
 void		ft_check_for_comand(char *s, int op);
+int			ft_arg(t_comand *src, char **line, int index, int *arg);
 
 /*
 ** ft_error.c

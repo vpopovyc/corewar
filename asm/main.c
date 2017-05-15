@@ -94,10 +94,19 @@ int		main(int ac, char **av)
 	t_gamer		*root;
 
 	root = init_validation(ac, av);
+<<<<<<< HEAD
 	header_bc_init(root->header_bc, root->src);
     ft_write_comands(root, NULL);
 	printf("path to file %s\n", av[1]);
     // print(root->label);
+=======
+ //   header_bc_init(root->header_bc, root->src);
+    root->label = ft_add_label();
+    root->label->comand = ft_add_comand();
+    ft_write_comands(root, NULL, 0, NULL);
+    print(root->label);
+
+>>>>>>> 899fbfbd276d1765daaed290242b715fa7567817
 	/* temp */
 	// print(root->label);
 	// fill_label_list(&(root->label));
