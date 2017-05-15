@@ -6,15 +6,15 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 17:49:01 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/13 12:39:49 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/15 12:19:58 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __BYTE_CODE_HEADER_H
 # define __BYTE_CODE_HEADER_H
 
-# include "libft.h"
-# include "op.h"
+# include "../libft/includes/libft.h"
+# include "../op.h"
 
 /*
 ** Header magic
@@ -175,6 +175,7 @@ t_comand	*ft_current(t_comand *src);
 t_comand	*ft_end(t_comand *src);
 char		ft_arg_to_binary(char b1, char b2, char b3);
 void		ft_check_for_comand(char *s, int op);
+int			ft_arg(t_comand *src, char **line, int index, int *arg);
 
 /*
 ** ft_error.c
