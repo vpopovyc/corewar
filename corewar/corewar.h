@@ -23,7 +23,7 @@ typedef struct		s_player
 	char			*comment;
 	char			*code;
 	int				number;
-	int				size;
+	unsigned int	size;
 	struct s_player	*next;
 }					t_player;
 
@@ -55,6 +55,7 @@ typedef struct		s_corewar
 	int				cycle;
 	int				fdump;
 	int				verbose;
+	int				count_ply;
 }					t_corewar;
 
 void				ft_error(int n);
