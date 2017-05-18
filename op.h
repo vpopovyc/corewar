@@ -73,16 +73,16 @@ typedef struct		header_s
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
 
-typedef struct 		s_op
-{
-	char			*name;
-	char 			num_args;
-	char			args[3];
-	char			op_code;
-	int				cycles;
-	char			code_byte;
-	char			label_size;
-}					t_op;
+// typedef struct 		s_op
+// {
+// 	char			*name;
+// 	char 			num_args;
+// 	char			args[3];
+// 	char			op_code;
+// 	int				cycles;
+// 	char			code_byte;
+// 	char			label_size;
+// }					t_op;
 
-extern t_op 		g_op[];
+// extern t_op 		g_op[];
 #endif

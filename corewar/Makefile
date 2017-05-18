@@ -13,7 +13,7 @@
 NAME = corewar
 LIB = -L../libft -lft
 FLAG = -Wall -Wextra -Werror
-SRC = corewar.c
+SRC = corewar.c dk_pars_arg.c ft_valid_cor.c
 BINS = $(SRC:.c=.o)
 
 all: $(NAME)
