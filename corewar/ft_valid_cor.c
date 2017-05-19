@@ -6,7 +6,7 @@
 /*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 09:32:43 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/05/19 09:32:53 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/19 10:09:48 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char		*ft_n_or_c(char *src, size_t n_byts)
 	size_t	len;
 	char	*res;
 
-	(src[0] == '\0') ? ft_error(5) : 0;
 	len = ft_strlen(src);
 	while (len < n_byts)
 		(src[len] != '\0') ? ft_error(5) : (len++);
