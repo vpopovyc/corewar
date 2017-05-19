@@ -6,7 +6,7 @@
 /*   By: dkosolap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/08 10:53:54 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/19 12:34:14 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,21 @@ typedef struct		s_op
 
 typedef struct		s_carriage
 {
+	unsigned int	posinion; //  индекс позиции каретки в игровом поле
 	void			(*f)(int args[4]);	//ссылка на функцию
 	int				cycle;				//циклы после которых выполняется команда
 	int				arg[4];				//opcode_arg, и три аргумента
 	int				last_live;			//количество циклов после последня лайфа
 	int				count_live;			//количество сказаных лайфав
 	int				reg[REG_NUMBER];	//регистры
+	struct  s_carriage *next;
 }					t_carriage;
 
 typedef struct		s_corewar
 {
 	t_player		*players;
+	t_carriage		*carriage;
+	char			*game_field;
 	int				cycle;
 	int				fdump;
 	int				verbose;
@@ -61,5 +65,7 @@ typedef struct		s_corewar
 void				ft_error(int n);
 t_player 		   *ft_valid_cor(int fd, size_t len, size_t n_read);
 void				dk_pars_arg(int argc, char **argv, t_corewar *cor, int i);
+void                ft_create_field_and_carriage(t_corewar *src, int free_space, int n);
+t_carriage			*ft_create_carriage(unsigned int position);
 
 #endif

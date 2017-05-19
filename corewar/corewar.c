@@ -6,7 +6,7 @@
 /*   By: dkosolap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 15:20:52 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/12 15:20:53 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/19 12:31:21 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int			main(int argc, char **argv)
 	}
 	else
 		ft_error(12);
+	ft_create_field_and_carriage(&cor, 0, 0);
 	return (0);
 }
