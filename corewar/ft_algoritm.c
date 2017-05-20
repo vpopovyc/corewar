@@ -4,7 +4,7 @@
 void    ft_check_cycle_to_die(t_corewar *src, int n_live)
 {
     t_carriage  *p;
-    
+
     p = src->carriage;
     while (p)
     {
@@ -13,22 +13,17 @@ void    ft_check_cycle_to_die(t_corewar *src, int n_live)
             break ;
         p = p->next;
     }
-    if (n_live >= NBR_LIVE)
+    if (n_live >= NBR_LIVE || src->n_check == MAX_CHECKS)
     {
         src->n_check = 0;
         src->cycle_to_die -= CYCLE_DELTA;
     }
     else
-    {
         src->n_check++;
-        if (src->n_check == MAX_CHECKS)
-        {
-            src->n_check = 0;
-            src->cycle_to_die -= CYCLE_DELTA;
-        }
-    }
     src->last_cycle_to_die = 0;
 }
+
+
 
 void    ft_check_mem_cell(t_carriage *head, char *field)
 {
@@ -42,7 +37,7 @@ void    ft_check_mem_cell(t_carriage *head, char *field)
             
         }
         else
-            p->posinion = ((p->posinion - 1) != MEM_SIZE) ? (p->posinion + 1) : (p->posinion++);
+            p->posinion = ((p->posinion - 1) != MEM_SIZE) ? (p->posinion + 1) : 0;
         p = p->next;
     }
     // проверить ячейку на соответсвие команде
@@ -59,18 +54,16 @@ void    ft_increment_cycle(t_carriage *head)
     {
         point->comand_cycle--;
         if (point->comand_cycle == 0)
-            point->f(point->arg);
-        // если point->comand_cycle == 0 выполнить команду
+            point->f(point->arg); // если point->comand_cycle == 0 выполнить команду
         point = point->next;
     }
 }
-
 
 void ft_algoritm(t_corewar *src)
 {
     t_carriage *point;
     
-    while (!src->carriage || src->cycle_to_die == 0)
+    while (!src->carriage || src->cycle_to_die == 0 || src->fdump == src->curent_cycle)
     {
         point = src->carriage;
         while (point) // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
@@ -78,19 +71,29 @@ void ft_algoritm(t_corewar *src)
             ft_check_mem_cell(point, src->game_field);
             point = point->next;
         }
-        ft_increment_cycle(src); // инкрементируем все циклы команд в каретках
+        ft_increment_cycle(src->carriage); // декрементируем все циклы команд в каретках
         if (src->last_cycle_to_die == src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
+        {
             ft_check_cycle_to_die(src, 0);
+            src->carriage = ft_check_del_carriege(src->carriage); //проверить и удалить все каретки которые не сказали live
+        }
         else
-            src->cycle_to_die++;
+            src->last_cycle_to_die++;
         src->curent_cycle++; // инкрементируем текущий цикл
         src->last_cycle_to_die++; // инкрементируем счетчик циклов к смерти
     }
-    
-    
-    
-    //отрисововать если src->verbouse = 1;
-    //остановиться после src->fdamp и вивести дамп
+    if (src->fdump != -1)
+    {
+        //остановиться после src->fdamp и вивести дамп
+        if (src->verbose != -1)
+        {
+            // отрисовать визуально
+        }
+        else
+        {
+            // обычный вывод
+        }
+    }
 }
 
 

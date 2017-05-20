@@ -5,21 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/19 12:33:16 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/05/19 12:34:16 by mkrutik          ###   ########.fr       */
+/*   Created: 2017/05/20 09:43:28 by mkrutik           #+#    #+#             */
+/*   Updated: 2017/05/20 09:43:35 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+t_carriage	*ft_check_del_carriege(t_carriage *src)
+{
+	t_carriage *point;
+
+	point = src;
+	while (point)
+	{
+		if (point->live_in_cycle == 0)
+		{
+			src = ft_del_carriage(src, point);
+			point = src;
+		}
+		else
+			point = point->next;
+	}
+	return (src);
+}
+
+t_carriage	*ft_del_carriage(t_carriage *src, t_carriage *del)
+{
+	t_carriage		*head;
+	t_carriage		*previous;
+
+	if (del == src)
+		head = src->next;
+	else
+	{
+		head = src;
+		previous = src;
+		while (src != del)
+		{
+			previous = src;
+			src = src->next;
+		}
+		previous->next = src->next;
+	}
+	free(src);
+	return (head);
+}
 
 t_carriage	*ft_create_carriage(unsigned int posinion)
 {
 	t_carriage *new;
 
 	new = (t_carriage*)malloc(sizeof(t_carriage));
-	new->count_live = 0;
-	new->cycle = 0;
-	new->last_live = 0;
+	new->comand_cycle = 0;
+	new->f = NULL;
+	new->live_in_cycle = 0;
 	new->posinion = posinion;
 	new->next = NULL;
 	return (new);
