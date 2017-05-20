@@ -45,7 +45,7 @@ void    ft_check_mem_cell(t_carriage *head, char *field)
     // если ето не команда увеличить индекс каретки на поле на один
 }
 
-void    ft_increment_cycle(t_carriage *head)
+void    ft_increment_cycle(t_carriage *head, t_corewar *src)
 {
     t_carriage *point;
     
@@ -71,7 +71,7 @@ void ft_algoritm(t_corewar *src)
             ft_check_mem_cell(point, src->game_field);
             point = point->next;
         }
-        ft_increment_cycle(src->carriage); // декрементируем все циклы команд в каретках
+        ft_increment_cycle(src->carriage, src); // декрементируем все циклы команд в каретках
         if (src->last_cycle_to_die == src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
         {
             ft_check_cycle_to_die(src, 0);

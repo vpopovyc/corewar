@@ -29,7 +29,6 @@ char		*ft_n_or_c(char *src, size_t n_byts)
 	size_t	len;
 	char	*res;
 
-//	(src[0] == '\0') ? ft_error(5) : 0;
 	len = ft_strlen(src);
 	while (len < n_byts)
 		(src[len] != '\0') ? ft_error(5) : (len++);
@@ -78,8 +77,8 @@ t_player	*ft_valid_cor(int fd, size_t len, size_t r)
 		(new->comment = ft_n_or_c(tmp, len));
 	((r = read(fd, tmp, new->size)) != new->size) ? ft_error(5) :
 		ft_valid_code(tmp, new);
-//	((r = read(fd, tmp, 10)) != 0 || new->size > CHAMP_MAX_SIZE) ?
-//		ft_error(5) : 0;
+	((r = read(fd, tmp, 10)) != 0 || new->size > CHAMP_MAX_SIZE) ?
+		ft_error(5) : 0;
 	new->next = NULL;
 	return (new);
 }

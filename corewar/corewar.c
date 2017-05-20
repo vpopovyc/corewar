@@ -6,7 +6,7 @@
 /*   By: dkosolap <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 15:20:52 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/20 09:45:12 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/05/12 15:20:53 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ void		ft_error(int n)
 	exit(-1);
 }
 
-void		dk_sort_ply(t_corewar *cor)
-{
-	t_player	*sort;
-	int			i;
+//void		dk_sort_ply(t_corewar *cor)
+//{
+//	t_player	*sort;
+//	int			i;
+//
+//	i = 1;
+//}
 
-	i = 1;
-}
 
 int			main(int argc, char **argv)
 {
@@ -64,12 +65,15 @@ int			main(int argc, char **argv)
 		tmp = cor.players;
 		while (tmp)
 		{
-			ft_printf("%s\n", tmp->name);
+//			ft_printf("%s\n", tmp->name);
 			tmp = tmp->next;
 		}
 	}
 	else
 		ft_error(12);
-	ft_create_field_and_carriage(&cor, 0, 0);
-	return (0);
+    ft_create_field_and_carriage(&cor, 0, 0, -2);
+
+
+
+    return (0);
 }
