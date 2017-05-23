@@ -44,6 +44,53 @@ void		ft_error(int n)
 //	i = 1;
 //}
 
+void    ft_read_arg(t_corewar *data, t_carriage *src, char *f, int p)
+{
+    int i = 0;
+    while (i < 10)
+    {
+        ft_putnbr(f[i]);
+        write(1, " ", 1);
+        i++;
+    }
+    
+    
+    p += (src->arg[0] != 0) ? 1 :0;
+    src->arg[1] = (unsigned char)(src->arg[0] >> 6);
+    src->arg[2] = (unsigned char)(src->arg[0] << 2);
+    src->arg[2] = (unsigned char)(src->arg[2] >> 6);
+    src->arg[3] = (unsigned char)(src->arg[0] << 4);
+    src->arg[3] = (unsigned char)(src->arg[3] >> 6);
+    
+    
+    if (src->arg[1] == 1)
+        src->arg[1] = f[++p];
+    else if (src->arg[1] == 2)
+        src->arg[1] = (f[++p] << 8) + f[++p]; // 2 или 4
+    else if (src->arg[1] == 3)
+        src->arg[1] = (f[++p] << 8) + f[++p];
+    
+    
+    if (src->arg[2] == 1)
+        src->arg[2] = f[++p];
+    else if (src->arg[2] == 2)
+        src->arg[2] = (f[++p] << 8) + f[++p];
+    else if (src->arg[2] == 3)
+        src->arg[2] = (f[++p] << 8) + f[++p];
+    
+    
+    if (src->arg[3] == 1)
+        src->arg[3] = f[++p];
+    else if (src->arg[3] == 2)
+        src->arg[3] = (f[++p] << 8) + f[++p];
+    else if (src->arg[3] == 3)
+        src->arg[3] = (f[++p] << 8) + f[++p];
+    src->posinion = ++p;
+}
+
+
+
+
 
 int			main(int argc, char **argv)
 {
@@ -72,8 +119,20 @@ int			main(int argc, char **argv)
 	else
 		ft_error(12);
     ft_create_field_and_carriage(&cor, 0, 0, -2);
+    
 
+//    cor.carriage->arg[0] = 120;
+//    ft_read_arg(&cor, cor.carriage, cor.game_field, cor.carriage->posinion);
+    for (int i = 0; i < MEM_SIZE; i++)
+    {
+        ft_printf("%.2x", (unsigned char)cor.game_field[i]);
+        if ((i + 1) % 1 == 0)
+            ft_printf(" ");
+        if ((i + 1) % 32 == 0)
+            ft_printf("\n");
+    }
 
+    
 
     return (0);
 }

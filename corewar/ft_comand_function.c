@@ -1,26 +1,81 @@
 #include "corewar.h"
 
-void    ft_live(t_corewar *src, int value)
+void    ft_live(t_corewar *src, t_carriage *p)
 {
-    if ((value * -1) >= 1 && (value * -1) <= src->count_ply)
-        src->players_live[(value * (-1)) - 1]++;
+    int value;
+    
+    p->posinion++;
+    value = (src->game_field[p->posinion++] << 24) + (src->game_field[p->posinion++] << 16) + (src->game_field[p->posinion++] << 8) + (src->game_field[p->posinion++]);
+    if (-value >= 1 && -value <= src->count_ply)
+        src->players_live[-value - 1]++;
+    ft_bzero(p->arg, 16);
 }
 
-void    ft_ld(t_corewar *src, t_carriage *p)
+void    ft_add(t_corewar *data, t_carriage *src)
 {
-    if (p->arg[0] == -48 && p->arg[2] >= 0 && p->arg[2] <= REG_NUMBER) // indirect
+    src->posinion++;
+    if (data->game_field[src->posinion] == 84)
     {
-        if (p->posinion + p->arg[1] >= MEM_SIZE)
-            p->reg[p->arg[2]] = src->game_field[p->posinion + p->arg[1] - MEM_SIZE]; // если нужний адрес в начале, при переполнении адереса
-        else
-            p->reg[p->arg[2]] = src->game_field[p->arg[1]];
-        p->carry = (p->carry == 1) ? 0 : 1;
+        src->posinion++;
+        src->arg[1] = data->game_field[src->posinion++];
+        src->arg[2] = data->game_field[src->posinion++];
+        src->arg[3] = data->game_field[src->posinion++];
+        if (src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER && src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER && src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
+            src->reg[src->arg[3]] = src->reg[src->arg[1]] + src->reg[src->arg[2]];
     }
-    else if (p->arg[0] == -112 && p->arg[2] >= 0 && p->arg[2] <= REG_NUMBER) //direct
+    ft_bzero(src->arg, 16);
+}
+
+void    ft_sub(t_corewar *data, t_carriage *src)
+{
+    src->posinion++;
+    if (data->game_field[src->posinion] == 84)
     {
-        p->reg[p->arg[2]] = p->arg[1];
-        p->carry = (p->carry == 1) ? 0 : 1;
+        src->posinion++;
+        src->arg[1] = data->game_field[src->posinion++];
+        src->arg[2] = data->game_field[src->posinion++];
+        src->arg[3] = data->game_field[src->posinion++];
+        if (src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER && src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER && src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
+            src->reg[src->arg[3]] = src->reg[src->arg[1]] - src->reg[src->arg[2]];
     }
+    ft_bzero(src->arg, 16);
+}
+
+
+
+
+
+
+
+
+
+
+
+void    ft_ld(t_corewar *data, t_carriage *src)
+{
+    src->posinion++;
+    if (data->game_field[src->posinion] == -48)
+    {
+        src->posinion++;
+        src->arg[1] = (data->game_field[src->posinion++] << 8) | data->game_field[src->posinion++];
+        src->arg[2] = data->game_field[src->posinion++];
+        if (src->arg[2] >= 1 && src->arg[2] <= REG_NUMBER)
+        {
+            if (src->arg[1] <= IDX_MOD)
+                src->reg[src->arg[2]] = data->game_field[src->posinion - 5 + src->arg[1]];
+            else
+                src->reg[src->arg[2]] = data->game_field[src->posinion - 5 + (src->arg[1] % IDX_MOD)];
+        }
+    }
+    else if (data->game_field[src->posinion] == -112)
+    {
+        src->posinion++;
+        src->arg[1] = (data->game_field[src->posinion++] << 8) | data->game_field[src->posinion++];
+        src->arg[2] = data->game_field[src->posinion++];
+        if (src->arg[2] >= 1 && src->arg[2] <= REG_NUMBER)
+            src->reg[src->arg[2]] = src->arg[1];
+    }
+    ft_bzero(src->arg, 16);
 }
 
 void    ft_st(t_corewar *src, t_carriage *p)
@@ -43,17 +98,9 @@ void    ft_st(t_corewar *src, t_carriage *p)
 
 
 
-void    ft_add(t_carriage *src)
-{
-    if (src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER && src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER && src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
-        src->reg[src->arg[3]] = src->reg[src->arg[1]] + src->reg[src->arg[2]];
-}
 
-void    ft_sub(t_carriage *src)
-{
-    if (src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER && src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER && src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
-        src->reg[src->arg[3]] = src->reg[src->arg[1]] - src->reg[src->arg[2]];
-}
+
+
 
 void    ft_aff(t_carriage *src)
 {
@@ -61,3 +108,6 @@ void    ft_aff(t_carriage *src)
         ft_putnbr(src->reg[src->arg[1]]);
 }
 
+// нужны 16 функций отвечающих за выполнения команд !!!!!!!!!!!!
+// при выполнении команды передвигать каретку на байт следующий за командой и аргументами байт
+// в функции live инкрементировать счетчик соответсвующего игрока
