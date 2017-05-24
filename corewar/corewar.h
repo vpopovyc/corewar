@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkosolap <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/08 10:53:54 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/23 20:26:01 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __COREWAR_H
 # define __COREWAR_H
 
-# include "op.h"
-# include "libft.h"
-# include "stdio.h"
+# include "../op.h"
+# include "../libft/includes/libft.h"
+# include <stdio.h>
 
 typedef struct		s_player
 {
@@ -27,26 +27,14 @@ typedef struct		s_player
 	struct s_player	*next;
 }					t_player;
 
-typedef struct		s_op
-{
-	char			*name;
-	int				binary_code;
-	int				len[3];
-	int				op_code;
-	int				cycle;
-	char			*comment;
-	int				octal;
-	int				dependence_carry;
-}					t_op;
+typedef struct		s_corewar t_corewar;
 
 typedef struct		s_carriage
 {
 	unsigned int	posinion;			//  индекс позиции каретки в игровом поле
-	void			(*f)(int args[4]);	//ссылка на функцию которую нужно будет выполнить
+	void			(*f)(t_corewar *src, struct s_carriage *head);	//ссылка на функцию которую нужно будет выполнить
 	int				comand_cycle;		//циклы после которых выполняется команда
 	int				arg[4];				//opcode_arg, и три аргумента
-	// unsigned int 	last_live;			//количество циклов после последня лайфа
-	
 	unsigned int	live_in_cycle;		// количество сказаных live в текущем cycle_to_die
 	int				reg[REG_NUMBER];	//регистры
 	int				carry;
@@ -82,7 +70,11 @@ void				dk_pars_arg(int argc, char **argv, t_corewar *cor, int i);
 void                ft_create_field_and_carriage(t_corewar *src, int free_space, int n, int num); // создание игрового поля и кареток
 void                ft_check_cycle_to_die(t_corewar *src, int n_live); // проверка для уменьшения cycle_to_die
 t_carriage          *ft_del_carriage(t_carriage *src, t_carriage *del); // удаление каретки
-t_carriage    *ft_check_del_carriege(t_carriage *src);
+t_carriage			*ft_check_del_carriege(t_carriage *src);
 
+void				ft_algoritm(t_corewar *src);
+void				dk_dump(char *addr);
+void   	 			ft_live(t_corewar *src, t_carriage *p);
 
+void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию
 #endif

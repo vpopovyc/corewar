@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dkosolap <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/12 15:22:31 by dkosolap          #+#    #+#              #
-#    Updated: 2017/05/20 09:44:05 by mkrutik          ###   ########.fr        #
+#    Updated: 2017/05/23 20:26:22 by dkosolap         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = corewar
 LIB = -L../libft -lft
 FLAG = -Wall -Wextra -Werror
 SRC = corewar.c dk_pars_arg.c ft_valid_cor.c ft_create_field_and_carriage.c \
-	  ft_algoritm.c
+	  ft_algoritm.c ft_comand_function.c 
 BINS = $(SRC:.c=.o)
 
 all: $(NAME)
