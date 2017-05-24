@@ -89,7 +89,7 @@ void    ft_increment_cycle(t_carriage *head)
             point->comand_cycle--; // если указатель на функцию не налл
         if (point->comand_cycle == 0)// что указатель на функцию не налл
         {
-            point->f(point->arg); // если point->comand_cycle == 0 выполнить команду
+            point->f(point->arg, head); // если point->comand_cycle == 0 выполнить команду
             point->comand_cycle = 0;
         }
         point = point->next;

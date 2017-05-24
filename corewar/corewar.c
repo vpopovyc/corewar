@@ -52,8 +52,8 @@ void		dk_dump(char *addr)
 	while (++i < MEM_SIZE)
 	{	
 		ft_printf("%.2x ", (unsigned char)addr[i]);
-		// if ((i + 1) % 2 == 0)
-			// ft_printf(" ");
+		if ((i + 1) % 2 == 0)
+			ft_printf(" ");
 		if ((i + 1) % 64 == 0)
 			ft_printf("\n");
 	}
