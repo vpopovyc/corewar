@@ -32,6 +32,7 @@ void	ft_error(int n)
 	(n == 14) ? ft_putstr("Could not find target lable :(\n") : 0;
 	(n == 15) ? ft_putstr("New line ?\n") : 0;
 	ft_putstr("\033[0m");
+	sound(NOK);
 	exit(-1);
 }
 
@@ -66,5 +67,6 @@ int		main(int ac, char **av)
 	ft_putstr("Writing output to ");
 	ft_putstr(root->path);
 	ft_putstr(".cor\n");
+	sound(OK);
 	return (0);
 }

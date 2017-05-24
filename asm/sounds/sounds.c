@@ -34,7 +34,7 @@ void	my_audio_callback(void *userdata, Uint8 *stream, int len)
 void	play_wav_track(SDL_AudioSpec *wav_spec)
 {
 	if (SDL_OpenAudio(wav_spec, NULL) < 0)
-		fprintf(stderr, "Couldn't open audio\n");
+		return ;
 	else
 	{
 		SDL_PauseAudio(0);
@@ -49,9 +49,8 @@ void	load_wav_to_buffer(char *track)
 	static Uint32			wav_length;
 	static SDL_AudioSpec	wav_spec;
 
-printf("%s\n", track);
 	if (SDL_LoadWAV(track, &wav_spec, &wav_buffer, &wav_length) == NULL)
-		printf("%s\n", (char*)SDL_GetError);
+		return ;
 	else
 	{
 		wav_spec.callback = my_audio_callback;
@@ -72,10 +71,3 @@ void	sound(char *track)
 	else
 		load_wav_to_buffer(track);
 }
-
-// int		main(int ac, char **av)
-// {
-// 	ac += 1;
-// 	sound(*(av + 1));
-// 	return (0);
-// }

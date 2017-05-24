@@ -16,22 +16,23 @@ OBJ = asm_src/init_validation.o asm_src/main.o asm_src/file_utils.o ../op.o \
 		asm_src/enqueue_labels.o stack/queue.o stack/stack.o \
 		asm_src/separ_delim.o asm_src/hash_labels.o hash/hash.o \
 		asm_src/compilation.o asm_src/insert_arg.o hash/hash_id.o \
+		sounds/sounds.o
 
 CC = clang
-CCFLAGS = -Wall -Wextra -Werror
+CCFLAGS = -Wall -Wextra -Werror -framework SDL2
 INCLUDES = -I../ -I../libft -I./headers
 
 .phony: all clean fclean re
 
 all: $(OBJ) $(LIBFT)
-	 $(CC) $(CCFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
+	$(CC) $(CCFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 	@ echo "\x1b[01;32mAsm was successfully compiled\x1b[0m"
 
 $(LIBFT):
 	@ make -C ../libft
 
 %.o : ./%.c
-	 clang -g -Wall -Wextra -Werror -o $@ -c $< $(INCLUDES)
+	 clang $(INCLUDES) -Wall -Wextra -Werror -o $@ -c $<
 
 clean:
 	@ make clean -C ../libft

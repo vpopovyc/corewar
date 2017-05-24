@@ -17,8 +17,8 @@
 # include <SDL2/SDL_audio.h>
 # include <unistd.h>
 
-# define OK 	"ok.wav"
-# define NOK	"nok.wav"
+# define OK 	"sounds/ok.wav"
+# define NOK	"sounds/nok.wav"
 
 void	my_audio_callback(void *userdata, Uint8 *stream, int len);
 void	load_wav_to_buffer(char *track);
