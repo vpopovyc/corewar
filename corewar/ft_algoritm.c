@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/26 16:09:05 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/26 16:21:03 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -64,15 +64,18 @@ int     ft_check_op_arg(int comand, char op) // проверка на соотв
 void    ft_check_mem_cell(t_carriage *head, char *field)
 {
     t_carriage *tmp;
+    static i= 0;
     
     tmp = head;
     while (tmp)
     {
-        printf("uk %x\n", (unsigned char)field[tmp->position]);
-        if ((unsigned char)field[tmp->position] > 0 && (unsigned char)field[tmp->position] <= 16 && !tmp->f)
+        if ((unsigned char)field[tmp->position] > 0 && (unsigned char)field[tmp->position] <= 16)
         {
-            tmp->f = g_funcs[field[tmp->position] - 1];
-            tmp->comand_cycle = g_op[field[tmp->position] - 1].cycles;
+            if (!tmp->f)
+            {
+                tmp->f = g_funcs[field[tmp->position] - 1];
+                tmp->comand_cycle = g_op[field[tmp->position] - 1].cycles;
+            }
         }
         else
             tmp->position = ((tmp->position - 1) != MEM_SIZE) ? (tmp->position + 1) : 0;
@@ -101,6 +104,15 @@ void    ft_increment_cycle(t_corewar *src, t_carriage *head)
         point = point->next;
     }
 }
+
+
+// void    ft_algoritm(t_corewar *src)
+// {
+//     while (src->fdump != src->curent_cycle)
+//     {
+//         dk_check_func();
+//     }
+// }
 
 void ft_algoritm(t_corewar *src)
 {

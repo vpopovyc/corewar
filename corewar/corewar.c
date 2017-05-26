@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 15:20:52 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/26 15:46:15 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/26 16:29:52 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ void		dk_dump(char *addr)
 	i = -1;
 	while (++i < MEM_SIZE)
 	{	
+		if ((unsigned char)addr[i])
+			ft_printf("\x1b[32m");
 		ft_printf("%.2x ", (unsigned char)addr[i]);
-		// if ((i + 1) % 2 == 0)
-			// ft_printf(" ");
+		ft_printf("\x1b[0m");
 		if ((i + 1) % 64 == 0)
 			ft_printf("\n");
 	}
@@ -80,6 +81,7 @@ int			main(int argc, char **argv)
 		ft_error(12);
 	ft_create_field_and_carriage(&cor, 0, 0, -2);
 	g_funcs[0] = &ft_live;
+	g_funcs[1] = &ft_ld;
 	g_funcs[2] = &ft_st;
 	ft_algoritm(&cor);
     return (0);

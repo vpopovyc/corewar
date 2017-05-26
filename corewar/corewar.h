@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/26 15:44:43 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/26 16:23:44 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_carriage 			*ft_create_carriage(unsigned int posinion, int num);
 
 void    			ft_fork(t_corewar *data, t_carriage *src);
 void			    ft_st(t_corewar *data, t_carriage *src);
+void				ft_ld(t_corewar *data, t_carriage *src);
 
 
 void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию
