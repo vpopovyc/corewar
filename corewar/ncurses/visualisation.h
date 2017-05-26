@@ -15,12 +15,31 @@
 
 # include <ncurses.h>
 # include <unistd.h>
+# include <pthread.h>
 # include "../../op.h"
 # include "../../libft/includes/libft.h"
 
-# define FIELD 	win[0]
-# define BOTTOM	win[1]
-# define PANEL	win[2]
-# define BASIC	win[3]
+# define FIELD 	init->win[0]
+# define BOTTOM	init->win[1]
+# define PANEL 	init->win[2]
 
+# define DES_FIELD_Y 64
+# define DES_FIELD_X 256
+
+
+typedef struct 	s_init_screen
+{
+	WINDOW 			*win[3];
+	int 			parent_x;
+	int 			parent_y;
+	int 			field_x;
+	int 			field_y;
+	int 			bottom_size;
+	int 			panel_size;
+}				t_init_screen;
+
+extern pthread_mutex_t 	g_lock;
+extern pthread_t 		g_resize;
+extern pthread_attr_t 	g_atr;
+extern char				g_flag;
 #endif
