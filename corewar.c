@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 15:20:52 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/26 15:46:15 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/26 15:37:54 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ void		ft_error(int n)
 	exit(-1);
 }
 
-//void		dk_sort_ply(t_corewar *cor)
-//{
-//	t_player	*sort;
-//	int			i;
-//
-//	i = 1;
-//}
-
 void		dk_dump(char *addr)
 {
 	int		i;
@@ -51,7 +43,10 @@ void		dk_dump(char *addr)
 	i = -1;
 	while (++i < MEM_SIZE)
 	{	
+		if ((unsigned char)addr[i])
+			ft_printf("\x1b[32m");
 		ft_printf("%.2x ", (unsigned char)addr[i]);
+		ft_printf("\x1b[0m");
 		// if ((i + 1) % 2 == 0)
 			// ft_printf(" ");
 		if ((i + 1) % 64 == 0)
@@ -79,8 +74,17 @@ int			main(int argc, char **argv)
 	else
 		ft_error(12);
 	ft_create_field_and_carriage(&cor, 0, 0, -2);
-	g_funcs[0] = &ft_live;
-	g_funcs[2] = &ft_st;
+    ft_bzero(cor.players_live, 4 * cor.count_ply);
+//	g_funcs[0] = &ft_live;
 	ft_algoritm(&cor);
+    // cor.carriage->reg[1] = 100;
+//    cor.carriage->position += 7;
+    // dk_dump(cor.game_field);
+    // ft_st(&cor, cor.carriage);
+    // ft_st(&cor, cor.carriage);
+	// ft_printf("\n\n");
+    // dk_dump(cor.game_field);
+    
+
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/26 16:09:05 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/26 15:42:11 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -68,11 +68,9 @@ void    ft_check_mem_cell(t_carriage *head, char *field)
     tmp = head;
     while (tmp)
     {
-        printf("uk %x\n", (unsigned char)field[tmp->position]);
-        if ((unsigned char)field[tmp->position] > 0 && (unsigned char)field[tmp->position] <= 16 && !tmp->f)
+        if ((unsigned char)field[tmp->position] > 0 && (unsigned char)field[tmp->position] <= 16)
         {
-            tmp->f = g_funcs[field[tmp->position] - 1];
-            tmp->comand_cycle = g_op[field[tmp->position] - 1].cycles;
+            tmp->f = &ft_st;
         }
         else
             tmp->position = ((tmp->position - 1) != MEM_SIZE) ? (tmp->position + 1) : 0;
@@ -90,13 +88,15 @@ void    ft_increment_cycle(t_corewar *src, t_carriage *head)
     point = head;
     while (point)
     {
-        if (point->f)
-            point->comand_cycle--; // если указатель на функцию не налл
-        if (point->comand_cycle == 0 && point->f)// что указатель на функцию не налл
+        // if  (point->f)
+        // {
+        //     point->comand_cycle--; // если указатель на функцию не налл
+        // }
+        if (point->comand_cycle == 0)// что указатель на функцию не налл
         {
-            point->f(src, point); // если point->comand_cycle == 0 выполнить команду
-            point->f = NULL;
+            // g_funcs[0](src, point); // если point->comand_cycle == 0 выполнить команду
             point->comand_cycle = 0;
+            printf("count %d\n", src->players_live[0]);
         }
         point = point->next;
     }
@@ -118,7 +118,6 @@ void ft_algoritm(t_corewar *src)
             src->last_cycle_to_die++; // инкрементируем счетчик циклов к смерти
         ft_increment_cycle(src, src->carriage); // декрементируем все циклы команд в каретках и выполняет команду
         src->curent_cycle++; // инкрементируем текущий цикл
-
     }
     if (src->fdump != -1 && src->fdump == src->curent_cycle)
         dk_dump(src->game_field);

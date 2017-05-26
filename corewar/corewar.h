@@ -6,15 +6,15 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/23 20:26:01 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/26 15:44:43 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __COREWAR_H
 # define __COREWAR_H
 
-# include "op.h"
-# include "libft.h"
+# include "../op.h"
+# include "../libft/includes/libft.h"
 # include <stdio.h>
 
 typedef struct		s_player
@@ -75,12 +75,15 @@ t_carriage			*ft_check_del_carriege(t_carriage *src);
 void				ft_algoritm(t_corewar *src);
 void				dk_dump(char *addr);
 void   	 			ft_live(t_corewar *src, t_carriage *p);
-void    ft_ld(t_corewar *data, t_carriage *src);
-int     ft_inc_index(t_carriage *src);
-int     ft_if_negative(int index);
-void    ft_take_arg(t_corewar *data, t_carriage *src, int i, int comand); // i == 0  / вызываеться при командах с опкодом
-t_carriage *ft_create_carriage(unsigned int posinion, int num);
+void    			ft_ld(t_corewar *data, t_carriage *src);
+int     			ft_inc_index(t_carriage *src);
+int     			ft_if_negative(int index);
+void    			ft_take_arg(t_corewar *data, t_carriage *src, int i, int comand); // i == 0  / вызываеться при командах с опкодом
+t_carriage 			*ft_create_carriage(unsigned int posinion, int num);
+
+void    			ft_fork(t_corewar *data, t_carriage *src);
+void			    ft_st(t_corewar *data, t_carriage *src);
 
 
-//void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию
+void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию
 #endif
