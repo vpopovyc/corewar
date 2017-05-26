@@ -13,8 +13,8 @@
 #ifndef __COREWAR_H
 # define __COREWAR_H
 
-# include "../op.h"
-# include "../libft/includes/libft.h"
+# include "op.h"
+# include "libft.h"
 # include <stdio.h>
 
 typedef struct		s_player
@@ -31,7 +31,7 @@ typedef struct		s_corewar t_corewar;
 
 typedef struct		s_carriage
 {
-	unsigned int	posinion;			//  индекс позиции каретки в игровом поле
+	unsigned int	position;			//  индекс позиции каретки в игровом поле
 	void			(*f)(t_corewar *src, struct s_carriage *head);	//ссылка на функцию которую нужно будет выполнить
 	int				comand_cycle;		//циклы после которых выполняется команда
 	int				arg[4];				//opcode_arg, и три аргумента
@@ -46,7 +46,6 @@ typedef struct		s_corewar
 	t_player		*players; // список игроков и их даные из файла для валидации
 	t_carriage		*carriage; // спичок кареток
 	char			*game_field; // игровое поле
-	/*char 			*meta_data;  информация о кокретной ячейке памяти, например, кто-то последний писал в неё*/
 	int				*players_live; /* масив размером с количество игроков, 
 	каждый елемент число сказаных live с именем конкретного 
 	игрока( индекс номер игрока на карте) */
@@ -76,6 +75,12 @@ t_carriage			*ft_check_del_carriege(t_carriage *src);
 void				ft_algoritm(t_corewar *src);
 void				dk_dump(char *addr);
 void   	 			ft_live(t_corewar *src, t_carriage *p);
+void    ft_ld(t_corewar *data, t_carriage *src);
+int     ft_inc_index(t_carriage *src);
+int     ft_if_negative(int index);
+void    ft_take_arg(t_corewar *data, t_carriage *src, int i, int comand); // i == 0  / вызываеться при командах с опкодом
+t_carriage *ft_create_carriage(unsigned int posinion, int num);
 
-void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию
+
+//void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию
 #endif

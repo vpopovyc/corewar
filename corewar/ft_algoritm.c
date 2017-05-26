@@ -22,38 +22,6 @@ void    ft_check_cycle_to_die(t_corewar *src, int n_live)
     src->last_cycle_to_die = 0;
 }
 
-int     ft_check_op_arg(int comand, char op) // проверка на соответсвие оп кода агументов команде
-{
-    int res;
-
-    res = 0;
-    if ((comand == 2 && (op != -48 || op != -112)))
-        res = 1;
-    else if ((comand == 3 && (op != 112 || op != 80)))
-        res = 1;
-    else if ((comand == 4 || comand == 5) && op != 84)
-        res = 1;
-    else if ((comand == 6 || comand == 7 || comand == 8) && (op != 84 && op != 100 && op != 116 && op != -108 && op != -92 && op != -76 && op != -44 && op != -12 && op != -28))
-        res = 1;
-    else if (comand == 10 && (op != 100 && op != 84 && op != -92 && op != -108 && op != -28 && op
-                         != -44))
-        res = 1;
-    else if (comand == 11 && (op != 88 && op != 84 && op != 104 && op != 100 && op != 120 &&
-                              op != 116))
-        res = 1;
-    else if (comand == 13 && (op != -112 || op != -48))
-        res = 1;
-    else if (comand == 14 && (op != 100 && op != 84 && op != -92 && op != -108 && op != -28 && op
-                              != -44))
-        res = 1;
-    else if (comand == 16 && op == 64)
-        res = 1;
-    return (res);
-}
-
-
-
-
 void    ft_check_mem_cell(t_carriage *head, char *field)
 {
     t_carriage *p;
@@ -61,16 +29,16 @@ void    ft_check_mem_cell(t_carriage *head, char *field)
     p = head;
     while (p)
     {
-        if ((unsigned char)field[p->posinion] > 0 && (unsigned char)field[p->posinion] <= 16)
+        if ((unsigned char)field[p->position] > 0 && (unsigned char)field[p->position] <= 16)
         {
             
-            if (field[p->posinion] != 1 && field[p->posinion] != 9 && field[p->posinion] != 12 && field[p->posinion] != 15)
+            if (field[p->position] != 1 && field[p->position] != 9 && field[p->position] != 12 && field[p->position] != 15)
             {
                 // если есть оп код проверить его
             }
         }
         else
-            p->posinion = ((p->posinion - 1) != MEM_SIZE) ? (p->posinion + 1) : 0;
+            p->position = ((p->position - 1) != MEM_SIZE) ? (p->position + 1) : 0;
         p = p->next;
     }
     // проверить ячейку на соответсвие команде , если для команды есть кодирующий байт проверить его
@@ -89,7 +57,7 @@ void    ft_increment_cycle(t_carriage *head)
             point->comand_cycle--; // если указатель на функцию не налл
         if (point->comand_cycle == 0)// что указатель на функцию не налл
         {
-            point->f(point->arg, head); // если point->comand_cycle == 0 выполнить команду
+//            point->f(point->arg); // если point->comand_cycle == 0 выполнить команду
             point->comand_cycle = 0;
         }
         point = point->next;

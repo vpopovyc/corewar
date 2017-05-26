@@ -52,8 +52,8 @@ void		dk_dump(char *addr)
 	while (++i < MEM_SIZE)
 	{	
 		ft_printf("%.2x ", (unsigned char)addr[i]);
-		if ((i + 1) % 2 == 0)
-			ft_printf(" ");
+		// if ((i + 1) % 2 == 0)
+			// ft_printf(" ");
 		if ((i + 1) % 64 == 0)
 			ft_printf("\n");
 	}
@@ -79,7 +79,14 @@ int			main(int argc, char **argv)
 	else
 		ft_error(12);
 	ft_create_field_and_carriage(&cor, 0, 0, -2);
-	g_funcs[0] = &ft_live;
-	ft_algoritm(&cor);
+    ft_bzero(cor.players_live, 4 * cor.count_ply);
+//	g_funcs[0] = &ft_live;
+//	ft_algoritm(&cor);
+    cor.carriage->reg[1] = 100;
+//    cor.carriage->position += 7;
+    ft_fork(&cor, cor.carriage);
+    
+    dk_dump(cor.game_field);
+
     return (0);
 }

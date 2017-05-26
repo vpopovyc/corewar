@@ -48,7 +48,7 @@ t_carriage *ft_create_carriage(unsigned int posinion, int num)
     new->comand_cycle = 0;
     new->f = NULL;
     new->live_in_cycle = 0;
-    new->posinion = posinion;
+    new->position = posinion;
     new->next = NULL;
     ft_bzero(new->reg, (REG_NUMBER * 4));
     new->reg[1] = num;
