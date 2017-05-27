@@ -16,6 +16,7 @@
 # include <ncurses.h>
 # include <unistd.h>
 # include <pthread.h>
+# include "sounds/sounds.h"
 # include "../../op.h"
 # include "../../libft/includes/libft.h"
 
@@ -26,6 +27,7 @@
 # define DES_FIELD_Y 64
 # define DES_FIELD_X 256
 
+# define TRACK "sounds/background.wav"
 
 typedef struct 	s_init_screen
 {
@@ -40,6 +42,7 @@ typedef struct 	s_init_screen
 
 extern pthread_mutex_t 	g_lock;
 extern pthread_t 		g_resize;
+extern pthread_t 		g_music;
 extern pthread_attr_t 	g_atr;
 extern char				g_flag;
 #endif
