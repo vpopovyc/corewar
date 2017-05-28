@@ -38,6 +38,7 @@ typedef struct		s_carriage
 	unsigned int	live_in_cycle;		// количество сказаных live в текущем cycle_to_die
 	int				reg[REG_NUMBER];	//регистры
 	int				carry;
+	int 			i;                   // нужно для визуализации, руками и не руками трогать нельзя
 	struct s_carriage *next;
 }					t_carriage;
 
@@ -46,6 +47,7 @@ typedef struct		s_corewar
 	t_player		*players; // список игроков и их даные из файла для валидации
 	t_carriage		*carriage; // спичок кареток
 	char			*game_field; // игровое поле
+	char 			*meta_data;
 	int				*players_live; /* масив размером с количество игроков, 
 	каждый елемент число сказаных live с именем конкретного 
 	игрока( индекс номер игрока на карте) */

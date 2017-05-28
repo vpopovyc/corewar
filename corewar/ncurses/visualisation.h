@@ -17,17 +17,39 @@
 # include <unistd.h>
 # include <pthread.h>
 # include "sounds/sounds.h"
-# include "../../op.h"
-# include "../../libft/includes/libft.h"
+# include "../corewar.h"
 
 # define FIELD 	init->win[0]
 # define BOTTOM	init->win[1]
 # define PANEL 	init->win[2]
 
-# define DES_FIELD_Y 64
-# define DES_FIELD_X 256
+# define DES_FIELD_Y 66 // 64 + 2 ((MEM_SIZE / 64) + 2) 
+# define DES_FIELD_X 195 // 64 * 2 + 64 + 3
 
 # define TRACK "sounds/background.wav"
+
+# define EXIT	0x1
+# define I_ERR 	0x2
+# define P_MUS	0x4 // play m 
+# define S_MUS	0x8 // stop m
+# define R_MUS	0x8 // resume m
+# define CLEAN	0x6 
+# define R_CHK	0xe // check if resume needed
+
+/*
+** color pairs
+*/
+
+# define P1RB 1 // RED_BLACK
+# define P2GB 2 // GREEN_BLACK
+# define P3YB 4 // YELLOW_BLACK
+# define P4BB 8 // BLUE_BLACK
+# define P1RW 17 // RED_WHITE
+# define P2GW 18 // GREEN_WHITE
+# define P3YW 20 // YELLOW_WHITE
+# define P4BW 24 // BLUE_WHITE
+# define P0WW 16 // WHITE_WHITE
+
 
 typedef struct 	s_init_screen
 {
@@ -43,6 +65,17 @@ typedef struct 	s_init_screen
 extern pthread_mutex_t 	g_lock;
 extern pthread_t 		g_resize;
 extern pthread_t 		g_music;
+extern pthread_t 		g_key;
 extern pthread_attr_t 	g_atr;
 extern char				g_flag;
 #endif
+
+
+/* 
+    0   0  0  0  0 0 0 0 
+    128 64 32 16 8 4 2 1
+
+a 	b 	c 	d 	e 	f
+10	11	12	13	14	15
+
+*/

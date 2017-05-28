@@ -19,7 +19,7 @@ void	my_audio_callback(void *userdata, Uint8 *stream, int len)
 {
 	Uint32 tmp_len;
 
-	if (g_flag & 0x2)
+	if (g_flag & (P_MUS | EXIT))
 		SDL_PauseAudio(1);
 	tmp_len = len;
 	if (g_audio_len == 0)
@@ -42,13 +42,10 @@ void	play_wav_track(SDL_AudioSpec *wav_spec)
 		SDL_PauseAudio(0);
 		while (g_audio_len > 0)
 		{
-			if (g_flag & 0x4)
-			{
-				SDL_PauseAudio(0);
-				g_flag ^= 0x4;
-			}
-			else if (g_flag &0x1)
+			if (g_flag & EXIT)
 				pthread_exit(NULL);
+			if ((g_flag & R_CHK) == R_MUS)
+				SDL_PauseAudio(0);
 			SDL_Delay(100);
 		}
 	}
@@ -80,6 +77,7 @@ void	*sound(void *arg)
 
 	track = (char*)arg;
 	close(2);
+	g_flag |= S_MUS;
 	if (SDL_Init(SDL_INIT_AUDIO) < 0)
 		SDL_Log("[SDL] Can't init SDL");
 	while (1)
