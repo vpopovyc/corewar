@@ -1,7 +1,7 @@
 
-#include "../corewar.h"
+#include "corewar.h"
 
-void    ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int index)
+static void    ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int index)
 {
     if (op_code == 88 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER && src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER)
     {
@@ -10,6 +10,7 @@ void    ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int index)
         data->game_field[ft_if_negative(index + 1)] = src->reg[src->arg[1]] >> 16;
         data->game_field[ft_if_negative(index + 2)] = src->reg[src->arg[1]] >> 8;
         data->game_field[ft_if_negative(index + 3)] = src->reg[src->arg[1]];
+        ft_write_meta(data, src->name, index);
     }
     else if (op_code == 84 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER && src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER && src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
     {
@@ -18,10 +19,11 @@ void    ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int index)
         data->game_field[ft_if_negative(index + 1)] = src->reg[1] >> 16;
         data->game_field[ft_if_negative(index + 2)] = src->reg[1] >> 8;
         data->game_field[ft_if_negative(index + 3)] = src->reg[1];
+        ft_write_meta(data, src->name, index);
     }
 }
 
-void    ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int index)
+static void    ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int index)
 {
     if (op_code == 104 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER)
     {
@@ -30,6 +32,7 @@ void    ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int index)
         data->game_field[ft_if_negative(index + 1)] = src->reg[src->arg[1]] >> 16;
         data->game_field[ft_if_negative(index + 2)] = src->reg[src->arg[1]] >> 8;
         data->game_field[ft_if_negative(index + 3)] = src->reg[src->arg[1]];
+        ft_write_meta(data, src->name, index);
     }
     else if (op_code == 100 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER && src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
     {
@@ -38,10 +41,11 @@ void    ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int index)
         data->game_field[ft_if_negative(index + 1)] = src->reg[src->arg[1]] >> 16;
         data->game_field[ft_if_negative(index + 2)] = src->reg[src->arg[1]] >> 8;
         data->game_field[ft_if_negative(index + 3)] = src->reg[src->arg[1]];
+        ft_write_meta(data, src->name, index);
     }
 }
 
-void    ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int index)
+static void    ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int index)
 {
     if (op_code == 120 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER)
     {
@@ -50,6 +54,7 @@ void    ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int index)
         data->game_field[ft_if_negative(index + 1)] = src->reg[src->arg[1]] >> 16;
         data->game_field[ft_if_negative(index + 2)] = src->reg[src->arg[1]] >> 8;
         data->game_field[ft_if_negative(index + 3)] = src->reg[src->arg[1]];
+        ft_write_meta(data, src->name, index);
     }
     else if (op_code == 116 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER && src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
     {
@@ -58,6 +63,7 @@ void    ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int index)
         data->game_field[ft_if_negative(index + 1)] = src->reg[src->arg[1]] >> 16;
         data->game_field[ft_if_negative(index + 2)] = src->reg[src->arg[1]] >> 8;
         data->game_field[ft_if_negative(index + 3)] = src->reg[src->arg[1]];
+        ft_write_meta(data, src->name, index);
     }
 }
 

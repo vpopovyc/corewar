@@ -80,9 +80,9 @@ int			main(int argc, char **argv)
 	else
 		ft_error(12);
 	ft_create_field_and_carriage(&cor, 0, 0, -2);
-	g_funcs[0] = &ft_live;
-	g_funcs[1] = &ft_ld;
-	g_funcs[2] = &ft_st;
-	ft_algoritm(&cor);
+//	g_funcs[0] = &ft_live;
+//	g_funcs[1] = &ft_ld;
+//	g_funcs[2] = &ft_st;
+//	ft_algoritm(&cor);
     return (0);
 }

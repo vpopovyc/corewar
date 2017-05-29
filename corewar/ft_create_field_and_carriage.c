@@ -52,6 +52,7 @@ t_carriage *ft_create_carriage(unsigned int posinion, int num)
     new->next = NULL;
     ft_bzero(new->reg, (REG_NUMBER * 4));
     new->reg[1] = num;
+    new->name = (char)num;
     return (new);
 }
 
@@ -80,6 +81,7 @@ void    ft_create_field_and_carriage(t_corewar *src, int free_space, int n, int 
     t_carriage      *carriage;
     
     src->game_field = ft_strnew(MEM_SIZE - 1);
+    src->meta_data = ft_strnew(MEM_SIZE - 1);
     src->carriage = ft_create_carriage(0, -1);
     src->carriage->reg[1] = -1;
     ft_count_free_mem_size(src->players, &free_space);
