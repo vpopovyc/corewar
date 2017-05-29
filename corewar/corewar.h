@@ -6,15 +6,15 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/29 16:59:42 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/29 17:29:13 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __COREWAR_H
 # define __COREWAR_H
 
-# include "op.h"
-# include "libft.h"
+# include "../op.h"
+# include "../libft/includes/libft.h"
 # include <stdio.h>
 
 typedef struct		s_player
@@ -69,6 +69,9 @@ typedef struct		s_corewar
 void				ft_error(int n);
 t_player 		   *ft_valid_cor(int fd, size_t len, size_t n_read);
 void				dk_pars_arg(int argc, char **argv, t_corewar *cor, int i);
+int					find_nbr_ply(t_player *ply, int nbr);
+void				dk_sort_ply(t_player **ply, int nbr);
+void				add_ply_back(t_player **ply, t_player *tmp);
 
 
 void                ft_create_field_and_carriage(t_corewar *src, int free_space, int n, int num); // создание игрового поля и кареток

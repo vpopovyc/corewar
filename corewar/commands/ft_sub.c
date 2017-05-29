@@ -1,4 +1,4 @@
-#include "corewar.h"
+#include "../corewar.h"
 
 void	ft_sub(t_corewar *data, t_carriage *src)
 {

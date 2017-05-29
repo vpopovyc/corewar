@@ -1,5 +1,5 @@
 
-#include "corewar.h"
+#include "../corewar.h"
 
 void	ft_lfork(t_corewar *data, t_carriage *src)
 {

@@ -1,5 +1,5 @@
 
-#include "corewar.h"
+#include "../corewar.h"
 
 void	ft_ld(t_corewar *data, t_carriage *src)
 {

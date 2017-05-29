@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dk_pars_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkosolap <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 13:07:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/18 13:07:53 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/29 18:08:06 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ void		dk_pars_arg(int argc, char **argv, t_corewar *cor, int i)
 		&& ft_isadigitall(argv[i + 1]) && ((i + 2) < argc))
 		{
 			if ((fd = open(argv[i += 2], O_RDONLY)) != -1)
+			{
+				if (!find_nbr_ply(cor->players, ft_atoi(argv[i - 1])))
+					ft_error(6);
 				dk_parsplayer(fd, cor, ft_atoi(argv[i - 1]), argv[i]);
+			}
 		}
 		else if ((fd = open(argv[i], O_RDONLY)) != -1)
 			dk_parsplayer(fd, cor, 0, argv[i]);

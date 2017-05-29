@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 15:20:52 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/26 16:29:52 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/29 18:09:05 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ void		ft_error(int n)
 	ft_printf("\x1b[0m");
 	exit(-1);
 }
-
-//void		dk_sort_ply(t_corewar *cor)
-//{
-//	t_player	*sort;
-//	int			i;
-//
-//	i = 1;
-//}
 
 void		dk_dump(char *addr)
 {
@@ -77,6 +69,7 @@ int			main(int argc, char **argv)
 		dk_pars_arg(argc, argv, &cor, 0);
 		if (!cor.count_ply)
 			ft_error(8);
+		dk_sort_ply(&cor.players, cor.count_ply);
 	}
 	else
 		ft_error(12);

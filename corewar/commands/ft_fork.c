@@ -1,10 +1,10 @@
 
-#include "corewar.h"
+#include "../corewar.h"
 
 void	ft_fork(t_corewar *data, t_carriage *src)
 {
     t_carriage *point;
-    
+
     ft_inc_index(src);
     src->arg[1] = (data->game_field[ft_inc_index(src)] << 16) | data->game_field[ft_inc_index(src)];
     point = data->carriage;
