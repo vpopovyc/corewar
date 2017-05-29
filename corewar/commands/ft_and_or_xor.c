@@ -1,4 +1,4 @@
-#include "corewar.h"
+#include "../corewar.h"
 
 void	ft_and_or_xor_1(t_corewar *d, t_carriage *s, char op, char c) // reg reg reg
 {

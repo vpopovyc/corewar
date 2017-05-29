@@ -1,5 +1,5 @@
 
-#include "corewar.h"
+#include "../corewar.h"
 
 void    ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int index)
 {
