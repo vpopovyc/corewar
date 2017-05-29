@@ -60,6 +60,7 @@ typedef struct		s_corewar
 	int				fdump; // елси число не (-1) значит вивести дамп после fdump циклов
 	int				verbose; // визуальный режим
 	int				count_ply;
+    char            winer;
 }					t_corewar;
 
 

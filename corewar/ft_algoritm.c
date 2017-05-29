@@ -64,7 +64,6 @@ int     ft_check_op_arg(int comand, char op) // проверка на соотв
 void    ft_check_mem_cell(t_carriage *head, char *field)
 {
     t_carriage *tmp;
-//    static i = 0;
     
     tmp = head;
     while (tmp)
@@ -106,14 +105,6 @@ void    ft_increment_cycle(t_corewar *src, t_carriage *head)
 }
 
 
-// void    ft_algoritm(t_corewar *src)
-// {
-//     while (src->fdump != src->curent_cycle)
-//     {
-//         dk_check_func();
-//     }
-// }
-
 void ft_algoritm(t_corewar *src)
 {
     src->cycle_to_die = CYCLE_TO_DIE;
@@ -132,6 +123,7 @@ void ft_algoritm(t_corewar *src)
         src->curent_cycle++; // инкрементируем текущий цикл
 
     }
+    // победитель src->winer;
     if (src->fdump != -1 && src->fdump == src->curent_cycle)
         dk_dump(src->game_field);
 }

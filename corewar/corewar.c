@@ -71,6 +71,7 @@ int			main(int argc, char **argv)
 	cor.verbose = 0;
 	cor.players = NULL;
 	cor.count_ply = 0;
+    cor.winer = 0;
 	if (argc > 1)
 	{
 		dk_pars_arg(argc, argv, &cor, 0);
