@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visualisation.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:31:02 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/24 19:31:04 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/05/29 16:56:19 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,20 @@
 # define BOTTOM	init->win[1]
 # define PANEL 	init->win[2]
 
-# define DES_FIELD_Y 66 // 64 + 2 ((MEM_SIZE / 64) + 2) 
+# define DES_FIELD_Y 66 // 64 + 2 ((MEM_SIZE / 64) + 2)
 # define DES_FIELD_X 195 // 64 * 2 + 64 + 3
 # define DES_BOT_S	 11
-# define DES_PANEL_S 50
+# define DES_PANEL_S 40
 
 # define TRACK "sounds/background.wav"
 
 # define EXIT	0x1
 # define I_ERR 	0x2
-# define P_MUS	0x4 // play m 
+# define P_MUS	0x4 // play m
 # define S_MUS	0x8 // stop m
 # define R_MUS	0x8 // resume m
-# define CLEAN	0x6 
+# define CLEAN	0x6
+# define A_STOP	0x10 //pause processes
 # define R_CHK	0xe // check if resume needed
 
 /*
@@ -82,8 +83,8 @@ extern char				g_flag;
 #endif
 
 
-/* 
-    0   0  0  0  0 0 0 0 
+/*
+    0   0  0  0  0 0 0 0
     128 64 32 16 8 4 2 1
 
 a 	b 	c 	d 	e 	f

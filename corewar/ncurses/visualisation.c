@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visualisation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:30:23 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/24 19:30:26 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/05/29 17:08:55 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ pthread_t 		g_key;
 void	draw_borders(t_init_screen *init)
 {
 	attron(A_ALTCHARSET);
-	wborder(FIELD, ACS_VLINE, ACS_VLINE, ACS_HLINE, 
+	wborder(FIELD, ACS_VLINE, ACS_VLINE, ACS_HLINE,
 		ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
-	wborder(BOTTOM, ACS_VLINE, ACS_VLINE, ACS_HLINE, 
+	wborder(BOTTOM, ACS_VLINE, ACS_VLINE, ACS_HLINE,
 		ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
-	wborder(PANEL, ACS_VLINE, ACS_VLINE, ACS_HLINE, 
+	wborder(PANEL, ACS_VLINE, ACS_VLINE, ACS_HLINE,
 		ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
 	wrefresh(stdscr);
 	wrefresh(FIELD);
@@ -44,7 +44,7 @@ void	new_size_calc(t_init_screen *init, int new_y, int new_x)
 
 	init->parent_x = new_x;
 	init->parent_y = new_y;
-	
+
 	bottom_size = new_y - DES_FIELD_Y;
 	panel_size = new_x - DES_FIELD_X;
 	field_y = DES_FIELD_Y;
@@ -150,7 +150,9 @@ void	*key_event(void *arg)
 		}
 		if (c == 'p')
 			g_flag ^= 0x4;
-		usleep(1 * 100000);
+		if (c == 32)
+			g_flag ^= 0x10;
+		usleep(3 * 100000);
 	}
 	pthread_exit(NULL);
 }
@@ -313,7 +315,7 @@ void	print_status(WINDOW *bottom)
 	if ((g_flag & R_CHK) == R_MUS)
 		mvwprintw(bottom, y, 86, "Music is currently playing");
 	else
-		mvwprintw(bottom, y, 86, "Music is paused");
+		mvwprintw(bottom, y, 86, "Music is paused           ");
 	y += 2;
 	mvwprintw(bottom, y, 86, "INGA MAUER - MY FLIGHTS WITHOUT YOU");
 	// y += 2;
@@ -387,28 +389,99 @@ void	fill_field(WINDOW *field, char *gamefield, char *mdata, t_carriage *crg)
 		}
 		++y;
 	}
-	wborder(field, ACS_VLINE, ACS_VLINE, ACS_HLINE, 
+	wborder(field, ACS_VLINE, ACS_VLINE, ACS_HLINE,
 		ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
+}
+
+void	print_player_info(WINDOW *panel, t_corewar *src, int *y)
+{
+	t_player	*players;
+	int			i;
+
+	i = 3;
+	players = src->players;
+	wattron(panel, A_BOLD);
+	while (players)
+	{
+		(*y) += 4;
+		mvwprintw(panel, (*y), 3, "Player %d : ", i / 2);
+		get_color(panel, i);
+		mvwprintw(panel, (*y), 15, "%s", players->name);
+		unset_color(panel, i);
+		mvwprintw(panel, (*y) + 2, 15, "Lives summary : %d", src->players_live[i / 2 - 1]);
+		i += 2;
+		players = players->next;
+	}
+	wattroff(panel, A_BOLD);
+}
+
+void	fill_panel(WINDOW *panel, t_corewar *src)
+{
+	int		y;
+
+	y = 2;
+	wattron(panel, A_BOLD);
+	if (!(g_flag & A_STOP))
+		mvwprintw(panel, y, 3, "PLAYING");
+	else
+		mvwprintw(panel, y, 3, "PAUSED  ");
+	y += 2;
+	mvwprintw(panel, y, 3, "CYCLE_NUMBER : %d", src->curent_cycle);
+	y += 2;
+	mvwprintw(panel, y, 3, "COUNT_TO_CYCLE_TO_DIE : %d", src->last_cycle_to_die);
+	y += 2;
+	mvwprintw(panel, y, 3, "CYCLE_TO_DIE : %d", src->cycle_to_die);
+	y += 2;
+	mvwprintw(panel, y, 3, "NUMBER_CHECKS : %d", src->n_check);
+	wattroff(panel, A_BOLD);
+	print_player_info(panel, src, &y);
 }
 
 void	fill_screen(t_init_screen *init, t_corewar *src)
 {
-	wclear(FIELD);
 	fill_field(FIELD, src->game_field, src->meta_data, src->carriage);
 	fill_bottom(BOTTOM, src->players, src->count_ply);
-	fill_panel(PANEL, );
+	fill_panel(PANEL, src);
 	wrefresh(stdscr);
 	wrefresh(FIELD);
 	wrefresh(BOTTOM);
 	wrefresh(PANEL);
 }
 
+void 	algo_event_managment()
+{
+	if (g_flag & A_STOP)
+	{
+		g_flag |= P_MUS;
+		while (1)
+		{
+			if (g_flag & EXIT)
+				break ;
+			if (!(g_flag & A_STOP))
+			{
+				g_flag ^= P_MUS;
+				break ;
+			}
+			usleep (5 * 100000);
+		}
+	}
+	else if (g_flag & I_ERR)
+	{
+		while (1)
+		{
+			if (g_flag & EXIT)
+				break ;
+			if (!(g_flag & I_ERR))
+				break ;
+			usleep (5 * 100000);
+		}
+	}
+}
+
 int 	main(void)
 {
 	t_init_screen 	*init;
-
-/* tmp
-*/
+	/* tmp */
 	t_corewar *src = (t_corewar*)ft_memalloc(sizeof(t_corewar));
 	src->game_field = ft_strnew(MEM_SIZE - 1);
 	src->meta_data = ft_strnew(MEM_SIZE - 1);
@@ -435,18 +508,31 @@ int 	main(void)
 	src->players = (t_player*)ft_memalloc(sizeof(t_player));
 	src->players->next = (t_player*)ft_memalloc(sizeof(t_player));
 	src->players->next->next = (t_player*)ft_memalloc(sizeof(t_player));
-	// src->players->next->next->next = (t_player*)ft_memalloc(sizeof(t_player));
+	src->players->next->next->next = (t_player*)ft_memalloc(sizeof(t_player));
 	src->players->name = strdup("Zork");
 	src->players->next->name = strdup("Fluterrshy");
 	src->players->next->next->name = strdup("Helltrain");
-	// src->players->next->next->next->name = strdup("Bigzork");
+	src->players->next->next->next->name = strdup("Bigzork");
+	src->curent_cycle = 0;
+	src->cycle_to_die = 1500;
+	src->last_cycle_to_die = 0;
 	src->count_ply = 4;
-/* tmp
-*/
+	src->players_live = (int*)malloc(sizeof(int) * 4);
+	src->players_live[0] = 5;
+	src->players_live[1] = 4;
+	src->players_live[2] = 3;
+	src->players_live[3] = 2;
+	/* tmp */
 	init = init_ncurses();
 
-	fill_screen(init, src);
-
+	while (1)
+	{
+		if (g_flag & EXIT)
+			break ;
+		fill_screen(init, src);
+		algo_event_managment();
+		usleep (5 * 100000);
+	}
 	end_ncurses(init);
 	return (0);
 }
