@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-void	ft_and_or_xor_1(t_corewar *d, t_carriage *s, char op, char c) // reg reg reg
+static void	ft_and_or_xor_1(t_corewar *d, t_carriage *s, char op, char c) // reg reg reg
 {
 	if (s->arg[1] >= 0 && s->arg[1] <= REG_NUMBER && s->arg[2] >= 0 && s->arg[2]
 	<= REG_NUMBER && s->arg[3] && s->arg[3] <= REG_NUMBER)
@@ -15,7 +15,7 @@ void	ft_and_or_xor_1(t_corewar *d, t_carriage *s, char op, char c) // reg reg re
 	}
 }
 
-void	ft_and_or_xor_2(t_corewar *d, t_carriage *s, char op, char c)
+static void	ft_and_or_xor_2(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == -108 && s->arg[2] >= 0 && s->arg[2] <= REG_NUMBER && s->arg[3]
 			>= 0 && s->arg[3] <= REG_NUMBER) // dir reg reg
@@ -39,7 +39,7 @@ void	ft_and_or_xor_2(t_corewar *d, t_carriage *s, char op, char c)
 	}
 }
 
-void	ft_and_or_xor_3(t_corewar *d, t_carriage *s, char op, char c)
+static void	ft_and_or_xor_3(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == 116 && s->arg[1] >= 0 && s->arg[1] <= REG_NUMBER && s->arg[3] >= 0
 		&& s->arg[3] <= REG_NUMBER) // reg dir reg
@@ -63,7 +63,7 @@ void	ft_and_or_xor_3(t_corewar *d, t_carriage *s, char op, char c)
 	}
 }
 
-void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
+static void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == -76 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER) // dir ind reg
 	{
@@ -85,7 +85,7 @@ void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
 	}
 }
 
-void	ft_and_or_xor_5(t_corewar *d, t_carriage *s, char op, char c)
+static void	ft_and_or_xor_5(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == -12 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER) // ind ind reg
 	{

@@ -13,8 +13,8 @@
 #ifndef __COREWAR_H
 # define __COREWAR_H
 
-# include "../op.h"
-# include "../libft/includes/libft.h"
+# include "op.h"
+# include "libft.h"
 # include <stdio.h>
 
 typedef struct		s_player
@@ -39,6 +39,7 @@ typedef struct		s_carriage
 	int				reg[REG_NUMBER];	//регистры
 	int				carry;
 	int 			i;                   // нужно для визуализации, руками и не руками трогать нельзя
+    char            name;
 	struct s_carriage *next;
 }					t_carriage;
 
@@ -77,6 +78,7 @@ t_carriage			*ft_check_del_carriege(t_carriage *src);
 void				ft_algoritm(t_corewar *src);
 void				dk_dump(char *addr);
 void   	 			ft_live(t_corewar *src, t_carriage *p);
+
 void    			ft_ld(t_corewar *data, t_carriage *src);
 int     			ft_inc_index(t_carriage *src);
 int     			ft_if_negative(int index);
@@ -86,7 +88,9 @@ t_carriage 			*ft_create_carriage(unsigned int posinion, int num);
 void    			ft_fork(t_corewar *data, t_carriage *src);
 void			    ft_st(t_corewar *data, t_carriage *src);
 void				ft_ld(t_corewar *data, t_carriage *src);
-
-
+void                ft_write_meta(t_corewar *src, char name, int position); // запись имени игрока в масив метаданных для визуального отображения
+void                ft_and_or_xor(t_corewar *d, t_carriage *s);
+void                ft_sti(t_corewar *data, t_carriage *src);
+void                ft_write_meta(t_corewar *src, char name, int position);
 void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию
 #endif

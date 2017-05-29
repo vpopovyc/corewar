@@ -64,7 +64,7 @@ int     ft_check_op_arg(int comand, char op) // проверка на соотв
 void    ft_check_mem_cell(t_carriage *head, char *field)
 {
     t_carriage *tmp;
-    static i= 0;
+//    static i = 0;
     
     tmp = head;
     while (tmp)
@@ -74,7 +74,7 @@ void    ft_check_mem_cell(t_carriage *head, char *field)
             if (!tmp->f)
             {
                 tmp->f = g_funcs[field[tmp->position] - 1];
-                tmp->comand_cycle = g_op[field[tmp->position] - 1].cycles;
+//                tmp->comand_cycle = g_op[field[tmp->position] - 1].cycles;
             }
         }
         else

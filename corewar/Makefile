@@ -6,7 +6,7 @@
 #    By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/12 15:22:31 by dkosolap          #+#    #+#              #
-#    Updated: 2017/05/26 15:52:00 by dkosolap         ###   ########.fr        #
+#    Updated: 2017/05/29 11:13:09 by dkosolap         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = corewar
 LIB = -L../libft -lft
 FLAG = -Wall -Wextra -Werror
 SRC = corewar.c dk_pars_arg.c ft_valid_cor.c ft_create_field_and_carriage.c \
-	  ft_algoritm.c ft_comand_function.c ../op.c
+	ft_algoritm.c ../op.c \
+	commands/ft_comand_function.c commands/ft_and_or_xor.c commands/ft_sti.c
 BINS = $(SRC:.c=.o)
 
 all: $(NAME)
