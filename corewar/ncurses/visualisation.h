@@ -25,6 +25,8 @@
 
 # define DES_FIELD_Y 66 // 64 + 2 ((MEM_SIZE / 64) + 2) 
 # define DES_FIELD_X 195 // 64 * 2 + 64 + 3
+# define DES_BOT_S	 11
+# define DES_PANEL_S 50
 
 # define TRACK "sounds/background.wav"
 
@@ -49,6 +51,15 @@
 # define P3YW 20 // YELLOW_WHITE
 # define P4BW 24 // BLUE_WHITE
 # define P0WW 16 // WHITE_WHITE
+
+/*
+** COLORS
+*/
+
+# define COL_RED 	"RED"
+# define COL_GREEN	"GREEN"
+# define COL_YELLOW	"YELLOW"
+# define COL_BLUE	"BLUE"
 
 
 typedef struct 	s_init_screen

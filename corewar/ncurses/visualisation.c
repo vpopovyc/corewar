@@ -49,7 +49,7 @@ void	new_size_calc(t_init_screen *init, int new_y, int new_x)
 	panel_size = new_x - DES_FIELD_X;
 	field_y = DES_FIELD_Y;
 	field_x = DES_FIELD_X;
-	if (bottom_size >= 0 && panel_size >= 0)
+	if (bottom_size >= DES_BOT_S && panel_size >= DES_PANEL_S)
 	{
 		init->bottom_size = bottom_size;
 		init->panel_size = panel_size;
@@ -119,7 +119,7 @@ void	*size_controll(void *arg)
 			pthread_exit(NULL);
 		pthread_mutex_lock(&g_lock);
 		getmaxyx(stdscr, y, x);
-		mvwprintw(stdscr, 0, 1, "[%d][%d]", y, x);
+		mvwprintw(stdscr, 0, 1, "[2017]");
 		if (y != init->parent_y || x != init->parent_x)
 		{
 			new_size_calc(init, y, x);
@@ -246,6 +246,123 @@ void	turn_off_color(WINDOW *field, int color_pair)
 	wattroff(field, COLOR_PAIR(color_pair));
 }
 
+char	*get_color(WINDOW *bottom, int i)
+{
+	if (i == 3)
+	{
+		wattron(bottom, COLOR_PAIR(P1RB));
+		return (COL_RED);
+	}
+	else if (i == 5)
+	{
+		wattron(bottom, COLOR_PAIR(P2GB));
+		return (COL_GREEN);
+	}
+	else if (i == 7)
+	{
+		wattron(bottom, COLOR_PAIR(P3YB));
+		return (COL_YELLOW);
+	}
+	else
+	{
+		wattron(bottom, COLOR_PAIR(P4BB));
+		return (COL_BLUE);
+	}
+}
+
+void 	unset_color(WINDOW *bottom, int i)
+{
+	if (i == 3)
+		wattroff(bottom, COLOR_PAIR(P1RB));
+	else if (i == 5)
+		wattroff(bottom, COLOR_PAIR(P2GB));
+	else if (i == 7)
+		wattroff(bottom, COLOR_PAIR(P3YB));
+	else if (i == 9)
+		wattroff(bottom, COLOR_PAIR(P4BB));
+}
+
+void	print_usage(WINDOW *bottom)
+{
+	int y;
+
+	y = 1;
+	mvwprintw(bottom, y, 42, "Usage:");
+	y += 2;
+	mvwprintw(bottom, y, 44, "Best shapes is [77][245]");
+	y += 2;
+	mvwprintw(bottom, y, 44, "Use 'q' to quit");
+	y += 2;
+	mvwprintw(bottom, y, 44, "Use 'p' to pause music");
+	y += 2;
+	mvwprintw(bottom, y, 44, "Use 'space' to execute");
+}
+
+void	print_status(WINDOW *bottom)
+{
+	int 	y;
+	int 	t_y;
+	int 	t_x;
+
+	y = 1;
+	mvwprintw(bottom, y, 84, "Status:");
+	y += 2;
+	getmaxyx(stdscr, t_y, t_x);
+	mvwprintw(bottom, y, 86, "Current shapes [%d][%d]", t_y, t_x);
+	y += 2;
+	if ((g_flag & R_CHK) == R_MUS)
+		mvwprintw(bottom, y, 86, "Music is currently playing");
+	else
+		mvwprintw(bottom, y, 86, "Music is paused");
+	y += 2;
+	mvwprintw(bottom, y, 86, "INGA MAUER - MY FLIGHTS WITHOUT YOU");
+	// y += 2;
+	// mvwprintw(bottom, y, 86, "Something");
+}
+
+void	print_credits(WINDOW *bottom)
+{
+	int y;
+
+	y = 1;
+	mvwprintw(bottom, y, 126, "Team name: moshonka_yagnenka");
+	y += 2;
+	mvwprintw(bottom, y, 128, "Team-lead:                     vpopovyc");
+	y += 2;
+	mvwprintw(bottom, y, 128, "Ternary master:                mkrutik");
+	y += 2;
+	mvwprintw(bottom, y, 128, "Towerfall gamer:               dkosolap");
+	y += 2;
+	mvwprintw(bottom, y, 128, "The guy who came at the end:   rvolovik");
+}
+
+void	fill_bottom(WINDOW *bottom, t_player *ply, int num_ply)
+{
+	t_player 	*player;
+	int 		y;
+	int 		x;
+
+	player = ply;
+	y = 1;
+	if (num_ply == 1)
+		mvwprintw(bottom, y, 1, "There is 1 player :(", num_ply);
+	else
+		mvwprintw(bottom, y, 1, "There is %d players:", num_ply);
+	while (player)
+	{
+		y += 2;
+		mvwprintw(bottom, y, 1, "  %-15s - ", player->name);
+		getyx(bottom, y, x);
+		mvwprintw(bottom, y, x, "%s", get_color(bottom, y));
+		unset_color(bottom, y);
+
+		player = player->next;
+	}
+	print_usage(bottom);
+	print_status(bottom);
+	print_credits(bottom);
+}
+
 void	fill_field(WINDOW *field, char *gamefield, char *mdata, t_carriage *crg)
 {
 	int 	y;
@@ -278,6 +395,8 @@ void	fill_screen(t_init_screen *init, t_corewar *src)
 {
 	wclear(FIELD);
 	fill_field(FIELD, src->game_field, src->meta_data, src->carriage);
+	fill_bottom(BOTTOM, src->players, src->count_ply);
+	fill_panel(PANEL, );
 	wrefresh(stdscr);
 	wrefresh(FIELD);
 	wrefresh(BOTTOM);
@@ -312,7 +431,16 @@ int 	main(void)
 	src->carriage->next->position = 5;
 	src->carriage->next->next->position = 6;
 	src->carriage->next->next->next->position = 7;
-	src->carriage->next->next->next->next->position = 8; 
+	src->carriage->next->next->next->next->position = 8;
+	src->players = (t_player*)ft_memalloc(sizeof(t_player));
+	src->players->next = (t_player*)ft_memalloc(sizeof(t_player));
+	src->players->next->next = (t_player*)ft_memalloc(sizeof(t_player));
+	// src->players->next->next->next = (t_player*)ft_memalloc(sizeof(t_player));
+	src->players->name = strdup("Zork");
+	src->players->next->name = strdup("Fluterrshy");
+	src->players->next->next->name = strdup("Helltrain");
+	// src->players->next->next->next->name = strdup("Bigzork");
+	src->count_ply = 4;
 /* tmp
 */
 	init = init_ncurses();
