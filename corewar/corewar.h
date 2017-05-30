@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/29 17:29:13 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/30 18:44:34 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,26 +74,33 @@ void				dk_sort_ply(t_player **ply, int nbr);
 void				add_ply_back(t_player **ply, t_player *tmp);
 
 
-void                ft_create_field_and_carriage(t_corewar *src, int free_space, int n, int num); // создание игрового поля и кареток
+void                ft_create_field_and_carriage(t_corewar *src, int n, int num); // создание игрового поля и кареток
 void                ft_check_cycle_to_die(t_corewar *src, int n_live); // проверка для уменьшения cycle_to_die
 t_carriage          *ft_del_carriage(t_carriage *src, t_carriage *del); // удаление каретки
 t_carriage			*ft_check_del_carriege(t_carriage *src);
 
 void				ft_algoritm(t_corewar *src);
 void				dk_dump(char *addr);
-void   	 			ft_live(t_corewar *src, t_carriage *p);
 
-void    			ft_ld(t_corewar *data, t_carriage *src);
 int     			ft_inc_index(t_carriage *src);
 int     			ft_if_negative(int index);
 void    			ft_take_arg(t_corewar *data, t_carriage *src, int i, int comand); // i == 0  / вызываеться при командах с опкодом
 t_carriage 			*ft_create_carriage(unsigned int posinion, int num);
 
-void    			ft_fork(t_corewar *data, t_carriage *src);
-void			    ft_st(t_corewar *data, t_carriage *src);
+void				ft_live(t_corewar *data, t_carriage *src);
 void				ft_ld(t_corewar *data, t_carriage *src);
-void                ft_write_meta(t_corewar *src, char name, int position); // запись имени игрока в масив метаданных для визуального отображения
+void			    ft_st(t_corewar *data, t_carriage *src);
+void				ft_add(t_corewar *data, t_carriage *src);
+void				ft_sub(t_corewar *data, t_carriage *src);
 void                ft_and_or_xor(t_corewar *d, t_carriage *s);
+void				ft_zjmp(t_corewar *data, t_carriage *src);
+void				ft_ldi_lldi(t_corewar *data, t_carriage *src);
+void    			ft_fork(t_corewar *data, t_carriage *src);
+void				ft_lld(t_corewar *data, t_carriage *src);
+void				ft_lfork(t_corewar *data, t_carriage *src);
+void				ft_aff(t_corewar *data, t_carriage *src);
+
+void                ft_write_meta(t_corewar *src, char name, int position); // запись имени игрока в масив метаданных для визуального отображения
 void                ft_sti(t_corewar *data, t_carriage *src);
 void                ft_write_meta(t_corewar *src, char name, int position);
 void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию

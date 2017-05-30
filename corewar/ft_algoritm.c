@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/26 16:21:03 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/30 19:33:54 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -18,7 +18,7 @@ void    ft_check_cycle_to_die(t_corewar *src, int n_live)
     p = src->carriage;
     while (p)
     {
-        (p->live_in_cycle > n_live) ? (n_live = p->live_in_cycle) : 0;
+        ((int)p->live_in_cycle > n_live) ? (n_live = p->live_in_cycle) : 0;
         p->live_in_cycle = 0; // сбросить во всех каретках счетчик циклов
         p = p->next;
     }
@@ -73,7 +73,7 @@ void    ft_check_mem_cell(t_carriage *head, char *field)
             if (!tmp->f)
             {
                 tmp->f = g_funcs[field[tmp->position] - 1];
-//                tmp->comand_cycle = g_op[field[tmp->position] - 1].cycles;
+                tmp->comand_cycle = g_op[field[tmp->position] - 1].cycles;
             }
         }
         else
@@ -107,12 +107,14 @@ void    ft_increment_cycle(t_corewar *src, t_carriage *head)
 
 void ft_algoritm(t_corewar *src)
 {
+    /****/
     src->cycle_to_die = CYCLE_TO_DIE;
     src->players_live[0] = 0;
-    while (src->carriage && src->cycle_to_die != 0 && src->fdump != src->curent_cycle)
+    /****/
+    while (src->carriage && src->cycle_to_die != 0 && src->fdump != (int)src->curent_cycle)
     {
         ft_check_mem_cell(src->carriage, src->game_field); // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
-        if (src->last_cycle_to_die == src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
+        if ((int)src->last_cycle_to_die == (int)src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
         {
             src->carriage = ft_check_del_carriege(src->carriage); //проверить и удалить все каретки которые не сказали live
             ft_check_cycle_to_die(src, 0); // сброс cycle_to_die
@@ -120,10 +122,11 @@ void ft_algoritm(t_corewar *src)
         else
             src->last_cycle_to_die++; // инкрементируем счетчик циклов к смерти
         ft_increment_cycle(src, src->carriage); // декрементируем все циклы команд в каретках и выполняет команду
+        /****/
         src->curent_cycle++; // инкрементируем текущий цикл
-
     }
+    /****/
     // победитель src->winer;
-    if (src->fdump != -1 && src->fdump == src->curent_cycle)
+    if (src->fdump != -1 && src->fdump == (int)src->curent_cycle)
         dk_dump(src->game_field);
 }

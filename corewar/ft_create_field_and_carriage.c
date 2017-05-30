@@ -56,25 +56,16 @@ t_carriage *ft_create_carriage(unsigned int posinion, int num)
     return (new);
 }
 
-void    ft_count_free_mem_size(t_player *head, int *free_space)
+void    dk_field_meta(char *meta, int name, int len)
 {
-    t_player    *point;
-    int         sum_size;
-    int         n_player;
+    int     i;
 
-    sum_size = 0;
-    n_player = 0;
-    point = head;
-    while (point)
-    {
-        sum_size += point->size;
-        n_player++;
-        point = point->next;
-    }
-    *free_space = (MEM_SIZE - sum_size) / n_player;
+    i = -1;
+    while (++i < len)
+        meta[i] = -name;
 }
 
-void    ft_create_field_and_carriage(t_corewar *src, int free_space, int n, int num)
+void    ft_create_field_and_carriage(t_corewar *src, int n, int num)
 {
     t_player        *point;
     char            *p;
@@ -84,7 +75,6 @@ void    ft_create_field_and_carriage(t_corewar *src, int free_space, int n, int 
     src->meta_data = ft_strnew(MEM_SIZE - 1);
     src->carriage = ft_create_carriage(0, -1);
     src->carriage->reg[1] = -1;
-    ft_count_free_mem_size(src->players, &free_space);
     carriage = src->carriage;
     point = src->players;
     p = src->game_field;
@@ -98,7 +88,59 @@ void    ft_create_field_and_carriage(t_corewar *src, int free_space, int n, int 
             carriage = carriage->next;
             ft_memcpy(p + n, point->code, point->size);
         }
-        n += point->size + free_space;
+        dk_field_meta(src->meta_data + n, point->number, point->size);
+        n += MEM_SIZE / src->count_ply;
         point = point->next;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

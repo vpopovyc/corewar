@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 15:20:52 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/29 18:09:05 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/30 19:00:26 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,41 @@ void		dk_dump(char *addr)
 int			main(int argc, char **argv)
 {
 	int			fd;
-	t_corewar	cor;
+	t_corewar	*cor;
 
 	fd = 0;
-	cor.curent_cycle = 0;
-	cor.fdump = -1;
-	cor.verbose = 0;
-	cor.players = NULL;
-	cor.count_ply = 0;
-    cor.winer = 0;
+	cor = (t_corewar *)malloc(sizeof(t_corewar));
+	cor = ft_memset(cor, 0, sizeof(t_corewar));   
+	cor->fdump = -1;
 	if (argc > 1)
 	{
-		dk_pars_arg(argc, argv, &cor, 0);
-		if (!cor.count_ply)
+		dk_pars_arg(argc, argv, cor, 0);
+		if (!cor->count_ply)
 			ft_error(8);
-		dk_sort_ply(&cor.players, cor.count_ply);
+		dk_sort_ply(&cor->players, cor->count_ply);
 	}
 	else
 		ft_error(12);
-	ft_create_field_and_carriage(&cor, 0, 0, -2);
-//	g_funcs[0] = &ft_live;
-//	g_funcs[1] = &ft_ld;
-//	g_funcs[2] = &ft_st;
-//	ft_algoritm(&cor);
+	ft_create_field_and_carriage(cor, 0, -2);
+	cor->players_live = (int *)malloc(sizeof(int) * cor->count_ply);
+	g_funcs[0] = &ft_live;
+	g_funcs[1] = &ft_ld;
+	g_funcs[2] = &ft_st;
+	g_funcs[3] = &ft_add;
+	g_funcs[4] = &ft_sub;
+	g_funcs[5] = &ft_and_or_xor;
+	g_funcs[6] = &ft_and_or_xor;
+	g_funcs[7] = &ft_and_or_xor;
+	g_funcs[8] = &ft_zjmp;
+	g_funcs[9] = &ft_ldi_lldi;
+	g_funcs[10] = &ft_sti;
+	g_funcs[11] = &ft_fork;
+	g_funcs[12] = &ft_lld;
+	g_funcs[13] = &ft_ldi_lldi;
+	g_funcs[14] = &ft_lfork;
+	g_funcs[15] = &ft_aff;
+	ft_algoritm(cor);
+	// printf("meta\n");
+    // dk_dump(cor->meta_data);
     return (0);
 }
