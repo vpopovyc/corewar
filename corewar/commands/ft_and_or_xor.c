@@ -2,6 +2,8 @@
 
 static void	ft_and_or_xor_1(t_corewar *d, t_carriage *s, char op, char c) // reg reg reg
 {
+	(void)d;
+	(void)c;
 	if (s->arg[1] >= 0 && s->arg[1] <= REG_NUMBER && s->arg[2] >= 0 && s->arg[2]
 	<= REG_NUMBER && s->arg[3] && s->arg[3] <= REG_NUMBER)
 	{

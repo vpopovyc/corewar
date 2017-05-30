@@ -9,7 +9,9 @@
 /*   Updated: 2017/05/30 19:33:54 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "corewar.h"
+#include "ncurses/visualisation.h"
 
 void    ft_check_cycle_to_die(t_corewar *src, int n_live)
 {
@@ -104,15 +106,36 @@ void    ft_increment_cycle(t_corewar *src, t_carriage *head)
     }
 }
 
+/*
+** Дима, алгоритм ловит сегфолт от переменной src->last_cycle_to_die
+** посмотри функции, в которых она используется
+** напиши функционал увеличения счётчиков (src->curent_cycle++)
+** только, не трогай algo_event_managment(), кейкоды клавиш – добавлю сам
+** поищи музыку для фона
+** Lives summary : -268435456 – пофикси это
+** придумай метод или переменную с помощью которой, я смогу выводить log игрока
+** например, "игрок 1 сделал sti" или "игрок 2 сказал жив"
+** если вдруг, почему-то на землю попадёт метеорит и мой код будет ловить сегментацию
+** пиши в телеграмм
+*/
+
+
 
 void ft_algoritm(t_corewar *src)
 {
-    /****/
+    t_init_screen   *init;
+
     src->cycle_to_die = CYCLE_TO_DIE;
     src->players_live[0] = 0;
-    /****/
+    init = init_ncurses();
     while (src->carriage && src->cycle_to_die != 0 && src->fdump != (int)src->curent_cycle)
     {
+        /****/
+        pthread_mutex_lock(&g_mutex_flag);
+        if (g_flag & EXIT)
+            break ;
+        pthread_mutex_unlock(&g_mutex_flag);
+        /****/
         ft_check_mem_cell(src->carriage, src->game_field); // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
         if ((int)src->last_cycle_to_die == (int)src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
         {
@@ -123,8 +146,14 @@ void ft_algoritm(t_corewar *src)
             src->last_cycle_to_die++; // инкрементируем счетчик циклов к смерти
         ft_increment_cycle(src, src->carriage); // декрементируем все циклы команд в каретках и выполняет команду
         /****/
+        fill_screen(init, src);
+        algo_event_managment();
+        usleep(1 * 100000);
+        /****/
         src->curent_cycle++; // инкрементируем текущий цикл
     }
+    /****/
+    end_ncurses(init);
     /****/
     // победитель src->winer;
     if (src->fdump != -1 && src->fdump == (int)src->curent_cycle)

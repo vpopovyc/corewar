@@ -14,9 +14,9 @@
 
 void	*crg_finder(void *arg)
 {
-	t_carriage	*crg;
-	void	 	*ret;
-	int 		i;
+	t_carriage			*crg;
+	void	 			*ret;
+	unsigned int 		i;
 
 	crg = (t_carriage*)arg;
 	i = crg->i;

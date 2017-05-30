@@ -52,7 +52,9 @@ void	*size_controll(void *arg)
 		pthread_mutex_unlock(&g_mutex_flag);
 		pthread_mutex_lock(&g_lock);
 		getmaxyx(stdscr, y, x);
-		mvwprintw(stdscr, 0, 1, "[2017]");
+		wattron(stdscr, A_ALTCHARSET);
+		mvwprintw(stdscr, 0, 1, "%c%c%c%c", ACS_HLINE, ACS_HLINE, ACS_HLINE, ACS_HLINE);
+		wattroff(stdscr, A_ALTCHARSET);
 		if (y != init->parent_y || x != init->parent_x)
 		{
 			new_size_calc(init, y, x);
@@ -72,6 +74,7 @@ void	*key_event(void *arg)
 	char c;
 
 	c = 0;
+	(void)arg;
 	while (1)
 	{
 		c = getch();
@@ -135,6 +138,10 @@ void	end_ncurses(t_init_screen *init)
 	pthread_join(g_key, NULL);
 	pthread_mutex_destroy(&g_lock);
 	pthread_mutex_destroy(&g_mutex_flag);
+	nodelay(stdscr, FALSE);
+	mvwprintw(stdscr, 0, 1, "Press enter to quit");
+	wrefresh(stdscr);
+	while (getch() != '\n');
 	free(init);
 	endwin();
 }
