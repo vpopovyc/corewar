@@ -28,7 +28,7 @@
 # define DES_BOT_S	 11
 # define DES_PANEL_S 40
 
-# define TRACK "sounds/background.wav"
+# define TRACK "ncurses/sounds/background.wav"
 
 # define EXIT	0x1
 # define I_ERR 	0x2
@@ -75,11 +75,55 @@ typedef struct 	s_init_screen
 }				t_init_screen;
 
 extern pthread_mutex_t 	g_lock;
+extern pthread_mutex_t 	g_mutex_flag;
 extern pthread_t 		g_resize;
 extern pthread_t 		g_music;
 extern pthread_t 		g_key;
 extern pthread_attr_t 	g_atr;
 extern char				g_flag;
+extern char				g_mus;
+
+/*
+** visualisation.c
+*/
+
+t_init_screen 	*init_ncurses(void);
+void			end_ncurses(t_init_screen *init);
+void			resize_screens(t_init_screen *init);
+
+/*
+** init_screen.c
+*/
+
+void	init_screens(t_init_screen *init);
+void	new_size_calc(t_init_screen *init, int new_y, int new_x);
+void	draw_borders(t_init_screen *init);
+void	init_color_pairs(void);
+
+/*
+** fill_screen.c
+*/
+
+void	fill_screen(t_init_screen *init, t_corewar *src);
+
+/*
+** usage_status_credits.c
+*/
+
+void	print_usage(WINDOW *bottom);
+void	print_status(WINDOW *bottom);
+void	print_credits(WINDOW *bottom);
+void 	unset_color(WINDOW *bottom, int i);
+char	*get_color(WINDOW *bottom, int i);
+
+/*
+** algo_event_managment.c
+*/
+
+void 	algo_event_managment(void);
+void	turn_off_color(WINDOW *field, int color_pair);
+void	turn_on_color(WINDOW *field, int i, char *mdata, t_carriage *crg);
+
 #endif
 
 
