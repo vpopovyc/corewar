@@ -1,6 +1,5 @@
 .name "name"
 .comment "comment"
 
-ld	%439025904, r2
-# st	r2, 10
-aff	r2
+ld	%-15, r2
+st	r2, 10

@@ -9,6 +9,7 @@ void    ft_live(t_corewar *data, t_carriage *src)
     {
         data->players_live[-src->arg[1] - 1]++;
         src->live_in_cycle++;
+       	data->winer = src->arg[1];
     }
     src->live_in_cycle++;
     ft_bzero(src->arg, 16);

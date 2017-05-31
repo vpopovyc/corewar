@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/31 17:04:32 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/31 17:17:49 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,19 @@ int     count_carriege(t_carriage *head)
 
 void ft_algoritm(t_corewar *src)
 {
-    // t_init_screen   *init;
+    t_init_screen   *init;
 
+    src->winer = -src->count_ply;
     src->cycle_to_die = CYCLE_TO_DIE;
     ft_bzero(src->players_live, 4 * src->count_ply);
-    // init = init_ncurses();
+    init = init_ncurses();
     while (src->carriage && src->cycle_to_die != 0 && src->fdump != (int)src->curent_cycle)
     {
         /****/
-        // pthread_mutex_lock(&g_mutex_flag);
-        // if (g_flag & EXIT)
-        //     break ;
-        // pthread_mutex_unlock(&g_mutex_flag);
+        pthread_mutex_lock(&g_mutex_flag);
+        if (g_flag & EXIT)
+            break ;
+        pthread_mutex_unlock(&g_mutex_flag);
         /****/
         ft_check_mem_cell(src->carriage, src->game_field); // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
         if ((int)src->last_cycle_to_die == (int)src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
@@ -124,16 +125,17 @@ void ft_algoritm(t_corewar *src)
         ft_increment_cycle(src, src->carriage); // декрементируем все циклы команд в каретках и выполняет команду
         /****/
         src->curent_cycle++; // инкрементируем текущий цикл
-        // if ((src->curent_cycle % g_sec) == 0)
-        // {
-        //     fill_screen(init, src);
-        //     algo_event_managment();
-        //     // usleep(1);
-        // }
+        if ((src->curent_cycle % g_sec) == 0)
+        {
+            fill_screen(init, src);
+            algo_event_managment();
+            // usleep(1);
+        }
         /****/
     }
     /****/
-    // end_ncurses(init);
+    end_ncurses(init);
+
     /****/
     // победитель src->winer;
     if (src->fdump != -1 && src->fdump == (int)src->curent_cycle)
