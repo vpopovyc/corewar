@@ -1,4 +1,6 @@
 .name "name"
 .comment "comment"
 
-sti	r1, 48, %10
+ld	%439025904, r2
+# st	r2, 10
+aff	r2

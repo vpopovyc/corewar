@@ -5,7 +5,7 @@ static void    ft_get_data(t_corewar *data, t_carriage *src, int index, char com
 {
     src->reg[src->arg[3]] = (data->game_field[ft_if_negative(index)] << 24) | (data->game_field[ft_if_negative(index + 1)] << 16) |  (data->game_field[ft_if_negative(index + 2)] << 8) |  data->game_field[ft_if_negative(index + 3)];
     if (comd == 14)
-        src->carry = (src->carry == 1) ? 0 : 1;
+        src->carry = (src->reg[src->arg[3]] == 0) ? 1 : 0;
 }
 
 static void    ft_ldi_lldi_1(t_corewar *data, t_carriage *src, char op, char comd)

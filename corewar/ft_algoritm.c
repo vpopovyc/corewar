@@ -6,12 +6,13 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/30 19:33:54 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/31 17:04:32 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "ncurses/visualisation.h"
+#include <time.h>
 
 void    ft_check_cycle_to_die(t_corewar *src, int n_live)
 {
@@ -28,39 +29,11 @@ void    ft_check_cycle_to_die(t_corewar *src, int n_live)
     {
         src->n_check = 0;
         src->cycle_to_die = (src->cycle_to_die < CYCLE_DELTA) ? 0 : (src->cycle_to_die - CYCLE_DELTA);
+        ft_bzero(src->players_live, 4 * src->count_ply);
     }
     else
         src->n_check++;
     src->last_cycle_to_die = 0;
-}
-
-int     ft_check_op_arg(int comand, char op) // проверка на соответсвие оп кода агументов команде
-{
-    int res;
-
-    res = 0;
-    if ((comand == 2 && (op != -48 || op != -112)))
-        res = 1;
-    else if ((comand == 3 && (op != 112 || op != 80)))
-        res = 1;
-    else if ((comand == 4 || comand == 5) && op != 84)
-        res = 1;
-    else if ((comand == 6 || comand == 7 || comand == 8) && (op != 84 && op != 100 && op != 116 && op != -108 && op != -92 && op != -76 && op != -44 && op != -12 && op != -28))
-        res = 1;
-    else if (comand == 10 && (op != 100 && op != 84 && op != -92 && op != -108 && op != -28 && op
-                         != -44))
-        res = 1;
-    else if (comand == 11 && (op != 88 && op != 84 && op != 104 && op != 100 && op != 120 &&
-                              op != 116))
-        res = 1;
-    else if (comand == 13 && (op != -112 || op != -48))
-        res = 1;
-    else if (comand == 14 && (op != 100 && op != 84 && op != -92 && op != -108 && op != -28 && op
-                              != -44))
-        res = 1;
-    else if (comand == 16 && op == 64)
-        res = 1;
-    return (res);
 }
 
 void    ft_check_mem_cell(t_carriage *head, char *field)
@@ -107,53 +80,60 @@ void    ft_increment_cycle(t_corewar *src, t_carriage *head)
 }
 
 /*
-** Дима, алгоритм ловит сегфолт от переменной src->last_cycle_to_die
-** посмотри функции, в которых она используется
-** напиши функционал увеличения счётчиков (src->curent_cycle++)
-** только, не трогай algo_event_managment(), кейкоды клавиш – добавлю сам
-** поищи музыку для фона
-** Lives summary : -268435456 – пофикси это
 ** придумай метод или переменную с помощью которой, я смогу выводить log игрока
 ** например, "игрок 1 сделал sti" или "игрок 2 сказал жив"
-** если вдруг, почему-то на землю попадёт метеорит и мой код будет ловить сегментацию
-** пиши в телеграмм
 */
 
+int     count_carriege(t_carriage *head)
+{
+    int        res;
 
+    res = 0;
+    while (head)
+    {
+        res++;
+        head = head->next;
+    }
+    return (res);
+}
 
 void ft_algoritm(t_corewar *src)
 {
-    t_init_screen   *init;
+    // t_init_screen   *init;
 
     src->cycle_to_die = CYCLE_TO_DIE;
-    src->players_live[0] = 0;
-    init = init_ncurses();
+    ft_bzero(src->players_live, 4 * src->count_ply);
+    // init = init_ncurses();
     while (src->carriage && src->cycle_to_die != 0 && src->fdump != (int)src->curent_cycle)
     {
         /****/
-        pthread_mutex_lock(&g_mutex_flag);
-        if (g_flag & EXIT)
-            break ;
-        pthread_mutex_unlock(&g_mutex_flag);
+        // pthread_mutex_lock(&g_mutex_flag);
+        // if (g_flag & EXIT)
+        //     break ;
+        // pthread_mutex_unlock(&g_mutex_flag);
         /****/
         ft_check_mem_cell(src->carriage, src->game_field); // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
         if ((int)src->last_cycle_to_die == (int)src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
         {
             src->carriage = ft_check_del_carriege(src->carriage); //проверить и удалить все каретки которые не сказали live
             ft_check_cycle_to_die(src, 0); // сброс cycle_to_die
+            src->last_cycle_to_die = 0;
         }
         else
             src->last_cycle_to_die++; // инкрементируем счетчик циклов к смерти
         ft_increment_cycle(src, src->carriage); // декрементируем все циклы команд в каретках и выполняет команду
         /****/
-        fill_screen(init, src);
-        algo_event_managment();
-        usleep(1 * 100000);
-        /****/
         src->curent_cycle++; // инкрементируем текущий цикл
+        // if ((src->curent_cycle % g_sec) == 0)
+        // {
+        //     fill_screen(init, src);
+        //     algo_event_managment();
+        //     // usleep(1);
+        // }
+        /****/
     }
     /****/
-    end_ncurses(init);
+    // end_ncurses(init);
     /****/
     // победитель src->winer;
     if (src->fdump != -1 && src->fdump == (int)src->curent_cycle)

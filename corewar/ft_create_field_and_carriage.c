@@ -40,7 +40,7 @@ t_carriage *ft_del_carriage(t_carriage *src, t_carriage *del)
     return (head);
 }
 
-t_carriage *ft_create_carriage(unsigned int posinion, int num)
+t_carriage *ft_create_carriage(unsigned int posinion, int num, t_carriage *data)
 {
     t_carriage *new;
  
@@ -51,8 +51,18 @@ t_carriage *ft_create_carriage(unsigned int posinion, int num)
     new->position = posinion;
     new->next = NULL;
     ft_bzero(new->reg, (REG_NUMBER * 4));
-    new->reg[1] = num;
-    new->name = (char)num;
+    if (data)
+    {
+        ft_memcpy(new->reg, data->reg, 4 * REG_NUMBER);
+        new->carry = data->carry;
+        new->name = (char)new->reg[1];
+    }
+    else
+    {
+        new->reg[1] = num;
+        new->name = (char)num;
+        new->carry = 0;
+    }
     return (new);
 }
 
@@ -73,7 +83,7 @@ void    ft_create_field_and_carriage(t_corewar *src, int n, int num)
     
     src->game_field = ft_strnew(MEM_SIZE - 1);
     src->meta_data = ft_strnew(MEM_SIZE - 1);
-    src->carriage = ft_create_carriage(0, -1);
+    src->carriage = ft_create_carriage(0, -1, NULL);
     src->carriage->reg[1] = -1;
     carriage = src->carriage;
     point = src->players;
@@ -84,7 +94,7 @@ void    ft_create_field_and_carriage(t_corewar *src, int n, int num)
             ft_memcpy(p, point->code, point->size);
         else
         {
-            carriage->next = ft_create_carriage(n, num--);
+            carriage->next = ft_create_carriage(n, num--, NULL);
             carriage = carriage->next;
             ft_memcpy(p + n, point->code, point->size);
         }

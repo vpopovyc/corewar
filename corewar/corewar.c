@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 15:20:52 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/30 19:00:26 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/31 12:18:36 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int			main(int argc, char **argv)
 	cor = (t_corewar *)malloc(sizeof(t_corewar));
 	cor = ft_memset(cor, 0, sizeof(t_corewar));   
 	cor->fdump = -1;
+	cor->sec_cycle = 1;
 	if (argc > 1)
 	{
 		dk_pars_arg(argc, argv, cor, 0);

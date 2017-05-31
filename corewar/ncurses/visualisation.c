@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visualisation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:30:23 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/29 17:08:55 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/31 15:48:24 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ pthread_mutex_t g_mutex_flag = PTHREAD_MUTEX_INITIALIZER;
 pthread_t 		g_resize;
 pthread_attr_t 	g_atr;
 char			g_flag = 0;
-char 			g_mus = 0;
+char 			g_mus = 0x10;
+int 			g_sec = 1;
 pthread_t 		g_music;
 pthread_t 		g_key;
 
@@ -98,6 +99,10 @@ void	*key_event(void *arg)
 			g_flag ^= 0x10;
 			pthread_mutex_unlock(&g_mutex_flag);
 		}
+		if (c == 45)
+			g_sec = g_sec == 1 ? 1 : g_sec - 1;
+		if (c == 43)
+			g_sec = g_sec == 15 ? 15 : g_sec + 1;
 		usleep(2 * 100000);
 	}
 	pthread_exit(NULL);

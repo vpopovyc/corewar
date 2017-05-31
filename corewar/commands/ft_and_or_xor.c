@@ -13,7 +13,7 @@ static void	ft_and_or_xor_1(t_corewar *d, t_carriage *s, char op, char c) // reg
 		: 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->reg[s->arg[1]] ^ s->reg[s->arg[2]])
 		: 0;
-		s->carry = (s->carry == 1) ? 0 : 1;
+        s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 }
 
@@ -25,7 +25,7 @@ static void	ft_and_or_xor_2(t_corewar *d, t_carriage *s, char op, char c)
 		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->reg[s->arg[2]]) : 0;
 		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | s->reg[s->arg[2]]) : 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ s->reg[s->arg[2]]) : 0;
-		s->carry = (s->carry == 1) ? 0 : 1;
+        s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 	else if (c == -44 && s->arg[2] >= 0 && s->arg[2] <= REG_NUMBER && s->arg[3]
 			>= 0 && s->arg[3] <= REG_NUMBER) // ind reg reg
@@ -37,7 +37,7 @@ static void	ft_and_or_xor_2(t_corewar *d, t_carriage *s, char op, char c)
 		d->game_field[s->arg[1] + 1]) | s->reg[s->arg[2]]) : 0;
 		(op == 8) ? (s->reg[s->arg[3]] = ((d->game_field[s->arg[1]] << 8) |
 		d->game_field[s->arg[1] + 1]) ^ s->reg[s->arg[2]]) : 0;
-		s->carry = (s->carry == 1) ? 0 : 1;
+        s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 }
 
@@ -53,7 +53,7 @@ static void	ft_and_or_xor_3(t_corewar *d, t_carriage *s, char op, char c)
 		s->reg[s->arg[1]]) : 0;
 		(op == 8) ? (s->reg[s->reg[3]] = d->game_field[s->arg[2]] ^
 		s->reg[s->arg[1]]) : 0;
-		s->carry = (s->carry == 1) ? 0 : 1;
+        s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 	else if (c == 100 && s->arg[1] >= 0 && s->arg[1] <= REG_NUMBER && s->arg[3]
 		>= 0 && s->arg[3] <= REG_NUMBER) // reg ind reg
@@ -61,7 +61,7 @@ static void	ft_and_or_xor_3(t_corewar *d, t_carriage *s, char op, char c)
 		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->arg[2]) : 0;
 		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | s->arg[2]) : 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ s->arg[2]) : 0;
-		s->carry = (s->carry == 1) ? 0 : 1;
+        s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 }
 
@@ -76,14 +76,14 @@ static void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
 		: 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ d->game_field[s->arg[2]])
 		: 0;
-		s->carry = (s->carry == 1) ? 0 : 1;
+        s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 	else if (c == -92 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER) // dir dir reg
 	{
 		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->arg[2]) : 0;
 		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | s->arg[2]) : 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ s->arg[2]) : 0;
-		s->carry = (s->carry == 1) ? 0 : 1;
+        s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 }
 
@@ -99,7 +99,7 @@ static void	ft_and_or_xor_5(t_corewar *d, t_carriage *s, char op, char c)
 			d->game_field[s->arg[2]]) : 0;
 		(op == 8) ? (s->reg[s->arg[3]] = d->game_field[s->arg[1]] ^
 				d->game_field[s->arg[2]]) : 0;
-		s->carry = (s->carry == 1) ? 0 : 1;
+        s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 	else if (c == -28 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER) // ind dir reg
 	{
@@ -110,7 +110,7 @@ static void	ft_and_or_xor_5(t_corewar *d, t_carriage *s, char op, char c)
 			: 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[2] ^ d->game_field[s->arg[1]])
 			: 0;
-		s->carry = (s->carry == 1) ? 0 : 1;
+        s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 }
 
