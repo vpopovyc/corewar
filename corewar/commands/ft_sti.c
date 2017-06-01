@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sti.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 13:38:41 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 13:38:43 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/01 13:46:27 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ void	ft_sti(t_corewar *data, t_carriage *src)
 	else if (op_code == 120 || op_code == 116)
 		ft_sti_3(data, src, op_code, i);
 	else
-		ft_inc_i(src);
+		ft_inc_index(src);
 	ft_bzero(src->arg, 16);
 }

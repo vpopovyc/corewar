@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_and_or_xor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 12:42:56 by mkrutik           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2017/06/01 15:35:41 by mkrutik          ###   ########.fr       */
+=======
+/*   Updated: 2017/06/01 15:21:05 by dkosolap         ###   ########.fr       */
+>>>>>>> 356672a241ce39abae80120cdd895c68ab03e7aa
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +77,22 @@ static void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == -76 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
 	{
+<<<<<<< HEAD
 		s->arg[2] = ft_take_ind(d, (s->position - 8 + s->arg[2]));
 		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->arg[2])	: 0;
 		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | s->arg[2])	: 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ s->arg[2])	: 0;
+=======
+		s->arg[2] = (s->position - 8 + s->arg[2]) % MEM_SIZE;
+		s->arg[2] = ((unsigned char)d->field[s->arg[2]] << 24) | ((unsigned char)d->field[s->arg[2] + 1] << 16) | ((unsigned char)d->field[s->arg[2] + 2] << 8) | (unsigned char)d->field[s->arg[2] + 3];
+
+		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->arg[2])
+			: 0;
+		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | d->field[s->arg[2]])
+			: 0;
+		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ d->field[s->arg[2]])
+			: 0;
+>>>>>>> 356672a241ce39abae80120cdd895c68ab03e7aa
 		s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 	else if (c == -92 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ld.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 12:50:47 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 12:50:49 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/01 13:43:56 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_ld_1(t_corewar *data, t_carriage *src)
 void	ft_ld(t_corewar *data, t_carriage *src)
 {
 	if (data->field[src->position + 1] == -48)
-		ft_1(data, src);
+		ft_ld_1(data, src);
 	else if (data->field[src->position + 1] == -112)
 	{
 		ft_take_arg(data, src, 0, data->field[src->position]);

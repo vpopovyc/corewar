@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:30:23 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/31 15:48:24 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/01 13:08:02 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ pthread_t 		g_resize;
 pthread_attr_t 	g_atr;
 char			g_flag = 0;
 char 			g_mus = 0x10;
-int 			g_sec = 1;
+int 			g_sec = 3;
 pthread_t 		g_music;
 pthread_t 		g_key;
 
