@@ -18,7 +18,7 @@ int 	main(void)
 /* tmp 
 */
 	t_corewar *src = (t_corewar*)ft_memalloc(sizeof(t_corewar));
-	src->game_field = ft_strnew(MEM_SIZE - 1);
+	src->field = ft_strnew(MEM_SIZE - 1);
 	src->meta_data = ft_strnew(MEM_SIZE - 1);
 	src->meta_data[0] = -1;
 	src->meta_data[1] = -2;
@@ -28,8 +28,8 @@ int 	main(void)
 	src->meta_data[5] = -2;
 	src->meta_data[6] = -3;
 	src->meta_data[7] = -4;
-	ft_memset((void*)src->game_field, 0x01, MEM_SIZE / 2);
-	ft_memset((void*)src->game_field + (MEM_SIZE / 2), 0x10, MEM_SIZE / 2);
+	ft_memset((void*)src->field, 0x01, MEM_SIZE / 2);
+	ft_memset((void*)src->field + (MEM_SIZE / 2), 0x10, MEM_SIZE / 2);
 	src->carriage = (t_carriage*)ft_memalloc(sizeof(t_carriage));
 	src->carriage->next = (t_carriage*)ft_memalloc(sizeof(t_carriage));
 	src->carriage->next->next = (t_carriage*)ft_memalloc(sizeof(t_carriage));
