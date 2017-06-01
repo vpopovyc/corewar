@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:45:43 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/31 17:50:19 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/01 15:16:27 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_error(int n)
 	(n == 7) ? ft_putstr("Can`t close file!") : 0;
 	(n == 8) ? ft_putstr("Invalid player's binary code!") : 0;
 	(n == 9) ? ft_putstr("Wrong comand founded!") : 0;
-	(n == 10) ? ft_putstr("Not enough commands code") : 0;
+	(n == 10) ?
+			ft_putstr("Length of commands code doesn't match to specified") : 0;
 	ft_putstr("\x1b[0m\n\x1b[36m");
 	ft_putstr("Usage: ./disasm file.cor");
 	ft_putstr("\x1b[0m");

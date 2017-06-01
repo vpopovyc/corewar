@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:42:55 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/31 18:06:22 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/01 15:50:38 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_write_comands(t_desasm *data)
 	while (point)
 	{
 		write(data->fd, "\t", 1);
-		write(data->fd, g_op[point->name].name,
-			ft_strlen(g_op[point->name].name));
+		write(data->fd, g_op[(int)(point->name)].name,
+			ft_strlen(g_op[(int)(point->name)].name));
 		write(data->fd, "\t", 1);
 		i = 0;
 		while (point->arg[i])
