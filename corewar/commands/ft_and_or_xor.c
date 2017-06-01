@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/01 12:42:56 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 15:54:31 by dkosolap         ###   ########.fr       */
+/*   Created: 2017/06/01 16:38:19 by mkrutik           #+#    #+#             */
+/*   Updated: 2017/06/01 17:02:16 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_and_or_xor_2(t_corewar *d, t_carriage *s, char op, char c)
 	else if (c == -44 && s->arg[2] >= 0 && s->arg[2] <= REG_NUMBER && s->arg[3]
 			>= 0 && s->arg[3] <= REG_NUMBER)
 	{
-		s->arg[1] = ft_take_ind(d, (s->position - 5 + s->arg[1]));
+		s->arg[1] = ft_take_ind(d, (s->position - 6 + s->arg[1]));
 		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->reg[s->arg[2]]) : 0;
 		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | s->reg[s->arg[2]]) : 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ s->reg[s->arg[2]]) : 0;
@@ -53,7 +53,7 @@ static void	ft_and_or_xor_3(t_corewar *d, t_carriage *s, char op, char c)
 	if (c == 116 && s->arg[1] >= 0 && s->arg[1] <= REG_NUMBER && s->arg[3] >= 0
 		&& s->arg[3] <= REG_NUMBER)
 	{
-		s->arg[2] = ft_take_ind(d, (s->position - 5 + s->arg[2]));
+		s->arg[2] = ft_take_ind(d, (s->position - 6 + s->arg[2]));
 		(op == 6) ? (s->reg[s->reg[3]] = s->reg[s->arg[1]] & s->arg[2]) : 0;
 		(op == 7) ? (s->reg[s->reg[3]] = s->reg[s->arg[1]] | s->arg[2]) : 0;
 		(op == 8) ? (s->reg[s->reg[3]] = s->reg[s->arg[1]] ^ s->arg[2]) : 0;
@@ -73,10 +73,10 @@ static void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == -76 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
 	{
-		s->arg[2] = ft_take_ind(d, (s->position - 8 + s->arg[2]));
-		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->arg[2])	: 0;
-		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | s->arg[2])	: 0;
-		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ s->arg[2])	: 0;
+		s->arg[2] = ft_take_ind(d, (s->position - 9 + s->arg[2]));
+		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->arg[2]) : 0;
+		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | s->arg[2]) : 0;
+		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ s->arg[2]) : 0;
 		s->carry = (s->reg[s->arg[3]] == 0) ? 1 : 0;
 	}
 	else if (c == -92 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
@@ -92,8 +92,8 @@ static void	ft_and_or_xor_5(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == -12 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
 	{
-		s->arg[1] = ft_take_ind(d, (s->position - 6 + s->arg[1]));
-		s->arg[2] = ft_take_ind(d, (s->position - 6 + s->arg[2]));
+		s->arg[1] = ft_take_ind(d, (s->position - 7 + s->arg[1]));
+		s->arg[2] = ft_take_ind(d, (s->position - 7 + s->arg[2]));
 		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->arg[2]) : 0;
 		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | s->arg[2]) : 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ s->arg[2]) : 0;
@@ -101,7 +101,7 @@ static void	ft_and_or_xor_5(t_corewar *d, t_carriage *s, char op, char c)
 	}
 	else if (c == -28 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
 	{
-		s->arg[1] = ft_take_ind(d, (s->position - 8 + s->arg[1]));
+		s->arg[1] = ft_take_ind(d, (s->position - 9 + s->arg[1]));
 		(op == 6) ? (s->reg[s->arg[3]] = s->arg[2] & s->arg[1]) : 0;
 		(op == 7) ? (s->reg[s->arg[3]] = s->arg[2] | s->arg[1]) : 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[2] ^ s->arg[1]) : 0;
