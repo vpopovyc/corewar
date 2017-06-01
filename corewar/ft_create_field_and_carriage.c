@@ -83,6 +83,7 @@ void    ft_create_field_and_carriage(t_corewar *src, int n, int num)
     
     src->field = ft_strnew(MEM_SIZE - 1);
     src->meta_data = ft_strnew(MEM_SIZE - 1);
+    src->meta_bold = ft_strnew(MEM_SIZE - 1);
     src->carriage = ft_create_carriage(0, -1, NULL);
     src->carriage->reg[1] = -1;
     carriage = src->carriage;
@@ -103,54 +104,3 @@ void    ft_create_field_and_carriage(t_corewar *src, int n, int num)
         point = point->next;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

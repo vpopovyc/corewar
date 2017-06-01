@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/06/01 16:36:27 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/01 21:06:37 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,16 @@ void    ft_increment_cycle(t_corewar *src, t_carriage *head)
 ** придумай метод или переменную с помощью которой, я смогу выводить log игрока
 ** например, "игрок 1 сделал sti" или "игрок 2 сказал жив"
 */
-
-int     count_carriege(t_carriage *head)
+void    sub_meta_bold(char *src)
 {
-    int        res;
+    int    i;
 
-    res = 0;
-    while (head)
+    i = -1;
+    while(++i < MEM_SIZE)
     {
-        res++;
-        head = head->next;
+        if (src[i])
+            src[i]--;
     }
-    return (res);
 }
 
 void ft_algoritm(t_corewar *src)
@@ -122,8 +120,9 @@ void ft_algoritm(t_corewar *src)
         else
             src->last_cycle_to_die++; // инкрементируем счетчик циклов к смерти
         ft_increment_cycle(src, src->carriage); // декрементируем все циклы команд в каретках и выполняет команду
-        /****/
+        sub_meta_bold(src->meta_bold);
         src->curent_cycle++; // инкрементируем текущий цикл
+        /****/
         if ((src->curent_cycle % g_sec) == 0)
         {
             fill_screen(init, src);
