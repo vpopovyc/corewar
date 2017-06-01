@@ -3,7 +3,7 @@
 
 static void    ft_get_data(t_corewar *data, t_carriage *src, int index, char comd)
 {
-    src->reg[src->arg[3]] = (data->game_field[ft_if_negative(index)] << 24) | (data->game_field[ft_if_negative(index + 1)] << 16) |  (data->game_field[ft_if_negative(index + 2)] << 8) |  data->game_field[ft_if_negative(index + 3)];
+    src->reg[src->arg[3]] = ((unsigned char)data->game_field[ft_if_negative(index)] << 24) | ((unsigned char)data->game_field[ft_if_negative(index + 1)] << 16) |  ((unsigned char)data->game_field[ft_if_negative(index + 2)] << 8) |  (unsigned char)data->game_field[ft_if_negative(index + 3)];
     if (comd == 14)
         src->carry = (src->reg[src->arg[3]] == 0) ? 1 : 0;
 }
