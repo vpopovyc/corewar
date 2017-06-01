@@ -12,6 +12,8 @@
 
 #include "visualisation.h"
 
+char	*g_meta_bold;
+
 void	print_player_info(WINDOW *panel, t_corewar *src, int *y)
 {
 	t_player	*players;
@@ -103,7 +105,7 @@ void	fill_field(WINDOW *field, char *gamefield, char *mdata, t_carriage *crg)
 		{
 			turn_on_color(field, i, mdata, crg);
 			mvwprintw(field, y, x, "%.2hhx", gamefield[i]);
-			turn_off_color(field, crg);
+			turn_off_color(field, crg, i);
 			++i;
 			if ((i % 64) == 0)
 				break ;
@@ -120,6 +122,7 @@ void	fill_screen(t_init_screen *init, t_corewar *src)
 	if (!(g_flag & I_ERR))
 	{
 		pthread_mutex_lock(&g_lock);
+		g_meta_bold = src->meta_bold;
 		fill_field(FIELD, src->field, src->meta_data, src->carriage);
 		fill_bottom(BOTTOM, src->players, src->count_ply);
 		fill_panel(PANEL, src);

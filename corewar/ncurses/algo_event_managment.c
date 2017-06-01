@@ -61,7 +61,7 @@ void	turn_on_color(WINDOW *field, int i, char *mdata, t_carriage *crg)
 	pthread_join(finder, &is_carrige);
 	if (is_carrige && *((char*)is_carrige))
 		color_pair |= P0WW;
-	if (color_pair != P0BB)
+	if (color_pair != P0BB && !g_meta_bold[i])
 		wattron(field, COLOR_PAIR(color_pair));
 	else
 		wattron(field, COLOR_PAIR(color_pair) | A_BOLD);
@@ -70,7 +70,7 @@ void	turn_on_color(WINDOW *field, int i, char *mdata, t_carriage *crg)
 	free(is_carrige);
 }
 
-void	turn_off_color(WINDOW *field, t_carriage *crg)
+void	turn_off_color(WINDOW *field, t_carriage *crg, int i)
 {
 	int 	color_pair;
 
@@ -78,7 +78,7 @@ void	turn_off_color(WINDOW *field, t_carriage *crg)
 		color_pair = crg->i;
 	else
 		color_pair = 0;
-	if (color_pair == P0BB)
+	if (color_pair == P0BB || (g_meta_bold && g_meta_bold[i]))
 		wattroff(field, COLOR_PAIR(color_pair) | A_BOLD);
 	else
 		wattroff(field, COLOR_PAIR(color_pair));

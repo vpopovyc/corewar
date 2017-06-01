@@ -85,6 +85,7 @@ extern pthread_attr_t 	g_atr;
 extern char				g_flag;
 extern char				g_mus;
 extern int				g_sec;
+extern char				*g_meta_bold;
 
 /*
 ** visualisation.c
@@ -124,7 +125,7 @@ char	*get_color(WINDOW *bottom, int i);
 */
 
 void 	algo_event_managment(t_init_screen *init);
-void    turn_off_color(WINDOW *field, t_carriage *crg);
+void    turn_off_color(WINDOW *field, t_carriage *crg, int i);
 void	turn_on_color(WINDOW *field, int i, char *mdata, t_carriage *crg);
 
 #endif

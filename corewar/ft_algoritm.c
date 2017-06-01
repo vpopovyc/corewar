@@ -104,6 +104,8 @@ void ft_algoritm(t_corewar *src)
     src->winer = -src->count_ply;
     src->cycle_to_die = CYCLE_TO_DIE;
     ft_bzero(src->players_live, 4 * src->count_ply);
+    src->meta_bold = ft_memalloc(sizeof(char*) * MEM_SIZE);
+    ft_memset(src->meta_bold, 50, 10);
     init = init_ncurses();
     while (src->carriage && src->cycle_to_die != 0 && src->fdump != (int)src->curent_cycle)
     {
