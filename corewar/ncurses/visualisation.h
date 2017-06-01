@@ -76,13 +76,14 @@ typedef struct 	s_init_screen
 
 extern pthread_mutex_t 	g_lock;
 extern pthread_mutex_t 	g_mutex_flag;
+extern pthread_mutex_t g_mutex_sec;
 extern pthread_t 		g_resize;
 extern pthread_t 		g_music;
 extern pthread_t 		g_key;
 extern pthread_attr_t 	g_atr;
 extern char				g_flag;
 extern char				g_mus;
-extern int				g_sec;
+extern char				g_sec;
 
 /*
 ** visualisation.c
