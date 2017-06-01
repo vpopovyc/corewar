@@ -6,13 +6,13 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 13:38:41 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 13:46:27 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/01 17:32:44 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../corewar.h"
 
-static void	ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int i)
+static void		ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int i)
 {
 	if (op_code == 88 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER &&
 		src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER)
@@ -37,7 +37,7 @@ static void	ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int i)
 	}
 }
 
-static void	ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int i)
+static void		ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int i)
 {
 	if (op_code == 104 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER)
 	{
@@ -60,7 +60,7 @@ static void	ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int i)
 	}
 }
 
-static void	ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int i)
+static void		ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int i)
 {
 	if (op_code == 120 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER)
 	{
@@ -83,7 +83,7 @@ static void	ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int i)
 	}
 }
 
-void	ft_sti(t_corewar *data, t_carriage *src)
+void			ft_sti(t_corewar *data, t_carriage *src)
 {
 	char	op_code;
 	int		i;
