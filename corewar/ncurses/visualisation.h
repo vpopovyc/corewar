@@ -77,7 +77,7 @@ typedef struct 	s_init_screen
 
 extern pthread_mutex_t 	g_lock;
 extern pthread_mutex_t 	g_mutex_flag;
-extern pthread_mutex_t g_mutex_sec;
+extern pthread_mutex_t  g_mutex_sec;
 extern pthread_t 		g_resize;
 extern pthread_t 		g_music;
 extern pthread_t 		g_key;
@@ -92,7 +92,7 @@ extern char				*g_meta_bold;
 */
 
 t_init_screen 	*init_ncurses(void);
-void			end_ncurses(t_init_screen *init, t_corewar *src);
+void			end_ncurses(t_init_screen *init, t_corewar *src, char redraw_need);
 void			resize_screens(t_init_screen *init);
 
 /*

@@ -90,7 +90,5 @@ int			main(int argc, char **argv)
 	g_funcs[14] = &ft_lfork;
 	g_funcs[15] = &ft_aff;
 	ft_algoritm(cor);
-	// printf("meta\n");
-    // dk_dump(cor->meta_data);
     return (0);
 }

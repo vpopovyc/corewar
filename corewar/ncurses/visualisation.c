@@ -67,7 +67,7 @@ void	*size_controll(void *arg)
 			}
 		}
 		pthread_mutex_unlock(&g_lock);
-		usleep(1 * 100000);
+		usleep(5 * 100000);
 	}
 }
 
@@ -111,7 +111,7 @@ void	*key_event(void *arg)
 			g_sec = g_sec == 15 ? 15 : g_sec + 1;
 			pthread_mutex_unlock(&g_mutex_sec);
 		}
-		usleep(2 * 100000);
+		usleep(3 * 100000);
 	}
 	pthread_exit(NULL);
 }
@@ -147,9 +147,10 @@ t_init_screen 	*init_ncurses(void)
 	return (init);
 }
 
-void	end_ncurses(t_init_screen *init, t_corewar *src)
+void	end_ncurses(t_init_screen *init, t_corewar *src, char redraw_need)
 {
-	fill_screen(init, src);
+	if (redraw_need)
+		fill_screen(init, src);
 	mvwprintw(BOTTOM, 9, 86, "Winner is %c", src->winer);
 	wattron(PANEL, A_BOLD);
 	mvwprintw(PANEL, 2, 3, "Press any key to exit", src->winer);

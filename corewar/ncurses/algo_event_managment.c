@@ -111,6 +111,7 @@ void 	algo_event_managment(t_init_screen *init)
 		pthread_mutex_unlock(&g_mutex_flag);
 		while (1)
 		{
+			usleep(3 * 100000);
 			pthread_mutex_lock(&g_mutex_sec);
 			if (tmp_flag != (g_sec | g_mus))
 			{
@@ -122,7 +123,7 @@ void 	algo_event_managment(t_init_screen *init)
 			if ((g_flag & EXIT) || (!(g_flag & A_STOP)))
 				break ;
 			pthread_mutex_unlock(&g_mutex_flag);
-			usleep (1 * 100000);
+			usleep(3 * 100000);
 		}
 	}
 	else if (g_flag & I_ERR)
@@ -130,14 +131,14 @@ void 	algo_event_managment(t_init_screen *init)
 		pthread_mutex_unlock(&g_mutex_flag);
 		while (1)
 		{
-			usleep (1 * 100000);
+			usleep(3 * 100000);
 			pthread_mutex_lock(&g_mutex_flag);
 			if (g_flag & EXIT)
 				break ;
 			if (!(g_flag & I_ERR))
 				break ;
 			pthread_mutex_unlock(&g_mutex_flag);
-			usleep (1 * 100000);
+			usleep(3 * 100000);
 		}
 	}
 	pthread_mutex_unlock(&g_mutex_flag);
