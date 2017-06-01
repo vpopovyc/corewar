@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:52:35 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/31 17:52:36 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/01 15:51:10 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	ft_valid_name_comment(t_desasm *data)
 	char			*p;
 	unsigned int	alignt;
 
+	tmp = NULL;
+	p = NULL;
+	alignt = 0;
 	ft_take_name(data, tmp, p, alignt);
-	data->len_comands_code = (data->file_data[data->curent_position] << 24) |
-						(data->file_data[data->curent_position + 1] << 16) |
-						(data->file_data[data->curent_position + 2] << 8) |
-						data->file_data[data->curent_position + 3];
-	data->curent_position += 4;
+	data->len_comands_code = write_to_int(data->file_data,
+											&(data->curent_position));
 	p = data->file_data + data->curent_position;
 	tmp = ft_strnew(COMMENT_LENGTH);
 	ft_strncpy(tmp, p, COMMENT_LENGTH);

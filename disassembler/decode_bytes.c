@@ -6,11 +6,27 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:41:00 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/31 20:42:54 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/01 15:48:00 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "disassembler.h"
+
+int		count_bytes(char byte, char com_ind)
+{
+	if ((byte | T_REG) == T_REG)
+		return (1);
+	else if ((byte | T_IND) == T_IND)
+		return (2);
+	else if ((byte | T_DIR) == T_DIR)
+	{
+		if (!g_op[(int)com_ind].label_size)
+			return (T_DIR * 2);
+		else
+			return (T_DIR);
+	}
+	return (0);
+}
 
 int		write_to_int(char *file, unsigned int *pos)
 {

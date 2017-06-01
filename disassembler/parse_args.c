@@ -6,13 +6,13 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:38:03 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/31 20:43:09 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/01 15:08:22 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "disassembler.h"
 
-char	*form_registry(char *file, unsigned int *pos, int com_ind)
+char	*form_registry(char *file, unsigned int *pos)
 {
 	int		regnum;
 	char	*tmp;
@@ -42,7 +42,7 @@ char	*form_direct(char *file, unsigned int *pos, int com_ind)
 	return (ret);
 }
 
-char	*form_indirect(char *file, unsigned int *pos, int com_ind)
+char	*form_indirect(char *file, unsigned int *pos)
 {
 	int		res;
 	char	*ret;
@@ -57,11 +57,11 @@ char	*parse_args(char t_arg, char *file, unsigned int *pos, int com_ind)
 	if (t_arg)
 	{
 		if (t_arg == T_REG)
-			return (form_registry(file, pos, com_ind));
+			return (form_registry(file, pos));
 		else if (t_arg == T_DIR)
 			return (form_direct(file, pos, com_ind));
 		else if (t_arg == T_IND)
-			return (form_indirect(file, pos, com_ind));
+			return (form_indirect(file, pos));
 	}
 	return (NULL);
 }

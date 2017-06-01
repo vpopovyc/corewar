@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:31:10 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/31 20:59:28 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/01 15:47:47 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char				*parse_args(char t_arg, char *file, unsigned int *pos,
 **	decode_bytes.c
 */
 
+int					count_bytes(char byte, char com_ind);
 int					write_to_int(char *file, unsigned int *pos);
 int					write_to_short(char *file, unsigned int *pos);
 

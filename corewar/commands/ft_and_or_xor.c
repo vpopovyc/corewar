@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_and_or_xor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 16:38:19 by mkrutik           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2017/06/01 17:02:16 by dkosolap         ###   ########.fr       */
+=======
+/*   Updated: 2017/06/01 17:32:04 by mkrutik          ###   ########.fr       */
+>>>>>>> 0cb176f2ac729b7da545ee3cff9fbbb72a9b904b
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../corewar.h"
 
-static void	ft_and_or_xor_1(t_carriage *s, char op)
+static void		ft_and_or_xor_1(t_carriage *s, char op)
 {
 	if (s->arg[1] >= 0 && s->arg[1] <= REG_NUMBER && s->arg[2] >= 0 && s->arg[2]
 		<= REG_NUMBER && s->arg[3] && s->arg[3] <= REG_NUMBER)
@@ -27,7 +31,7 @@ static void	ft_and_or_xor_1(t_carriage *s, char op)
 	}
 }
 
-static void	ft_and_or_xor_2(t_corewar *d, t_carriage *s, char op, char c)
+static void		ft_and_or_xor_2(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == -108 && s->arg[2] >= 0 && s->arg[2] <= REG_NUMBER && s->arg[3]
 		>= 0 && s->arg[3] <= REG_NUMBER)
@@ -48,7 +52,7 @@ static void	ft_and_or_xor_2(t_corewar *d, t_carriage *s, char op, char c)
 	}
 }
 
-static void	ft_and_or_xor_3(t_corewar *d, t_carriage *s, char op, char c)
+static void		ft_and_or_xor_3(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == 116 && s->arg[1] >= 0 && s->arg[1] <= REG_NUMBER && s->arg[3] >= 0
 		&& s->arg[3] <= REG_NUMBER)
@@ -69,7 +73,7 @@ static void	ft_and_or_xor_3(t_corewar *d, t_carriage *s, char op, char c)
 	}
 }
 
-static void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
+static void		ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == -76 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
 	{
@@ -88,7 +92,7 @@ static void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
 	}
 }
 
-static void	ft_and_or_xor_5(t_corewar *d, t_carriage *s, char op, char c)
+static void		ft_and_or_xor_5(t_corewar *d, t_carriage *s, char op, char c)
 {
 	if (c == -12 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
 	{
@@ -109,7 +113,7 @@ static void	ft_and_or_xor_5(t_corewar *d, t_carriage *s, char op, char c)
 	}
 }
 
-void	ft_and_or_xor(t_corewar *d, t_carriage *s)
+void			ft_and_or_xor(t_corewar *d, t_carriage *s)
 {
 	char operation;
 	char op_code;

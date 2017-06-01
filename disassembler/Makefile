@@ -24,7 +24,7 @@ $(LIBFT):
 	make -C ../libft/
 
 %.o: %.c
-	gcc -c -o $@ $<
+	gcc -c -o $@ $< $(CFLAGS)
 
 clean:
 	make -C ../libft/ clean
