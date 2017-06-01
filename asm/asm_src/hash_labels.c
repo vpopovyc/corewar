@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/21 17:03:05 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/21 19:54:29 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/01 17:36:47 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void		get_args(char *reference, t_stack *dir, char opcode, t_command *new)
 	args = all_delims_split(reference, separ_delim);
 	while (i < g_op[(int)opcode - 1].num_args)
 	{
+		if (!args[i])
+			ft_error(2);
 		new->args[i] = check_argument(args[i], dir, opcode, i);
 		if (g_op[(int)opcode - 1].code_byte)
 			new->codebyte |= g_flag << (6 - 2 * i);
