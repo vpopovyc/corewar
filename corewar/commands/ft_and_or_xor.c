@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 12:42:56 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 14:27:54 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/01 15:21:05 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,10 @@ static void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
 	if (c == -76 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
 	{
 		s->arg[2] = (s->position - 8 + s->arg[2]) % MEM_SIZE;
-		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & d->field[s->arg[2]])
+		s->arg[2] = ((unsigned char)d->field[s->arg[2]] << 24) | ((unsigned char)d->field[s->arg[2] + 1] << 16) | ((unsigned char)d->field[s->arg[2] + 2] << 8) | (unsigned char)d->field[s->arg[2] + 3];
+
+		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & s->arg[2])
 			: 0;
-		if (op == 6)
-		{
-			printf("\n       \n");
-			printf("\n%i %i, %i\n", s->arg[1], d->field[s->arg[2] + 1], (s->arg[1] & d->field[s->arg[2] + 1]));
-		}
 		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | d->field[s->arg[2]])
 			: 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ d->field[s->arg[2]])
