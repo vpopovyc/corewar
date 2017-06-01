@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visualisation.h                                    :+:      :+:    :+:   */
+/*   usage_status_credits.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:31:02 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/29 16:56:19 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/31 11:52:22 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	print_credits(WINDOW *bottom)
 	y += 2;
 	mvwprintw(bottom, y, 128, "Ternary master:                mkrutik");
 	y += 2;
-	mvwprintw(bottom, y, 128, "Towerfall gamer:               dkosolap");
+	mvwprintw(bottom, y, 128, "King of the fixing:            dkosolap");
 	y += 2;
 	mvwprintw(bottom, y, 128, "The guy who came at the end:   rvolovik");
 }

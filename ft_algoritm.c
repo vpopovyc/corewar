@@ -108,7 +108,7 @@ void ft_algoritm(t_corewar *src)
     src->players_live[0] = 0;
     while (src->carriage && src->cycle_to_die != 0 && src->fdump != src->curent_cycle)
     {
-        ft_check_mem_cell(src->carriage, src->game_field); // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
+        ft_check_mem_cell(src->carriage, src->field); // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
         if (src->last_cycle_to_die == src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
         {
             src->carriage = ft_check_del_carriege(src->carriage); //проверить и удалить все каретки которые не сказали live
@@ -120,5 +120,5 @@ void ft_algoritm(t_corewar *src)
         src->curent_cycle++; // инкрементируем текущий цикл
     }
     if (src->fdump != -1 && src->fdump == src->curent_cycle)
-        dk_dump(src->game_field);
+        dk_dump(src->field);
 }

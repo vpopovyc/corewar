@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visualisation.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:31:02 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/29 16:56:19 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/31 12:25:42 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ extern pthread_t 		g_key;
 extern pthread_attr_t 	g_atr;
 extern char				g_flag;
 extern char				g_mus;
+extern int				g_sec;
 
 /*
 ** visualisation.c

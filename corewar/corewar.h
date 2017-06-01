@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/30 18:44:34 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/05/31 16:23:30 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_corewar
 {
 	t_player		*players; // список игроков и их даные из файла для валидации
 	t_carriage		*carriage; // спичок кареток
-	char			*game_field; // игровое поле
+	char			*field; // игровое поле
 	char 			*meta_data;
 	int				*players_live; /* масив размером с количество игроков,
 	каждый елемент число сказаных live с именем конкретного
@@ -60,6 +60,7 @@ typedef struct		s_corewar
 	int				fdump; // елси число не (-1) значит вивести дамп после fdump циклов
 	int				verbose; // визуальный режим
 	int				count_ply;
+	int				sec_cycle;
     char            winer;
 }					t_corewar;
 
@@ -83,10 +84,9 @@ void				ft_algoritm(t_corewar *src);
 void				dk_dump(char *addr);
 
 int     			ft_inc_index(t_carriage *src);
-int     			ft_if_negative(int index);
+int     			ft_fix(int index);
 void    			ft_take_arg(t_corewar *data, t_carriage *src, int i, int comand); // i == 0  / вызываеться при командах с опкодом
-t_carriage 			*ft_create_carriage(unsigned int posinion, int num);
-
+t_carriage			*ft_create_carriage(unsigned int posinion, int num, t_carriage *data);
 void				ft_live(t_corewar *data, t_carriage *src);
 void				ft_ld(t_corewar *data, t_carriage *src);
 void			    ft_st(t_corewar *data, t_carriage *src);

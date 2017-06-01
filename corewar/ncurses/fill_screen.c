@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visualisation.h                                    :+:      :+:    :+:   */
+/*   fill_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:31:02 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/29 16:56:19 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/05/31 12:30:33 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	fill_panel(WINDOW *panel, t_corewar *src)
 	else
 		mvwprintw(panel, y, 3, "PAUSED  ");
 	pthread_mutex_unlock(&g_mutex_flag);
+	y += 2;
+	mvwprintw(panel, y, 3, "Cycles/second limit : %d", g_sec);
 	y += 2;
 	mvwprintw(panel, y, 3, "CYCLE_NUMBER : %d", src->curent_cycle);
 	y += 2;
@@ -118,7 +120,7 @@ void	fill_screen(t_init_screen *init, t_corewar *src)
 	if (!(g_flag & I_ERR))
 	{
 		pthread_mutex_lock(&g_lock);
-		fill_field(FIELD, src->game_field, src->meta_data, src->carriage);
+		fill_field(FIELD, src->field, src->meta_data, src->carriage);
 		fill_bottom(BOTTOM, src->players, src->count_ply);
 		fill_panel(PANEL, src);
 		wrefresh(stdscr);
