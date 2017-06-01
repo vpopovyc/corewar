@@ -113,7 +113,7 @@ void ft_algoritm(t_corewar *src)
             break ;
         pthread_mutex_unlock(&g_mutex_flag);
         /****/
-        ft_check_mem_cell(src->carriage, src->game_field); // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
+        ft_check_mem_cell(src->carriage, src->field); // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
         if ((int)src->last_cycle_to_die == (int)src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
         {
             src->carriage = ft_check_del_carriege(src->carriage); //проверить и удалить все каретки которые не сказали live
@@ -139,5 +139,5 @@ void ft_algoritm(t_corewar *src)
     /****/
     // победитель src->winer;
     if (src->fdump != -1 && src->fdump == (int)src->curent_cycle)
-        dk_dump(src->game_field);
+        dk_dump(src->field);
 }

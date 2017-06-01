@@ -120,7 +120,7 @@ void	fill_screen(t_init_screen *init, t_corewar *src)
 	if (!(g_flag & I_ERR))
 	{
 		pthread_mutex_lock(&g_lock);
-		fill_field(FIELD, src->game_field, src->meta_data, src->carriage);
+		fill_field(FIELD, src->field, src->meta_data, src->carriage);
 		fill_bottom(BOTTOM, src->players, src->count_ply);
 		fill_panel(PANEL, src);
 		wrefresh(stdscr);
