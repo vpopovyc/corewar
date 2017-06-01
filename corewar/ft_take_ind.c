@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_aff.c                                           :+:      :+:    :+:   */
+/*   ft_take_ind.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/01 12:40:19 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 12:40:22 by mkrutik          ###   ########.fr       */
+/*   Created: 2017/06/01 15:28:16 by mkrutik           #+#    #+#             */
+/*   Updated: 2017/06/01 15:49:42 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include "corewar.h"
 
-void	ft_aff(t_corewar *data, t_carriage *src)
+int		ft_take_ind(t_corewar *data, int index)
 {
-	ft_inc_index(src);
-	if (data->field[src->position] == 64)
-	{
-		ft_inc_index(src);
-		src->arg[1] = data->field[ft_inc_index(src)];
-		if (src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER)
-			ft_printf("%c", src->reg[src->arg[1]] % 256);
-	}
-	ft_bzero(src->arg, 16);
+	int res;
+
+	res = ((unsigned char)data->field[ft_fix(index)] << 24) |
+		((unsigned char)data->field[ft_fix(index + 1)] << 16) |
+		((unsigned char)data->field[ft_fix(index +2)] << 8) |
+		(unsigned char)data->field[ft_fix(index +3)];
+	return (res);
 }

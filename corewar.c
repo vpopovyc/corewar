@@ -79,11 +79,11 @@ int			main(int argc, char **argv)
 	ft_algoritm(&cor);
     // cor.carriage->reg[1] = 100;
 //    cor.carriage->position += 7;
-    // dk_dump(cor.game_field);
+    // dk_dump(cor.field);
     // ft_st(&cor, cor.carriage);
     // ft_st(&cor, cor.carriage);
 	// ft_printf("\n\n");
-    // dk_dump(cor.game_field);
+    // dk_dump(cor.field);
     
 
     return (0);
