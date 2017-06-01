@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_and_or_xor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 12:42:56 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 12:44:42 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/01 14:27:54 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ static void	ft_and_or_xor_4(t_corewar *d, t_carriage *s, char op, char c)
 		s->arg[2] = (s->position - 8 + s->arg[2]) % MEM_SIZE;
 		(op == 6) ? (s->reg[s->arg[3]] = s->arg[1] & d->field[s->arg[2]])
 			: 0;
+		if (op == 6)
+		{
+			printf("\n       \n");
+			printf("\n%i %i, %i\n", s->arg[1], d->field[s->arg[2] + 1], (s->arg[1] & d->field[s->arg[2] + 1]));
+		}
 		(op == 7) ? (s->reg[s->arg[3]] = s->arg[1] | d->field[s->arg[2]])
 			: 0;
 		(op == 8) ? (s->reg[s->arg[3]] = s->arg[1] ^ d->field[s->arg[2]])

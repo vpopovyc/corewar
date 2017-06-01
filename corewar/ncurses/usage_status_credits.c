@@ -55,13 +55,13 @@ void	print_credits(WINDOW *bottom)
 	y = 1;
 	mvwprintw(bottom, y, 126, "Team name: moshonka_yagnenka");
 	y += 2;
-	mvwprintw(bottom, y, 128, "Team-lead:                     vpopovyc");
+	mvwprintw(bottom, y, 128, "Team-lead:                        vpopovyc");
 	y += 2;
-	mvwprintw(bottom, y, 128, "Ternary master:                mkrutik");
+	mvwprintw(bottom, y, 128, "Ternary master:                   mkrutik");
 	y += 2;
-	mvwprintw(bottom, y, 128, "King of the fixing:            dkosolap");
+	mvwprintw(bottom, y, 128, "King of the fixing:               dkosolap");
 	y += 2;
-	mvwprintw(bottom, y, 128, "The guy who came at the end:   rvolovik");
+	mvwprintw(bottom, y, 128, "Dissassembler u menya na git'e:   rvolovik");
 }
 
 void	print_status(WINDOW *bottom)
@@ -82,8 +82,8 @@ void	print_status(WINDOW *bottom)
 		mvwprintw(bottom, y, 86, "Music is paused           ");
 	y += 2;
 	mvwprintw(bottom, y, 86, "INGA MAUER - MY FLIGHTS WITHOUT YOU");
-	// y += 2;
-	// mvwprintw(bottom, y, 86, "Something");
+	y += 2;
+	mvwprintw(bottom, y, 86, "Who is gonna win?");
 }
 
 void	print_usage(WINDOW *bottom)

@@ -46,13 +46,14 @@
 # define P1RB 1 // RED_BLACK
 # define P2GB 2 // GREEN_BLACK
 # define P3YB 4 // YELLOW_BLACK
-# define P4BB 8 // BLUE_BLACK
+# define P4BB 8 // BLUE_BLACK 
+# define P0WW 16 // WHITE_WHITE
+# define P0BB 32 // BLACK_BLACK
 # define P1RW 17 // RED_WHITE
 # define P2GW 18 // GREEN_WHITE
 # define P3YW 20 // YELLOW_WHITE
 # define P4BW 24 // BLUE_WHITE
-# define P0WW 16 // WHITE_WHITE
-
+# define P0WB 48 // WHITE_BLACK
 /*
 ** COLORS
 */
@@ -61,7 +62,7 @@
 # define COL_GREEN	"GREEN"
 # define COL_YELLOW	"YELLOW"
 # define COL_BLUE	"BLUE"
-
+# define COL_GRAY	0
 
 typedef struct 	s_init_screen
 {
@@ -83,14 +84,14 @@ extern pthread_t 		g_key;
 extern pthread_attr_t 	g_atr;
 extern char				g_flag;
 extern char				g_mus;
-extern char				g_sec;
+extern int				g_sec;
 
 /*
 ** visualisation.c
 */
 
 t_init_screen 	*init_ncurses(void);
-void			end_ncurses(t_init_screen *init);
+void			end_ncurses(t_init_screen *init, t_corewar *src);
 void			resize_screens(t_init_screen *init);
 
 /*
@@ -122,8 +123,8 @@ char	*get_color(WINDOW *bottom, int i);
 ** algo_event_managment.c
 */
 
-void 	algo_event_managment(void);
-void	turn_off_color(WINDOW *field, int color_pair);
+void 	algo_event_managment(t_init_screen *init);
+void    turn_off_color(WINDOW *field, t_carriage *crg);
 void	turn_on_color(WINDOW *field, int i, char *mdata, t_carriage *crg);
 
 #endif

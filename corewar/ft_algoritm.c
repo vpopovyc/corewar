@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/31 17:17:49 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/01 14:17:32 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,14 +128,12 @@ void ft_algoritm(t_corewar *src)
         if ((src->curent_cycle % g_sec) == 0)
         {
             fill_screen(init, src);
-            algo_event_managment();
-            // usleep(1);
+            algo_event_managment(init);
         }
         /****/
     }
     /****/
-    end_ncurses(init);
-
+    end_ncurses(init, src);
     /****/
     // победитель src->winer;
     if (src->fdump != -1 && src->fdump == (int)src->curent_cycle)

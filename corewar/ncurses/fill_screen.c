@@ -47,15 +47,15 @@ void	fill_panel(WINDOW *panel, t_corewar *src)
 		mvwprintw(panel, y, 3, "PAUSED  ");
 	pthread_mutex_unlock(&g_mutex_flag);
 	y += 2;
-	mvwprintw(panel, y, 3, "Cycles/second limit : %d", g_sec);
+	mvwprintw(panel, y, 3, "Cycles/second limit : %d      ", g_sec);
 	y += 2;
-	mvwprintw(panel, y, 3, "CYCLE_NUMBER : %d", src->curent_cycle);
+	mvwprintw(panel, y, 3, "CYCLE_NUMBER : %d         ", src->curent_cycle);
 	y += 2;
-	mvwprintw(panel, y, 3, "COUNT_TO_CYCLE_TO_DIE : %d", src->last_cycle_to_die);
+	mvwprintw(panel, y, 3, "COUNT_TO_CYCLE_TO_DIE : %d       ", src->last_cycle_to_die);
 	y += 2;
-	mvwprintw(panel, y, 3, "CYCLE_TO_DIE : %d", src->cycle_to_die);
+	mvwprintw(panel, y, 3, "CYCLE_TO_DIE : %d     ", src->cycle_to_die);
 	y += 2;
-	mvwprintw(panel, y, 3, "NUMBER_CHECKS : %d", src->n_check);
+	mvwprintw(panel, y, 3, "NUMBER_CHECKS : %d          ", src->n_check);
 	wattroff(panel, A_BOLD);
 	print_player_info(panel, src, &y);
 }
@@ -103,7 +103,7 @@ void	fill_field(WINDOW *field, char *gamefield, char *mdata, t_carriage *crg)
 		{
 			turn_on_color(field, i, mdata, crg);
 			mvwprintw(field, y, x, "%.2hhx", gamefield[i]);
-			turn_off_color(field, crg->i);
+			turn_off_color(field, crg);
 			++i;
 			if ((i % 64) == 0)
 				break ;

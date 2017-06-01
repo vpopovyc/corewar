@@ -38,6 +38,8 @@ void	init_color_pairs(void)
 	init_pair(P2GW, COLOR_GREEN, COLOR_WHITE);
 	init_pair(P3YW, COLOR_YELLOW, COLOR_WHITE);
 	init_pair(P4BW, COLOR_BLUE, COLOR_WHITE);
+	init_pair(P0WB, COLOR_WHITE, COLOR_WHITE);
+	init_pair(P0BB, COLOR_BLACK, COLOR_BLACK);
 	init_pair(P0WW, COLOR_WHITE, COLOR_WHITE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:30:23 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/31 15:48:24 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/01 13:08:02 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ pthread_mutex_t g_mutex_flag = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t g_mutex_sec = PTHREAD_MUTEX_INITIALIZER;
 pthread_t 		g_resize;
 pthread_attr_t 	g_atr;
-char			g_flag = 0;
-char 			g_mus = 0x10;
-char 			g_sec = 1;
+char			g_flag = A_STOP;
+char 			g_mus = P_MUS;
+int 			g_sec = 1;
 pthread_t 		g_music;
 pthread_t 		g_key;
 
@@ -67,7 +67,7 @@ void	*size_controll(void *arg)
 			}
 		}
 		pthread_mutex_unlock(&g_lock);
-		usleep(3 * 100000);
+		usleep(1 * 100000);
 	}
 }
 
@@ -85,7 +85,6 @@ void	*key_event(void *arg)
 			pthread_mutex_lock(&g_mutex_flag);
 			g_flag |= EXIT;
 			pthread_mutex_unlock(&g_mutex_flag);
-			usleep(2 * 100000);
 			break ;
 		}
 		if (c == 'p')
@@ -144,19 +143,24 @@ t_init_screen 	*init_ncurses(void)
 	** key event
 	*/
 	pthread_create(&g_key, &g_atr, key_event, NULL);
+	pthread_detach(g_key);
 	return (init);
 }
 
-void	end_ncurses(t_init_screen *init)
+void	end_ncurses(t_init_screen *init, t_corewar *src)
 {
-	pthread_join(g_key, NULL);
+	fill_screen(init, src);
+	mvwprintw(BOTTOM, 9, 86, "Winner is %c", src->winer);
+	wattron(PANEL, A_BOLD);
+	mvwprintw(PANEL, 2, 3, "Press any key to exit", src->winer);
+	wrefresh(BOTTOM);
+	wrefresh(PANEL);
+	wattroff(PANEL, A_BOLD);
+	nodelay(stdscr, FALSE);
+	getch();
+	free(init);
 	pthread_mutex_destroy(&g_lock);
 	pthread_mutex_destroy(&g_mutex_flag);
 	pthread_mutex_destroy(&g_mutex_sec);
-	nodelay(stdscr, FALSE);
-	mvwprintw(stdscr, 0, 1, "Press enter to quit");
-	wrefresh(stdscr);
-	while (getch() != '\n');
-	free(init);
 	endwin();
 }
