@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/06/01 14:17:32 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/01 16:36:27 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void    ft_check_cycle_to_die(t_corewar *src, int n_live)
     {
         src->n_check = 0;
         src->cycle_to_die = (src->cycle_to_die < CYCLE_DELTA) ? 0 : (src->cycle_to_die - CYCLE_DELTA);
-        ft_bzero(src->players_live, 4 * src->count_ply);
     }
     else
         src->n_check++;
+    ft_bzero(src->players_live, 4 * src->count_ply);
     src->last_cycle_to_die = 0;
 }
 
@@ -118,7 +118,6 @@ void ft_algoritm(t_corewar *src)
         {
             src->carriage = ft_check_del_carriege(src->carriage); //проверить и удалить все каретки которые не сказали live
             ft_check_cycle_to_die(src, 0); // сброс cycle_to_die
-            src->last_cycle_to_die = 0;
         }
         else
             src->last_cycle_to_die++; // инкрементируем счетчик циклов к смерти
@@ -133,7 +132,12 @@ void ft_algoritm(t_corewar *src)
         /****/
     }
     /****/
+<<<<<<< HEAD
     end_ncurses(init, src);
+=======
+    end_ncurses(init);
+
+>>>>>>> 544ab7c23186eb22708626dd5d2cb697a1fea8dc
     /****/
     // победитель src->winer;
     if (src->fdump != -1 && src->fdump == (int)src->curent_cycle)

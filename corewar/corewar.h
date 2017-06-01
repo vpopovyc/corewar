@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/31 16:23:30 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/01 17:50:32 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct		s_corewar
 	t_carriage		*carriage; // спичок кареток
 	char			*field; // игровое поле
 	char 			*meta_data;
+	char 			*meta_bold;
 	int				*players_live; /* масив размером с количество игроков,
 	каждый елемент число сказаных live с именем конкретного
 	игрока( индекс номер игрока на карте) */
@@ -104,4 +105,5 @@ void                ft_write_meta(t_corewar *src, char name, int position); // �
 void                ft_sti(t_corewar *data, t_carriage *src);
 void                ft_write_meta(t_corewar *src, char name, int position);
 void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию
+int					ft_take_ind(t_corewar *data, int index);
 #endif

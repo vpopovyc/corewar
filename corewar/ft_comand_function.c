@@ -17,7 +17,7 @@ void	ft_take_arg(t_corewar *data, t_carriage *src, int i, int comand) // i == 0 
 			src->arg[i] = data->field[ft_inc_index(src)];
 		else if (src->arg[i] == DIR_CODE)
 		{
-			if (comand == 2 || comand == 6 || comand == 7 || comand == 9 || comand == 13)
+			if (comand == 2 || comand == 6 || comand == 7 || comand == 8 || comand == 13)
 				src->arg[i] = ((unsigned char)data->field[ft_inc_index(src)] << 24) | ((unsigned char)data->field[ft_inc_index(src)] << 16) | ((unsigned char)data->field[ft_inc_index(src)] << 8) | (unsigned char)data->field[ft_inc_index(src)];
 			else // dir == 2 байта
 				 src->arg[i] = (short)((unsigned char)data->field[ft_inc_index(src)] << 8) | (unsigned char)data->field[ft_inc_index(src)];
