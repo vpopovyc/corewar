@@ -132,12 +132,7 @@ void ft_algoritm(t_corewar *src)
         /****/
     }
     /****/
-<<<<<<< HEAD
     end_ncurses(init, src);
-=======
-    end_ncurses(init);
-
->>>>>>> 544ab7c23186eb22708626dd5d2cb697a1fea8dc
     /****/
     // победитель src->winer;
     if (src->fdump != -1 && src->fdump == (int)src->curent_cycle)
