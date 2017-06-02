@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 13:25:18 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 21:05:28 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/02 18:03:49 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_st_1(t_corewar *data, t_carriage *src)
 		data->field[ft_fix(src->arg[2] + 3)] = (unsigned char)
 			(src->reg[src->arg[1]]);
 		ft_write_meta(data, src->name, src->arg[2]);
-		dk_field_meta(data->meta_bold + src->arg[2], -50, 4);
+		dk_field_meta(data->meta_bold, -50, src->arg[2], 4);
 	}
 }
 

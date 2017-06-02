@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:31:02 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/31 12:30:33 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/02 19:21:20 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	print_player_info(WINDOW *panel, t_corewar *src, int *y)
 		get_color(panel, i);
 		mvwprintw(panel, (*y), 15, "%s", players->name);
 		unset_color(panel, i);
-		mvwprintw(panel, (*y) + 2, 15, "Lives summary : %d", src->players_live[i / 2 - 1]);
+		mvwprintw(panel, (*y) + 2, 15, "Lives summary : %d                ",
+			src->players_live[i / 2 - 1]);
 		i += 2;
 		players = players->next;
 	}
@@ -53,20 +54,23 @@ void	fill_panel(WINDOW *panel, t_corewar *src)
 	y += 2;
 	mvwprintw(panel, y, 3, "CYCLE_NUMBER : %d         ", src->curent_cycle);
 	y += 2;
-	mvwprintw(panel, y, 3, "COUNT_TO_CYCLE_TO_DIE : %d       ", src->last_cycle_to_die);
+	mvwprintw(panel, y, 3, "COUNT_TO_CYCLE_TO_DIE : %d       ",
+		src->last_cycle_to_die);
 	y += 2;
 	mvwprintw(panel, y, 3, "CYCLE_TO_DIE : %d     ", src->cycle_to_die);
 	y += 2;
 	mvwprintw(panel, y, 3, "NUMBER_CHECKS : %d          ", src->n_check);
+	y += 2;
+	mvwprintw(panel, y, 3, "Processes : %d          ", g_car);
 	wattroff(panel, A_BOLD);
 	print_player_info(panel, src, &y);
 }
 
 void	fill_bottom(WINDOW *bottom, t_player *ply, int num_ply)
 {
-	t_player 	*player;
-	int 		y;
-	int 		x;
+	t_player	*player;
+	int			y;
+	int			x;
 
 	player = ply;
 	y = 1;
@@ -81,7 +85,6 @@ void	fill_bottom(WINDOW *bottom, t_player *ply, int num_ply)
 		getyx(bottom, y, x);
 		mvwprintw(bottom, y, x, "%s", get_color(bottom, y));
 		unset_color(bottom, y);
-
 		player = player->next;
 	}
 	print_usage(bottom);
@@ -91,9 +94,9 @@ void	fill_bottom(WINDOW *bottom, t_player *ply, int num_ply)
 
 void	fill_field(WINDOW *field, char *gamefield, char *mdata, t_carriage *crg)
 {
-	int 	y;
-	int 	x;
-	int 	i;
+	int		y;
+	int		x;
+	int		i;
 
 	i = 0;
 	y = 1;

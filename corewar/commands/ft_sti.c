@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 13:38:41 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 21:05:34 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/02 18:03:59 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int i)
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
 		data->field[ft_fix(i + 3)] = (unsigned int)src->reg[src->arg[1]];
 		ft_write_meta(data, src->name, i);
-		dk_field_meta(data->meta_bold + i, -50, 4);
+		dk_field_meta(data->meta_bold, -50, i, 4);
 	}
 	else if (op_code == 84 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER &&
 		src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER && src->arg[3] >= 0 &&
@@ -35,7 +35,7 @@ static void		ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int i)
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[1] >> 8;
 		data->field[ft_fix(i + 3)] = (unsigned int)src->reg[1];
 		ft_write_meta(data, src->name, i);
-		dk_field_meta(data->meta_bold + i, -50, 4);
+		dk_field_meta(data->meta_bold, -50, i, 4);
 	}
 }
 
@@ -49,7 +49,7 @@ static void		ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int i)
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
 		data->field[ft_fix(i + 3)] = (unsigned int)src->reg[src->arg[1]];
 		ft_write_meta(data, src->name, i);
-		dk_field_meta(data->meta_bold + i, -50, 4);
+		dk_field_meta(data->meta_bold, -50, i, 4);
 	}
 	else if (op_code == 100 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER &&
 		src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
@@ -60,7 +60,7 @@ static void		ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int i)
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
 		data->field[ft_fix(i + 3)] = (unsigned int)src->reg[src->arg[1]];
 		ft_write_meta(data, src->name, i);
-		dk_field_meta(data->meta_bold + i, -50, 4);
+		dk_field_meta(data->meta_bold, -50, i, 4);
 	}
 }
 
@@ -74,7 +74,7 @@ static void		ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int i)
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
 		data->field[ft_fix(i + 3)] = (unsigned int)src->reg[src->arg[1]];
 		ft_write_meta(data, src->name, i);
-		dk_field_meta(data->meta_bold + i, -50, 4);
+		dk_field_meta(data->meta_bold, -50, i, 4);
 	}
 	else if (op_code == 116 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER &&
 		src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
@@ -85,7 +85,7 @@ static void		ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int i)
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
 		data->field[ft_fix(i + 3)] = (unsigned int)src->reg[src->arg[1]];
 		ft_write_meta(data, src->name, i);
-		dk_field_meta(data->meta_bold + i, -50, 4);
+		dk_field_meta(data->meta_bold, -50, i, 4);
 	}
 }
 

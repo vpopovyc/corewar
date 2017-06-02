@@ -12,42 +12,35 @@
 
 #include "visualisation.h"
 
-void	*crg_finder(void *arg)
+char	crg_finder(t_carriage *arg)
 {
 	t_carriage			*crg;
-	void	 			*ret;
-	unsigned int 		i;
+	unsigned int		i;
 
-	crg = (t_carriage*)arg;
-	ret = NULL;
+	crg = arg;
 	if (crg)
 	{
 		i = crg->i;
-		ret = (void*)malloc(sizeof(void));
-		*((char*)ret) = 0;
 		while (crg)
 		{
 			if (crg->position == i)
-				*((char*)ret) = 1;
+				return (1);
 			crg = crg->next;
 		}
 	}
-	pthread_exit(ret);
+	return (0);
 }
 
 void	turn_on_color(WINDOW *field, int i, char *mdata, t_carriage *crg)
 {
-	char 		player;
-	void		*is_carrige;
+	char		player;
+	char		is_carrige;
 	int			color_pair;
-	pthread_t 	finder;
 
 	color_pair = 0;
-	if (crg)
-		crg->i = i;
-	is_carrige = 0;
+	(crg) ? crg->i = i : 0;
+	is_carrige = crg_finder(crg);
 	player = mdata[i];
-	pthread_create(&finder, &g_atr, crg_finder, crg);
 	if (player == 0)
 		color_pair |= P0BB;
 	else if (player == -1)
@@ -58,21 +51,18 @@ void	turn_on_color(WINDOW *field, int i, char *mdata, t_carriage *crg)
 		color_pair |= P3YB;
 	else if (player == -4)
 		color_pair |= P4BB;
-	pthread_join(finder, &is_carrige);
-	if (is_carrige && *((char*)is_carrige))
+	if (is_carrige)
 		color_pair |= P0WW;
 	if (color_pair != P0BB && !g_meta_bold[i])
 		wattron(field, COLOR_PAIR(color_pair));
 	else
 		wattron(field, COLOR_PAIR(color_pair) | A_BOLD);
-	if (crg)
-		crg->i = color_pair;
-	free(is_carrige);
+	(crg) ? crg->i = color_pair : 0;
 }
 
 void	turn_off_color(WINDOW *field, t_carriage *crg, int i)
 {
-	int 	color_pair;
+	int color_pair;
 
 	if (crg)
 		color_pair = crg->i;
@@ -100,32 +90,13 @@ void	update_while_paused(t_init_screen *init)
 	pthread_mutex_unlock(&g_lock);
 }
 
-void 	algo_event_managment(t_init_screen *init)
+void	algo_event_managment(t_init_screen *init)
 {
-	char 	tmp_flag;
+	char tmp_flag;
 
 	pthread_mutex_lock(&g_mutex_flag);
 	if (g_flag & A_STOP)
-	{
-		tmp_flag = g_sec | g_mus;
-		pthread_mutex_unlock(&g_mutex_flag);
-		while (1)
-		{
-			usleep(3 * 100000);
-			pthread_mutex_lock(&g_mutex_sec);
-			if (tmp_flag != (g_sec | g_mus))
-			{
-				update_while_paused(init);
-				tmp_flag = g_sec | g_mus;
-			}
-			pthread_mutex_unlock(&g_mutex_sec);
-			pthread_mutex_lock(&g_mutex_flag);
-			if ((g_flag & EXIT) || (!(g_flag & A_STOP)))
-				break ;
-			pthread_mutex_unlock(&g_mutex_flag);
-			usleep(3 * 100000);
-		}
-	}
+		stop(&tmp_flag, init);
 	else if (g_flag & I_ERR)
 	{
 		pthread_mutex_unlock(&g_mutex_flag);

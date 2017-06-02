@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/06/02 12:25:15 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/02 18:05:01 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void				ft_lfork(t_corewar *data, t_carriage *src);
 void				ft_aff(t_corewar *data, t_carriage *src);
 
 void                ft_write_meta(t_corewar *src, char name, int position); // запись имени игрока в масив метаданных для визуального отображения
-void				dk_field_meta(char *meta, int name, int len);
+void				dk_field_meta(char *meta, int name, int start, int len);
 void                ft_sti(t_corewar *data, t_carriage *src);
 void                ft_write_meta(t_corewar *src, char name, int position);
 void				(*g_funcs[16])(struct s_corewar *src, struct s_carriage *head);//Указатель на функцию

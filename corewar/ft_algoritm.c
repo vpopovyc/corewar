@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/06/02 10:58:36 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/02 19:41:05 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,22 @@
 
 void    ft_check_cycle_to_die(t_corewar *src, int n_live)
 {
-    t_carriage  *p;
+    // t_carriage  *p;
 
-    p = src->carriage;
-    while (p)
+    // p = src->carriage;
+    // while (p)
+    // {
+    //     ((int)p->live_in_cycle > n_live) ? (n_live = p->live_in_cycle) : 0;
+    //     p->live_in_cycle = 0; // сбросить во всех каретках счетчик циклов
+    //     p = p->next;
+    // }
+    int i = 0;
+
+    while (i < src->count_ply)
     {
-        ((int)p->live_in_cycle > n_live) ? (n_live = p->live_in_cycle) : 0;
-        p->live_in_cycle = 0; // сбросить во всех каретках счетчик циклов
-        p = p->next;
+        if (src->players_live[i] >= n_live)
+            n_live = src->players_live[i];
+        i++;
     }
     if (n_live >= NBR_LIVE || src->n_check == MAX_CHECKS)
     {
@@ -95,6 +103,19 @@ void    sub_meta_bold(char *src)
     }
 }
 
+int     count_car(t_carriage *head)
+{
+    int res;
+
+    res = 0;
+    while (head)
+    {
+        res++;
+        head = head->next;
+    }
+    return (res);
+}
+
 void ft_algoritm(t_corewar *src)
 {
     t_init_screen   *init;
@@ -112,7 +133,7 @@ void ft_algoritm(t_corewar *src)
         pthread_mutex_unlock(&g_mutex_flag);
         /****/
         ft_check_mem_cell(src->carriage, src->field); // проверяем ячейку памяти на наличие команды если команды нет передвигаем коретку
-        if ((int)src->last_cycle_to_die == (int)src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
+        if (((int)src->last_cycle_to_die + 1)== (int)src->cycle_to_die) // проверяем можноли уменьшить cycle_To_die
         {
             src->carriage = ft_check_del_carriege(src->carriage); //проверить и удалить все каретки которые не сказали live
             ft_check_cycle_to_die(src, 0); // сброс cycle_to_die
@@ -123,15 +144,14 @@ void ft_algoritm(t_corewar *src)
         sub_meta_bold(src->meta_bold);
         src->curent_cycle++; // инкрементируем текущий цикл
         /****/
-        if ((src->curent_cycle % g_sec) == 0)
-        {
-            fill_screen(init, src);
-            algo_event_managment(init);
-        }
+        g_car = count_car(src->carriage);
+        fill_screen(init, src);
+        algo_event_managment(init);
+        usleep(10000 * g_sec);
         /****/
     }
     /****/
-    end_ncurses(init, src, src->curent_cycle % g_sec);
+    end_ncurses(init, src, 0);
     /****/
     if (src->fdump != -1 && src->fdump == (int)src->curent_cycle)
         dk_dump(src->field);

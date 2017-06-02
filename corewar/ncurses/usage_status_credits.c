@@ -36,7 +36,7 @@ char	*get_color(WINDOW *bottom, int i)
 	}
 }
 
-void 	unset_color(WINDOW *bottom, int i)
+void	unset_color(WINDOW *bottom, int i)
 {
 	if (i == 3)
 		wattroff(bottom, COLOR_PAIR(P1RB));
@@ -66,9 +66,9 @@ void	print_credits(WINDOW *bottom)
 
 void	print_status(WINDOW *bottom)
 {
-	int 	y;
-	int 	t_y;
-	int 	t_x;
+	int		y;
+	int		t_y;
+	int		t_x;
 
 	y = 1;
 	mvwprintw(bottom, y, 84, "Status:");

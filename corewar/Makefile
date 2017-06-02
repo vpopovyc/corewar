@@ -6,7 +6,7 @@
 #    By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/12 15:22:31 by dkosolap          #+#    #+#              #
-#    Updated: 2017/06/01 15:55:11 by dkosolap         ###   ########.fr        #
+#    Updated: 2017/06/02 17:36:52 by dkosolap         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC = corewar.c dk_pars_arg.o ft_valid_cor.o ft_create_field_and_carriage.o \
 	commands/ft_sti.o commands/ft_sub.o commands/ft_zjmp.o
 
 VIS = ncurses/algo_event_managment.o ncurses/fill_screen.o ncurses/init_screen.o \
-		ncurses/usage_status_credits.o ncurses/visualisation.o ncurses/sounds/sounds.o
+	ncurses/usage_status_credits.o ncurses/visualisation.o ncurses/sounds/sounds.o \
+	ncurses/algo_event_managment_addition.o
 
 SRC += $(VIS)
 

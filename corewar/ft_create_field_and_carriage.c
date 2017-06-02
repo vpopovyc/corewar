@@ -67,13 +67,13 @@ t_carriage *ft_create_carriage(unsigned int posinion, int num, t_carriage *data,
     return (new);
 }
 
-void    dk_field_meta(char *meta, int name, int len)
+void    dk_field_meta(char *meta, int name, int start, int len)
 {
     int     i;
 
     i = -1;
     while (++i < len)
-        meta[i] = -name;
+        meta[ft_fix(start + i)] = -name;
 }
 
 void    ft_create_field_and_carriage(t_corewar *src, int n, int num)
@@ -100,7 +100,7 @@ void    ft_create_field_and_carriage(t_corewar *src, int n, int num)
             carriage = carriage->next;
             ft_memcpy(p + n, point->code, point->size);
         }
-        dk_field_meta(src->meta_data + n, point->number, point->size);
+        dk_field_meta(src->meta_data, point->number, n, point->size);
         n += MEM_SIZE / src->count_ply;
         point = point->next;
     }
