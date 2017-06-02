@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 19:42:51 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/06/01 21:06:37 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/02 10:58:36 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void ft_algoritm(t_corewar *src)
 {
     t_init_screen   *init;
 
-    src->winer = -src->count_ply;
+    src->winer = src->carriage->name_p;
     src->cycle_to_die = CYCLE_TO_DIE;
     ft_bzero(src->players_live, 4 * src->count_ply);
     init = init_ncurses();

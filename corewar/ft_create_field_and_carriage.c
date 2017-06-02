@@ -40,7 +40,7 @@ t_carriage *ft_del_carriage(t_carriage *src, t_carriage *del)
     return (head);
 }
 
-t_carriage *ft_create_carriage(unsigned int posinion, int num, t_carriage *data)
+t_carriage *ft_create_carriage(unsigned int posinion, int num, t_carriage *data, char *name)
 {
     t_carriage *new;
  
@@ -63,6 +63,7 @@ t_carriage *ft_create_carriage(unsigned int posinion, int num, t_carriage *data)
         new->name = (char)num;
         new->carry = 0;
     }
+	new->name_p = name;
     return (new);
 }
 
@@ -84,7 +85,7 @@ void    ft_create_field_and_carriage(t_corewar *src, int n, int num)
     src->field = ft_strnew(MEM_SIZE - 1);
     src->meta_data = ft_strnew(MEM_SIZE - 1);
     src->meta_bold = ft_strnew(MEM_SIZE - 1);
-    src->carriage = ft_create_carriage(0, -1, NULL);
+    src->carriage = ft_create_carriage(0, -1, NULL, src->players->name);
     src->carriage->reg[1] = -1;
     carriage = src->carriage;
     point = src->players;
@@ -95,7 +96,7 @@ void    ft_create_field_and_carriage(t_corewar *src, int n, int num)
             ft_memcpy(p, point->code, point->size);
         else
         {
-            carriage->next = ft_create_carriage(n, num--, NULL);
+            carriage->next = ft_create_carriage(n, num--, NULL, point->name);
             carriage = carriage->next;
             ft_memcpy(p + n, point->code, point->size);
         }

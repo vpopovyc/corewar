@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 10:53:53 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/06/01 20:54:17 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/02 10:57:21 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct		s_carriage
 	int				carry;
 	int 			i;                   // нужно для визуализации, руками и не руками трогать нельзя
     char            name;
+	char			*name_p;
 	struct s_carriage *next;
 }					t_carriage;
 
@@ -62,7 +63,7 @@ typedef struct		s_corewar
 	int				verbose; // визуальный режим
 	int				count_ply;
 	int				sec_cycle;
-    char            winer;
+    char            *winer;
 }					t_corewar;
 
 
@@ -87,7 +88,7 @@ void				dk_dump(char *addr);
 int     			ft_inc_index(t_carriage *src);
 int     			ft_fix(int index);
 void    			ft_take_arg(t_corewar *data, t_carriage *src, int i, int comand); // i == 0  / вызываеться при командах с опкодом
-t_carriage			*ft_create_carriage(unsigned int posinion, int num, t_carriage *data);
+t_carriage			*ft_create_carriage(unsigned int posinion, int num, t_carriage *data, char *name);
 void				ft_live(t_corewar *data, t_carriage *src);
 void				ft_ld(t_corewar *data, t_carriage *src);
 void			    ft_st(t_corewar *data, t_carriage *src);

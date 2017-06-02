@@ -6,7 +6,7 @@
 /*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 12:45:47 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 16:45:52 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/02 10:51:41 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	ft_fork(t_corewar *data, t_carriage *src)
 	while (point->next)
 		point = point->next;
 	src->arg[1] = ft_fix((src->position - 3) + (src->arg[1] % IDX_MOD));
-	point->next = ft_create_carriage(src->arg[1], src->name, src);
+	point->next = ft_create_carriage(src->arg[1], src->name, src, src->name_p);
 	ft_bzero(src->arg, 16);
 }
