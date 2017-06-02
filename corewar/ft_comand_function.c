@@ -44,7 +44,11 @@ int	 ft_fix(int index)
 	int res;
 	
 	if (index < 0)
-		res = MEM_SIZE + index;
+	{
+		while (index < 0)
+			index += MEM_SIZE;
+		res = index;
+	}
 	else if (index >= MEM_SIZE)
 		res = index % MEM_SIZE;
 	else
