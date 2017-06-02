@@ -20,11 +20,11 @@ void	ft_st_1(t_corewar *data, t_carriage *src)
 		src->arg[2] = src->position - 5 + (src->arg[2] % IDX_MOD);
 		data->field[ft_fix(src->arg[2])] = (unsigned char)
 			(src->reg[src->arg[1]] >> 24);
-		data->field[ft_fix(src->arg[2]) + 1] = (unsigned char)
+		data->field[ft_fix(src->arg[2] + 1)] = (unsigned char)
 			(src->reg[src->arg[1]] >> 16);
-		data->field[ft_fix(src->arg[2]) + 2] = (unsigned char)
+		data->field[ft_fix(src->arg[2] + 2)] = (unsigned char)
 			(src->reg[src->arg[1]] >> 8);
-		data->field[ft_fix(src->arg[2]) + 3] = (unsigned char)
+		data->field[ft_fix(src->arg[2] + 3)] = (unsigned char)
 			(src->reg[src->arg[1]]);
 		ft_write_meta(data, src->name, src->arg[2]);
 		dk_field_meta(data->meta_bold + src->arg[2], -50, 4);
