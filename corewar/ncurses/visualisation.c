@@ -151,7 +151,7 @@ void	end_ncurses(t_init_screen *init, t_corewar *src, char redraw_need)
 {
 	if (redraw_need)
 		fill_screen(init, src);
-	mvwprintw(BOTTOM, 9, 86, "Winner is %c", src->winer);
+	mvwprintw(BOTTOM, 9, 86, "Winner is %s  ", src->winer);
 	wattron(PANEL, A_BOLD);
 	mvwprintw(PANEL, 2, 3, "Press any key to exit", src->winer);
 	wrefresh(BOTTOM);
