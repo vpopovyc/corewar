@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 15:20:52 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/05/31 12:18:36 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/03 12:44:47 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		dk_dump(char *addr)
 
 	i = -1;
 	while (++i < MEM_SIZE)
-	{	
+	{
 		if ((unsigned char)addr[i])
 			ft_printf("\x1b[32m");
 		ft_printf("%.2x ", (unsigned char)addr[i]);
@@ -52,27 +52,25 @@ void		dk_dump(char *addr)
 	}
 }
 
-int			main(int argc, char **argv)
+t_corewar	*ft_initialize_data_struct(void)
 {
-	int			fd;
-	t_corewar	*cor;
+	t_corewar	*src;
 
-	fd = 0;
-	cor = (t_corewar *)malloc(sizeof(t_corewar));
-	cor = ft_memset(cor, 0, sizeof(t_corewar));   
-	cor->fdump = -1;
-	cor->sec_cycle = 1;
-	if (argc > 1)
-	{
-		dk_pars_arg(argc, argv, cor, 0);
-		if (!cor->count_ply)
-			ft_error(8);
-		dk_sort_ply(&cor->players, cor->count_ply);
-	}
-	else
-		ft_error(12);
-	ft_create_field_and_carriage(cor, 0, -2);
-	cor->players_live = (int *)malloc(sizeof(int) * cor->count_ply);
+	src = (t_corewar *)malloc(sizeof(t_corewar));
+	src = ft_memset(src, 0, sizeof(t_corewar));
+	src->fdump = -1;
+	src->sec_cycle = 1;
+	src->verbose = -1;
+	src->field = ft_strnew(MEM_SIZE - 1);
+	src->meta_data = ft_strnew(MEM_SIZE - 1);
+	src->meta_bold = ft_strnew(MEM_SIZE - 1);
+	src->cycle_to_die = CYCLE_TO_DIE;
+	src->n_processes = 0;
+	return (src);
+}
+
+void		ft_initialize_func_array(void)
+{
 	g_funcs[0] = &ft_live;
 	g_funcs[1] = &ft_ld;
 	g_funcs[2] = &ft_st;
@@ -89,6 +87,27 @@ int			main(int argc, char **argv)
 	g_funcs[13] = &ft_ldi_lldi;
 	g_funcs[14] = &ft_lfork;
 	g_funcs[15] = &ft_aff;
-	ft_algoritm(cor);
-    return (0);
+}
+
+int			main(int argc, char **argv)
+{
+	int			fd;
+	t_corewar	*cor;
+
+	fd = 0;
+	cor = ft_initialize_data_struct();
+	if (argc > 1)
+	{
+		dk_pars_arg(argc, argv, cor, 0);
+		if (!cor->count_ply)
+			ft_error(8);
+		dk_sort_ply(&cor->players, cor->count_ply);
+	}
+	else
+		ft_error(12);
+	ft_create_field_and_carriage(cor, 0, -2, cor->field);
+	cor->players_live = (int *)malloc(sizeof(int) * cor->count_ply);
+	ft_initialize_func_array();
+	(cor->verbose == 1) ? ft_algoritm_visual(cor) : ft_algoritm(cor);
+	return (0);
 }

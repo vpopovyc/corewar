@@ -21,6 +21,7 @@ void	ft_fork(t_corewar *data, t_carriage *src)
 		<< 8) | (unsigned char)data->field[ft_inc_index(src)];
 	src->arg[1] = ft_fix((src->position - 3) + (src->arg[1] % IDX_MOD));
 	new = ft_create_carriage(src->arg[1], src->name, src, src->name_p);
+	data->n_processes++;
 	new->next = data->carriage;
 	data->carriage = new;
 	ft_bzero(src->arg, 16);

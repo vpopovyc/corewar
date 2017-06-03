@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 13:04:15 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/02 10:57:15 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/03 11:54:56 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ void	ft_live(t_corewar *data, t_carriage *src)
 	if (-src->arg[1] >= 1 && -src->arg[1] <= data->count_ply)
 	{
 		data->players_live[-src->arg[1] - 1]++;
-	   	data->winer = src->name_p;
+		data->winer = src->name_p;
+		data->n_winer = src->name;
+		if (data->verbose != 1)
+		{
+			ft_printf("A process shows that player %d", (int)src->name);
+			ft_printf(" (%s) is alive\n", src->name_p);
+		}
 	}
 	src->live_in_cycle++;
 	ft_bzero(src->arg, 16);

@@ -6,7 +6,7 @@
 /*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 12:57:01 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/01 17:29:22 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/03 12:08:34 by mkrutik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,11 @@ void	ft_ldi_lldi(t_corewar *data, t_carriage *s)
 	p = data->field[ft_fix(s->position + 1)];
 	if (p == 100 || p == 84 || p == -92 || p == -108 || p == -44 || p == -28)
 		ft_take_arg(data, s, 0, comd);
-	if (p == 100 && s->arg[1] >= 0 && s->arg[1] <= REG_NUMBER &&
-		s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
+	if (p == 100 || p == 84)
 		ft_ldi_lldi_1(data, s, p, comd);
-	else if (p == 84 && s->arg[1] >= 0 && s->arg[1] <= REG_NUMBER &&
-		s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER && s->arg[2] >= 0 &&
-		s->arg[2] <= REG_NUMBER)
-		ft_ldi_lldi_1(data, s, p, comd);
-	else if (p == -92 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
+	else if (p == -92 || p == -108)
 		ft_ldi_lldi_2(data, s, p, comd);
-	else if (p == -108 && s->arg[2] >= 0 && s->arg[2] <= REG_NUMBER &&
-		s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
-		ft_ldi_lldi_2(data, s, p, comd);
-	else if (p == -44 && s->arg[2] >= 0 && s->arg[2] <= REG_NUMBER &&
-		s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
-		ft_ldi_lldi_3(data, s, p, comd);
-	else if (p == -28 && s->arg[3] >= 0 && s->arg[3] <= REG_NUMBER)
+	else if (p == -44 || p == -28)
 		ft_ldi_lldi_3(data, s, p, comd);
 	else
 		ft_inc_index(s);
