@@ -54,7 +54,7 @@ char	*filepath(char *str)
 
 	ptr = str;
 	if (str[ft_strlen(str) - 1] != 's' && str[ft_strlen(str) - 1] != '.')
-		ft_error(3);
+		ft_error(3, g_line);
 	while (*ptr)
 	{
 		if (*ptr == '.')
@@ -69,8 +69,8 @@ char	*ft_open(char *path)
 	char	s[2];
 
 	if ((g_fd_s = open(path, O_RDONLY)) < 0)
-		ft_error(3);
+		ft_error(3, 1);
 	if (read(g_fd_s, s, 0) < 0)
-		ft_error(4);
+		ft_error(4, 1);
 	return (filepath(path));
 }

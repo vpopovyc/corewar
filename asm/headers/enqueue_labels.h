@@ -21,13 +21,12 @@
 
 extern char				g_flag;
 extern int				g_label_byte;
-/*
-** separ_delim.c
-*/
+extern int				g_line;
 
 /*
 ** isspace()
 */
+
 char					iscomment(char *sv);
 char					*get_label(char *line);
 char					*get_substring(char *line);
@@ -39,25 +38,25 @@ int						separ_delim(int c);
 */
 
 void					dig_or_lab_val(t_stack *dir, char *arg,
-	char *flag, char mark);
+												char *flag, char mark);
 void					digit_validation(char *src);
 void					label_validation(t_stack *dir, char *src);
 void					get_args(char *reference, t_stack *dir,
-	char opcode, t_command *new);
+												char opcode, t_command *new);
 char					*check_argument(char *refarg, t_stack *dir,
-	char opcode, int i);
+												char opcode, int i);
 
 /*
 ** enqueue_labels.c
 */
 
 void					add_commands(t_hash *table,
-	char *lbl, t_command *com);
+												char *lbl, t_command *com);
 t_command				*create_commands_elem(char *label,
-	t_stack *dir, char *line);
+												t_stack *dir, char *line);
 void					line_analyse(t_stack *queue, t_stack *dir,
-	t_hash *table, char *ln);
+												t_hash *table, char *ln);
 void					check_stack(t_stack *labels, t_hash *table);
 t_stack					*enqueue_labels(t_stack *queue, t_hash *table,
-	unsigned int *p_s);
+												unsigned int *p_s);
 #endif

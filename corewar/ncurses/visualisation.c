@@ -19,7 +19,7 @@ pthread_t		g_resize;
 pthread_attr_t	g_atr;
 char			g_flag = A_STOP;
 char			g_mus = P_MUS;
-int				g_sec = 0;
+int				g_sec = 30;
 int				g_car = 0;
 pthread_t		g_music;
 pthread_t		g_key;
@@ -75,7 +75,7 @@ void			*key_event(void *arg)
 		}
 		extend_key_event(c);
 		extend_key_event_2(c);
-		usleep(4 * 100000);
+		usleep(2 * 100000);
 	}
 	pthread_exit(NULL);
 }
@@ -96,16 +96,14 @@ t_init_screen	*init_ncurses(void)
 	pthread_create(&g_resize, &g_atr, size_controll, init);
 	pthread_detach(g_resize);
 	pthread_create(&g_music, &g_atr, sound, &TRACK);
+	pthread_detach(g_music);
 	pthread_create(&g_key, &g_atr, key_event, NULL);
 	pthread_detach(g_key);
 	return (init);
 }
 
-void			end_ncurses(t_init_screen *init, t_corewar *src,
-	char redraw_need)
+void			end_ncurses(t_init_screen *init, t_corewar *src)
 {
-	if (redraw_need)
-		fill_screen(init, src);
 	mvwprintw(BOTTOM, 9, 86, "Winner is %s  ", src->winer);
 	wattron(PANEL, A_BOLD);
 	mvwprintw(PANEL, 2, 3, "Press any key to exit", src->winer);

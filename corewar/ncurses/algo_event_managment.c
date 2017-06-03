@@ -78,26 +78,30 @@ void	update_while_paused(t_init_screen *init)
 {
 	pthread_mutex_lock(&g_lock);
 	wattron(PANEL, A_BOLD);
-	mvwprintw(PANEL, 4, 3, "Cycles/second limit : %d      ", g_sec);
+	mvwprintw(PANEL, 4, 3, "Slow it [x] times :     %8d", g_sec);
 	wattroff(PANEL, A_BOLD);
+	pthread_mutex_lock(&g_mutex_flag);
 	if ((g_mus & R_CHK) == R_MUS)
 		mvwprintw(BOTTOM, 5, 86, "Music is currently playing");
 	else
 		mvwprintw(BOTTOM, 5, 86, "Music is paused           ");
+	pthread_mutex_unlock(&g_mutex_flag);
 	wrefresh(PANEL);
 	wrefresh(BOTTOM);
 	wrefresh(FIELD);
+	wrefresh(stdscr);
 	pthread_mutex_unlock(&g_lock);
 }
 
 void	algo_event_managment(t_init_screen *init)
 {
-	char tmp_flag;
+	short tmp_flag;
 
+	tmp_flag = 0;
 	pthread_mutex_lock(&g_mutex_flag);
-	if (g_flag & A_STOP)
+	if ((g_flag & A_STOP) && !(g_flag & STEP))
 		stop(&tmp_flag, init);
-	else if (g_flag & I_ERR)
+	else if ((g_flag & I_ERR) && !(g_flag & STEP))
 	{
 		pthread_mutex_unlock(&g_mutex_flag);
 		while (1)
@@ -112,5 +116,7 @@ void	algo_event_managment(t_init_screen *init)
 			usleep(3 * 100000);
 		}
 	}
+	(g_flag & STEP) ? g_flag ^= STEP : 0; 
 	pthread_mutex_unlock(&g_mutex_flag);
+	usleep(g_sec * 10000);
 }

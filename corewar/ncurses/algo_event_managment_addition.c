@@ -32,10 +32,10 @@ void	extend_key_event(char c)
 		g_sec = 30;
 		pthread_mutex_unlock(&g_mutex_sec);
 	}
-	if (c == '4')
+	if (c == '0')
 	{
 		pthread_mutex_lock(&g_mutex_sec);
-		g_sec = 40;
+		g_sec = 0;
 		pthread_mutex_unlock(&g_mutex_sec);
 	}
 }
@@ -54,17 +54,11 @@ void	extend_key_event_2(char c)
 		g_flag ^= A_STOP;
 		pthread_mutex_unlock(&g_mutex_flag);
 	}
-	if (c == '-')
+	if (c == 's')
 	{
-		pthread_mutex_lock(&g_mutex_sec);
-		g_sec = g_sec == 0 ? 0 : g_sec - 1;
-		pthread_mutex_unlock(&g_mutex_sec);
-	}
-	if (c == '+')
-	{
-		pthread_mutex_lock(&g_mutex_sec);
-		g_sec = g_sec == 200 ? 200 : g_sec + 1;
-		pthread_mutex_unlock(&g_mutex_sec);
+		pthread_mutex_lock(&g_mutex_flag);
+		g_flag |= STEP;
+		pthread_mutex_unlock(&g_mutex_flag);
 	}
 }
 
@@ -100,22 +94,22 @@ void	resize(void)
 	pthread_mutex_unlock(&g_mutex_flag);
 }
 
-void	stop(char *tmp_flag, t_init_screen *init)
+void	stop(short *tmp_flag, t_init_screen *init)
 {
-	*tmp_flag = g_sec | g_mus;
+	*tmp_flag = (((short)tmp_flag << 8) | g_sec) | g_mus;
 	pthread_mutex_unlock(&g_mutex_flag);
 	while (1)
 	{
 		usleep(3 * 100000);
 		pthread_mutex_lock(&g_mutex_sec);
-		if (*tmp_flag != (g_sec | g_mus))
+		if (*tmp_flag != ((((short)tmp_flag << 8) | g_sec) | g_mus))
 		{
 			update_while_paused(init);
-			*tmp_flag = g_sec | g_mus;
+			*tmp_flag = (((short)tmp_flag << 8) | g_sec) | g_mus;
 		}
 		pthread_mutex_unlock(&g_mutex_sec);
 		pthread_mutex_lock(&g_mutex_flag);
-		if ((g_flag & EXIT) || (!(g_flag & A_STOP)))
+		if ((g_flag & EXIT) || !(g_flag & A_STOP) || (g_flag & STEP))
 			break ;
 		pthread_mutex_unlock(&g_mutex_flag);
 		usleep(3 * 100000);

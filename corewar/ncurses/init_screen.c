@@ -60,10 +60,7 @@ void	new_size_calc(t_init_screen *init, int new_y, int new_x)
 		init->field_y = DES_FIELD_Y;
 		pthread_mutex_lock(&g_mutex_flag);
 		if (g_flag & I_ERR)
-		{
 			g_flag ^= I_ERR;
-			g_mus ^= P_MUS;
-		}
 		pthread_mutex_unlock(&g_mutex_flag);
 	}
 	else

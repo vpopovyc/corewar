@@ -93,11 +93,11 @@ void	print_usage(WINDOW *bottom)
 	y = 1;
 	mvwprintw(bottom, y, 42, "Usage:");
 	y += 2;
-	mvwprintw(bottom, y, 44, "Best shapes is [77][245]");
+	mvwprintw(bottom, y, 44, "'0' 1' '2' '3' to controll exec speed");
 	y += 2;
 	mvwprintw(bottom, y, 44, "Use 'q' to quit");
 	y += 2;
 	mvwprintw(bottom, y, 44, "Use 'p' to pause music");
 	y += 2;
-	mvwprintw(bottom, y, 44, "Use 'space' to execute");
+	mvwprintw(bottom, y, 44, "Use 'space' ot 's' to start/stop");
 }

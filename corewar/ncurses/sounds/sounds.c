@@ -49,8 +49,10 @@ void	play_wav_track(SDL_AudioSpec *wav_spec)
 				pthread_exit(NULL);
 			}
 			pthread_mutex_unlock(&g_mutex_flag);
+			pthread_mutex_lock(&g_mutex_flag);
 			if ((g_mus & R_CHK) == R_MUS)
 				SDL_PauseAudio(0);
+			pthread_mutex_unlock(&g_mutex_flag);
 			SDL_Delay(100);
 		}
 	}

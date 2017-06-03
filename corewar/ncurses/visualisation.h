@@ -34,9 +34,9 @@
 # define I_ERR 	0x2
 # define P_MUS	0x4
 # define S_MUS	0x8
-# define R_MUS	0x8
-# define CLEAN	0x6
 # define A_STOP	0x10
+# define STEP	0x20
+# define R_MUS	0x8
 # define R_CHK	0xe
 
 /*
@@ -93,8 +93,7 @@ extern char				*g_meta_bold;
 */
 
 t_init_screen	*init_ncurses(void);
-void			end_ncurses(t_init_screen *init,
-									t_corewar *src, char redraw_need);
+void			end_ncurses(t_init_screen *init, t_corewar *src);
 void			resize_screens(t_init_screen *init);
 
 /*
@@ -137,7 +136,7 @@ void			update_while_paused(t_init_screen *init);
 */
 
 void			check_resize(t_init_screen *init);
-void			stop(char *tmp_flag, t_init_screen *init);
+void			stop(short *tmp_flag, t_init_screen *init);
 void			resize();
 void			extend_key_event(char c);
 void			extend_key_event_2(char c);

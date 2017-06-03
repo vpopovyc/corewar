@@ -115,10 +115,9 @@ void		ft_algoritm_visual(t_corewar *src)
 		g_car = src->n_processes;
 		fill_screen(init, src);
 		algo_event_managment(init);
-		usleep(10000 * g_sec);
 		/****/
 	}
 	/****/
-	end_ncurses(init, src, 0);
+	end_ncurses(init, src);
 	/****/
 }

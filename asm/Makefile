@@ -19,7 +19,7 @@ OBJ = asm_src/init_validation.o asm_src/main.o asm_src/file_utils.o ../op.o \
 		sounds/sounds.o
 
 CC = clang
-CCFLAGS = -Wall -Wextra -Werror -framework SDL2
+CCFLAGS =  -Wall -Wextra -Werror -framework SDL2
 INCLUDES = -I../ -I../libft -I./headers
 
 .phony: all clean fclean re
@@ -32,7 +32,7 @@ $(LIBFT):
 	@ make -C ../libft
 
 %.o : ./%.c
-	 clang $(INCLUDES) -Wall -Wextra -Werror -o $@ -c $<
+	 clang $(INCLUDES) -g -Wall -Wextra -Werror -o $@ -c $<
 
 clean:
 	@ make clean -C ../libft

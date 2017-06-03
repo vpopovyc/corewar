@@ -14,6 +14,7 @@
 
 int	g_fd_cor;
 int	g_carrige;
+int g_line;
 
 void	uint_compile(unsigned int n)
 {

@@ -36,7 +36,7 @@ char	*get_label(char *line)
 		ptr++;
 	}
 	if (*ptr != '\0')
-		ft_error(9);
+		ft_error(9, g_line);
 	return (NULL);
 }
 
@@ -65,7 +65,7 @@ char	g_op_compare(char *command, t_command *new)
 		}
 		i++;
 	}
-	ft_error(10);
+	ft_error(10, g_line);
 	return (-1);
 }
 

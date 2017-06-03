@@ -62,7 +62,7 @@ typedef struct		s_base
 ** main.c
 */
 
-void				ft_error(int n);
+void				ft_error(int n, int line);
 void				check_new_line(int fd);
 /*
 ** file_utils.c
@@ -81,7 +81,7 @@ int					command_length(char opcode);
 # define QUOTE 			'\"'
 # define HEADER_PARTS 	2
 
-t_base				*init_validation(int argc, char **argv);
+t_base				*init_validation(char *av);
 
 /*
 **	enqueue_labels.c

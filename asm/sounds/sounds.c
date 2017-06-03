@@ -65,7 +65,6 @@ void	load_wav_to_buffer(char *track)
 
 void	sound(char *track)
 {
-	close(2);
 	if (SDL_Init(SDL_INIT_AUDIO) < 0)
 		SDL_Log("[SDL] Can't init SDL");
 	else

@@ -14,6 +14,7 @@
 
 char		g_flag;
 int			g_label_byte;
+int			g_line;
 
 void		add_commands(t_hash *table, char *lbl, t_command *com)
 {
@@ -86,7 +87,7 @@ void		check_stack(t_stack *labels, t_hash *table)
 	while (stack_size(labels))
 	{
 		if (!key_exist(top(*labels), table))
-			ft_error(14);
+			ft_error(14, g_line);
 		pop(labels);
 	}
 }
@@ -99,7 +100,8 @@ t_stack		*enqueue_labels(t_stack *queue, t_hash *table, unsigned int *p_s)
 	stack_init(&dir);
 	g_label_byte = 0;
 	g_flag = 0;
-	while (get_next_line(g_fd_s, &line) > 0)
+	g_line = 0;
+	while (get_next_line(g_fd_s, &line) > 0 && ++g_line)
 	{
 		if (ft_strcmp(line, EMPTYLINE) && !iscomment(line))
 			line_analyse(queue, &dir, table, line);

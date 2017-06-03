@@ -29,7 +29,7 @@ void	print_player_info(WINDOW *panel, t_corewar *src, int *y)
 		get_color(panel, i);
 		mvwprintw(panel, (*y), 15, "%s", players->name);
 		unset_color(panel, i);
-		mvwprintw(panel, (*y) + 2, 15, "Lives summary : %d                ",
+		mvwprintw(panel, (*y) + 2, 15, "Lives summary : %10d",
 			src->players_live[i / 2 - 1]);
 		i += 2;
 		players = players->next;
@@ -47,21 +47,21 @@ void	fill_panel(WINDOW *panel, t_corewar *src)
 	if (!(g_flag & A_STOP))
 		mvwprintw(panel, y, 3, "PLAYING");
 	else
-		mvwprintw(panel, y, 3, "PAUSED  ");
+		mvwprintw(panel, y, 3, "PAUSED ");
 	pthread_mutex_unlock(&g_mutex_flag);
 	y += 2;
-	mvwprintw(panel, y, 3, "Cycles/second limit : %d      ", g_sec);
+	mvwprintw(panel, y, 3, "Slow it [x] times :     %8d", g_sec);
 	y += 2;
-	mvwprintw(panel, y, 3, "CYCLE_NUMBER : %d         ", src->curent_cycle);
+	mvwprintw(panel, y, 3, "CYCLE_NUMBER :          %8d", src->curent_cycle);
 	y += 2;
-	mvwprintw(panel, y, 3, "COUNT_TO_CYCLE_TO_DIE : %d       ",
+	mvwprintw(panel, y, 3, "COUNT_TO_CYCLE_TO_DIE : %8d",
 		src->last_cycle_to_die);
 	y += 2;
-	mvwprintw(panel, y, 3, "CYCLE_TO_DIE : %d     ", src->cycle_to_die);
+	mvwprintw(panel, y, 3, "CYCLE_TO_DIE :          %8d", src->cycle_to_die);
 	y += 2;
-	mvwprintw(panel, y, 3, "NUMBER_CHECKS : %d          ", src->n_check);
+	mvwprintw(panel, y, 3, "NUMBER_CHECKS :         %8d", src->n_check);
 	y += 2;
-	mvwprintw(panel, y, 3, "Processes : %d          ", g_car);
+	mvwprintw(panel, y, 3, "Processes :             %8d", g_car);
 	wattroff(panel, A_BOLD);
 	print_player_info(panel, src, &y);
 }
