@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/21 20:31:30 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/21 22:58:55 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/05 14:02:18 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	labels_compile(t_hash *table, t_stack *q_labels)
 	}
 }
 
-void	compilation(t_hash *tb, t_stack *q_lb, header_t *re, char *path)
+void	compilation(t_hash *tb, t_stack *q_lb, t_header *re, char *path)
 {
 	char	*cor_path;
 	int		i;

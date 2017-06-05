@@ -6,7 +6,7 @@
 /*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/22 20:29:55 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/22 20:30:54 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/06/05 14:00:58 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ extern int g_line;
 
 typedef struct		s_base
 {
-	header_t		*reference;
+	t_header		*reference;
 	t_hash			*table;
 	t_stack			q_label;
 	char			*path;
@@ -98,6 +98,6 @@ t_stack				*enqueue_labels(t_stack *queue, t_hash *table,
 */
 
 void				compilation(t_hash *tb, t_stack *q_lb,
-													header_t *re, char *path);
+													t_header *re, char *path);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/22 20:35:55 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/22 20:35:57 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/06/05 14:01:47 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_base			*init_validation(char *av)
 
 	g_line = 0;
 	new = (t_base*)ft_memalloc(sizeof(t_base));
-	new->reference = (header_t*)ft_memalloc(sizeof(header_t));
+	new->reference = (t_header*)ft_memalloc(sizeof(t_header));
 	new->table = (t_hash*)ft_memalloc(sizeof(t_hash) * SIZEOFTABLE);
 	stack_init(&(new->q_label));
 	new->path = ft_open(av);
