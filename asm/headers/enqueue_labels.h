@@ -21,7 +21,6 @@
 
 extern char				g_flag;
 extern int				g_label_byte;
-extern int				g_line;
 
 /*
 ** isspace()

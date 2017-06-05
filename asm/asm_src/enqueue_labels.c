@@ -14,7 +14,6 @@
 
 char		g_flag;
 int			g_label_byte;
-int			g_line;
 
 void		add_commands(t_hash *table, char *lbl, t_command *com)
 {
@@ -100,7 +99,6 @@ t_stack		*enqueue_labels(t_stack *queue, t_hash *table, unsigned int *p_s)
 	stack_init(&dir);
 	g_label_byte = 0;
 	g_flag = 0;
-	g_line = 0;
 	while (get_next_line(g_fd_s, &line) > 0 && ++g_line)
 	{
 		if (ft_strcmp(line, EMPTYLINE) && !iscomment(line))

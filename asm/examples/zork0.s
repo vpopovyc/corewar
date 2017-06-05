@@ -1,147 +1,147 @@
-#by zaz, still not as good as rainbowdash though
+#by zaz, it's not very good, but what did you expect, rainbowdash is way better
 #2013
 
-.name		"helltrain"
-.comment	"choo-choo, motherf*****s !"
+.name		"fluttershy"
+.comment	"oh, my, what a scary project"
 
 entry:
-	sti		r1, %:beegees_gen, %1
-	sti		r1, %:beegees, %1
-	sti		r1, %:cc_spawn, %1
-	sti		r1, %:wall, %1
-	sti		r1, %:cc4, %1
-	sti		r1, %:cc4, %9
-	sti		r1, %:cc4, %17
-	sti		r1, %:cc4l, %1
-	sti		r1, %:cc4ld, %2
-	sti		r1, %:cc3, %1
-	sti		r1, %:cc3, %9
-	sti		r1, %:cc2, %1
-	ld		%0, r16
-	fork	%:cc_spawn
+	fork	%:coregeni
+	st		r1, 6
+	live	%42
+	fork	%:torpgeni
+	st		r1, 6
+	live	%42
+	fork	%:avdefgeni
 
-wall_prep:
+ardeftgt:
+
+ardefgeni:
+	st 		r1, 6
+
+ardefgen:
+	live 	%213904
+	fork 	%:ardefgen
+
+ardefinit:
+	sti		r1, %:ardefl1, %1
+	st		r1, 6
+	live	%43123
+	sti		r1, %:ardefchk, %1
+	ld		%-6, r2
+	ld		%-6, r3
+	ld		%150994953, r4
+	ld		%-186, r5
+
+ardefwrite:
+ardefl1:
+	live	%295423
+	sti		r4, %:ardeftgt, r2
+	add		r2, r3, r2
+	sti		r4, %:ardeftgt, r2
+	add		r2, r3, r2
+ardefchk:
+	live	%3940641
+	xor		r2, r5, r15
+	zjmp	%:ardefinit
+ardefloop:
+	ld		%0, r16
+	zjmp	%:ardefwrite
+
+
+coregeni:
+	st		r1, 6
+
+coregen:
+	live	%123012
+	fork	%:coregen
+
+coreinit:
+	st		r1, 58
+	st		r1, 58
+	st		r1, 58
+	st		r1, 58
+	st		r1, 58
+	st		r1, 58
+	st		r1, 58
+	st		r1, 58
+	st		r1, 58
+	st		r1, 58
+	ld		%0, r16
+
+corelive:
+	live	%985341
+	live	%985341
+	live	%985341
+	live	%985341
+	live	%985341
+	live	%985341
+	live	%985341
+	live	%985341
+	live	%985341
+	live	%985341
+	zjmp	%:corelive
+
+avdefgeni:
+	st 		r1, 6
+
+avdefgen:
+	live 	%213904
+	fork 	%:avdefgen
+
+avdefinit:
+	sti		r1, %:avdefl1, %1
+	st		r1, 6
+	live	%43123
+	sti		r1, %:avdefchk, %1
 	ld		%0, r2
+	ld		%6, r3
+	ld		%150994953, r4
+	ld		%180, r5
+
+avdefwrite:
+avdefl1:
+	live	%295423
+	sti		r4, %:avdeftgt, r2
+	add		r2, r3, r2
+	sti		r4, %:avdeftgt, r2
+	add		r2, r3, r2
+avdefchk:
+	live	%3940641
+	xor		r2, r5, r15
+	zjmp	%:avdefinit
+avdefloop:	
 	ld		%0, r16
+	zjmp	%:avdefwrite
 
-wall:
-	live	%4902343
-	st		r2, -24
-	st		r2, -33
-	st		r2, -42
-	st		r2, -51
-	st		r2, -60
-	st		r2, -69
-	st		r2, -78
-	st		r2, -87
-	st		r2, -96
-	st		r2, -105
-	st		r2, -114
-	st		r2, -123
-	st		r2, -132
-	st		r2, -141
-	st		r2, -150
-	st		r2, -159
-	st		r2, -168
-	st		r2, -177
-	st		r2, -186
-	st		r2, -195
-	st		r2, -204
-	st		r2, -213
-	st		r2, -222
-	st		r2, -231
-	st		r2, -240
-	st		r2, -249
-	st		r2, -258
-	st		r2, -267
-	st		r2, -276
-	st		r2, -285
-	st		r2, -294
-	st		r2, -303
-	st		r2, -312
-	st		r2, -321
-	st		r2, -330
-	st		r2, -339
-	st		r2, -348
-	st		r2, -357
-	st		r2, -366
-	st		r2, -375
-	st		r2, -384
-	st		r2, -393
-	st		r2, -402
-	st		r2, -411
-	st		r2, -420
-	st		r2, -429
-	st		r2, -438
-	st		r2, -447
-	st		r2, -456
-	st		r2, -465
-	st		r2, -474
-	st		r2, -483
-	st		r2, -492
-	st		r2, -501
-	st		r2, -510
-	zjmp	%:wall
+torpgeni:
+	st		r1, 6
 
-beegees_gen:
-	live	%4239423
-	fork	%:beegees_gen
-	ld		%0, r16
+torpgen:
+	live	%96824
+	fork	%:torpgen
 
-beegees:
-	live	%3442302
-	zjmp	%:beegees
-
-cc_spawn:
-	live	%4320423
-	zjmp	%3
-	fork	%:cc_spawn
-
-cc4:
-	live	%4329034
-	fork	%:cc3
-	live	%3401123
-	fork	%:cc2
-	live	%4590543
-	fork	%:cc1
-cc4ld:
+torpinit:
 	ld		%0, r2
-	ld		%251883523, r3
-	ld		%0, r16
-cc4l:
-	live	%4930423
-	ld		%0, r16
-	zjmp	%:choochoo
+	ld		%4, r3
+	ld		%96, r5
+	sti		r1, %:torpchk, %1
+	st		r1, 6
 
-cc2:
-	live	%4342342
-	fork	%:wall_prep
-	ld		%251883523, r2
-	ld		%386101251, r3
-	ld		%0, r16
-	ld		%0, r16
-	zjmp	%:choochoo
+torpwrite:
+torpl1:
+	live	%8008135
+	ldi		%:torpinit, r2, r4
+	sti		r4, %400, r2
+	add		r2, r3, r2
+	ldi		%:torpinit, r2, r4
+	sti		r4, %383, r2
+	add		r2, r3, r2
+torpchk:
+	live	%89523
+	xor		r2, r5, r15
+	zjmp	%362
+torploop:
+	ld		%0, r15
+	zjmp	%:torpwrite
 
-cc3:
-	live	%4239013
-	fork	%:cc4
-	live	%4093282
-	fork	%:beegees_gen
-	ld		%4294902016, r2
-	ld		%436432899, r3
-	ld		%0, r16
-	ld		%0, r16
-	ld		%0, r16
-	zjmp	%:choochoo
-
-cc1:
-	ld		%57672192, r2
-	ld		%318992387, r3
-	ld		%0, r16
-	zjmp	%:choochoo
-
-choochoo:
-	st		r2, 15
-	st		r3, -1
-cc_live:
-	live	%0
+avdeftgt:

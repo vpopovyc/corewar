@@ -45,6 +45,7 @@
 
 extern int g_fd_s;
 extern int g_fd_cor;
+extern int g_line;
 
 /*
 **	BASE STRUCTURE
@@ -64,6 +65,7 @@ typedef struct		s_base
 
 void				ft_error(int n, int line);
 void				check_new_line(int fd);
+
 /*
 ** file_utils.c
 */
@@ -74,6 +76,7 @@ void				skip_spaces(char **line);
 char				*filepath(char *str);
 char				*ft_open(char *name);
 int					command_length(char opcode);
+
 /*
 ** init_validation.c
 */
@@ -88,13 +91,13 @@ t_base				*init_validation(char *av);
 */
 
 t_stack				*enqueue_labels(t_stack *queue, t_hash *table,
-	unsigned int *prog_size);
+													unsigned int *prog_size);
 
 /*
 **	compilation.c
 */
 
 void				compilation(t_hash *tb, t_stack *q_lb,
-	header_t *re, char *path);
+													header_t *re, char *path);
 
 #endif

@@ -21,10 +21,11 @@ OBJ = asm_src/init_validation.o asm_src/main.o asm_src/file_utils.o ../op.o \
 CC = clang
 CCFLAGS =  -Wall -Wextra -Werror -framework SDL2
 INCLUDES = -I../ -I../libft -I./headers
+OBJCCFALGS = -Wall -Wextra -Werror
 
 .phony: all clean fclean re
 
-all: $(OBJ) $(LIBFT)
+all: $(LIBFT) $(OBJ) 
 	$(CC) $(CCFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 	@ echo "\x1b[01;32mAsm was successfully compiled\x1b[0m"
 
@@ -32,15 +33,18 @@ $(LIBFT):
 	@ make -C ../libft
 
 %.o : ./%.c
-	 clang $(INCLUDES) -g -Wall -Wextra -Werror -o $@ -c $<
+	 $(CC) $(INCLUDES) $(OBJCCFALGS) -o $@ -c $<
 
 clean:
-	@ make clean -C ../libft
+	@ make -C ../libft clean
 	@ /bin/rm -f $(OBJ)
+	@ echo "\033[01;31mAsm objects deleted\x1b[0m"
 
-fclean: clean
-	@ /bin/rm -f ../libft/libft.a
+fclean:
+	@ make -C ../libft fclean
+	@ /bin/rm -f $(OBJ)
+	@ echo "\033[01;31mAsm objects deleted\x1b[0m"
 	@ /bin/rm -f $(NAME)
-	@ echo "\033[01;31mAsm files deleted\x1b[0m"
+	@ echo "\033[01;31mAsm binary  deleted\x1b[0m"
 
 re: fclean all
