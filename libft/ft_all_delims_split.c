@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/06 14:33:22 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/20 21:47:08 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/05 13:40:12 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,22 +91,3 @@ char			**all_delims_split(char *string, int (*compare)(int))
 	}
 	return (new);
 }
-
-/*
-**	JUST UNCOMMENT IT TO CHECK all_delims_split() FUNCTION
-**
-** int		main(void)
-** {
-** 	char	**ptr;
-** 	char	*str;
-**
-**	str = "\v\v\t\n\naaaasdfdsagadgd \t\v\nwojskf \nsdfsadfd sd  \0  dghfghgf ";
-** 	printf("there are %d words\n", count_words_in_string(str));
-** 	ptr = all_delims_split(str);
-** 	while (*ptr != NULL)
-** 	{
-** 		printf("%s\n", *ptr);
-** 		ptr++;
-** 	}
-** }
-}*/
