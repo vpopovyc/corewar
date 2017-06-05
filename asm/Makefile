@@ -6,7 +6,7 @@
 #    By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/22 19:20:38 by vpopovyc          #+#    #+#              #
-#    Updated: 2017/06/05 14:11:37 by rvolovik         ###   ########.fr        #
+#    Updated: 2017/06/05 19:38:08 by rvolovik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ = asm_src/init_validation.o asm_src/main.o asm_src/file_utils.o ../op.o \
 		sounds/sounds.o
 
 CC = clang
-CCFLAGS =  -Wall -Wextra -Werror -framework SDL2
+CCFLAGS = -g -Wall -Wextra -Werror -framework SDL2
 INCLUDES = -I../ -I../libft -I./headers
 OBJCCFALGS = -g -Wall -Wextra -Werror
 

@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/05 16:46:44 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/20 16:11:29 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/05 20:46:07 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		key_exist(char *newkey, t_hash *table)
 	return (0);
 }
 
-t_hash	*append_key_hash(char *newkey, t_hash *table, int id, int bytes)
+t_hash	*append_key_hash(char *newkey, t_hash *collision, int bytes)
 {
 	t_hash	*ptr;
 	t_hash	*new;
@@ -41,16 +41,16 @@ t_hash	*append_key_hash(char *newkey, t_hash *table, int id, int bytes)
 	new = (t_hash*)ft_memalloc(sizeof(t_hash));
 	new->key = newkey;
 	new->bytes = bytes;
-	ptr = table[id].collision;
+	ptr = collision;
 	if (ptr == FIRST_COLLISION)
-		ptr = new;
+		collision = new;
 	else
 	{
 		while (ptr->collision)
 			ptr = ptr->collision;
 		ptr->collision = new;
 	}
-	return (ptr);
+	return (collision);
 }
 
 void	add_key_hash(char *newkey, int bytes, t_hash *table)
@@ -65,18 +65,18 @@ void	add_key_hash(char *newkey, int bytes, t_hash *table)
 	}
 	else if (!key_exist(newkey, table))
 		table[id].collision = append_key_hash(ft_strdup(newkey),
-			table, id, bytes);
+				table[id].collision, bytes);
 }
 
 t_hash	*get_item(char *key, t_hash *table)
 {
-	int		idi;
+	int		id;
 	t_hash	*ptr;
 
-	idi = hash_id(str_hash(key));
-	ptr = table[idi].collision;
-	if (ft_strequ(table[idi].key, key))
-		return (&table[idi]);
+	id = hash_id(str_hash(key));
+	ptr = table[id].collision;
+	if (ft_strequ(table[id].key, key))
+		return (&table[id]);
 	else
 	{
 		while (ptr)
