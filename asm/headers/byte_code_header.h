@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   byte_code_header.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/22 20:29:55 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/06/05 14:00:58 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/05 14:38:46 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct		s_base
 ** main.c
 */
 
+void				find_delete_comment(char *ln);
 void				ft_error(int n, int line);
 void				check_new_line(int fd);
 

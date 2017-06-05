@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/22 20:32:50 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/22 20:32:51 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/06/05 14:38:27 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 #include "../headers/sounds.h"
 
 int		g_line = 0;
+
+void	find_delete_comment(char *ln)
+{
+	char	*ptr;
+
+	ptr = ft_strchr(ln, COMMENT_CHAR);
+	if (ptr)
+		ft_memset(ptr, ' ', ft_strlen(ptr));
+}
 
 void	ft_error(int n, int line)
 {

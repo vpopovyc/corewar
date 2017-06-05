@@ -6,7 +6,7 @@
 /*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 15:41:12 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/21 22:34:29 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/05 14:38:10 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		line_analyse(t_stack *queue, t_stack *dir, t_hash *table, char *ln)
 	char		*label;
 	t_command	*command;
 
+	find_delete_comment(ln);
 	tmp = all_delims_split(ln, ft_isspace);
 	if (tmp)
 	{
