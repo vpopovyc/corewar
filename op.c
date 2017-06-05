@@ -3,25 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rvolovik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/20 14:27:23 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/05/21 14:12:04 by rvolovik         ###   ########.fr       */
+/*   Created: 2017/06/05 13:46:12 by rvolovik          #+#    #+#             */
+/*   Updated: 2017/06/05 13:47:51 by rvolovik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-t_op    g_op[17] =
+#define AND "and"
+#define OR	"or"
+#define XOR	"xor"
+
+t_op	g_op[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, 1, 0},
 	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, 1, 0},
 	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, 1, 0},
-	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6, 1, 0},
-	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6, 1, 0},
-	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6, 1, 0},
+	{AND, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6, 1, 0},
+	{OR, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6, 1, 0},
+	{XOR, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6, 1, 0},
 	{"zjmp", 1, {T_DIR}, 9, 20, 0, 1},
 	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25, 1, 1},
 	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25, 1, 1},
