@@ -11,11 +11,8 @@
 # **************************************************************************** #
 
 NAME = corewar
-LIB = -L../libft -lft -I./ncurses/sounds -I./ncurses
-OBJFLAG = -Wall -Wextra -Werror
-FLAG =  -Wall -Wextra -Werror -framework SDL2 -lpthread -lncurses 
 
-SRC = corewar.o dk_pars_arg.o ft_valid_cor.o ft_create_field_and_carriage.o \
+OBJ = corewar.o dk_pars_arg.o ft_valid_cor.o ft_create_field_and_carriage.o \
 	ft_algoritm.o ../op.o dk_sort_ply.o ft_comand_function.o ft_take_ind.o\
 	commands/ft_add.o commands/ft_aff.o commands/ft_and_or_xor.o \
 	commands/ft_fork.o commands/ft_ld.o commands/ft_ldi_lldi.o \
@@ -27,19 +24,37 @@ VIS = ncurses/algo_event_managment.o ncurses/fill_screen.o ncurses/init_screen.o
 	ncurses/usage_status_credits.o ncurses/visualisation.o ncurses/sounds/sounds.o \
 	ncurses/algo_event_managment_addition.o
 
-SRC += $(VIS)
+OBJ += $(VIS)
 
-all: $(NAME)
+CC = clang
+LIBFT = ../libft/libft.a
+LIB = -Wall -Wextra -Werror -framework SDL2 -lpthread -lncurses  
+CCFLAGS =  -Wall -Wextra -Werror -framework SDL2
+INCLUDES = -I../ -I../libft -I./ncurses/sounds -I./ncurses
+OBJCCFALGS = -Wall -Wextra -Werror
 
-$(NAME): $(SRC)
-	make -C ../libft
-	clang $(LIB) $(FLAG) $(SRC)  -o $(NAME)
-%.o: %.c
-	clang -c $(OBJFLAG) -I../ -o $@ $<
+.phony: all clean fclean re
+
+all: $(LIBFT) $(OBJ) 
+	$(CC) $(CCFLAGS) $(LIB) $(LIBFT) $(OBJ) -o $(NAME)
+	@ echo "\x1b[01;32mCorewar was successfully compiled\x1b[0m"
+
+$(LIBFT):
+	@ make -C ../libft
+
+%.o : ./%.c
+	 $(CC) $(OBJCCFALGS) $(INCLUDES) -o $@ -c $<
+
 clean:
-	make -C ../libft/ clean
-	rm -rf $(SRC)
-fclean: clean
-	make -C ../libft/ fclean
-	rm -f $(NAME)
+	@ make -C ../libft clean
+	@ /bin/rm -f $(OBJ)
+	@ echo "\033[01;31mCorewar objects deleted\x1b[0m"
+
+fclean:
+	@ make -C ../libft fclean
+	@ /bin/rm -f $(OBJ)
+	@ echo "\033[01;31mCorewar objects deleted\x1b[0m"
+	@ /bin/rm -f $(NAME)
+	@ echo "\033[01;31mCorewar binary  deleted\x1b[0m"
+
 re: fclean all
