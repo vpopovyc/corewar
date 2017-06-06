@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 16:29:57 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/06/02 17:45:57 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/06 19:49:52 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	extend_key_event(int c)
 	if (c == '1')
 	{
 		pthread_mutex_lock(&g_mutex_sec);
-		g_sec = 10;
+		g_sec = 2;
 		pthread_mutex_unlock(&g_mutex_sec);
 	}
 	if (c == '2')
 	{
 		pthread_mutex_lock(&g_mutex_sec);
-		g_sec = 20;
+		g_sec = 5;
 		pthread_mutex_unlock(&g_mutex_sec);
 	}
 	if (c == '3')
 	{
 		pthread_mutex_lock(&g_mutex_sec);
-		g_sec = 30;
+		g_sec = 10;
 		pthread_mutex_unlock(&g_mutex_sec);
 	}
 	if (c == '0')
