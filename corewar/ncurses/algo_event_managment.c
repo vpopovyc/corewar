@@ -101,24 +101,6 @@ void	algo_event_managment(t_init_screen *init)
 	pthread_mutex_lock(&g_mutex_flag);
 	if ((g_flag & A_STOP) && !(g_flag & STEP))
 		stop(&tmp_flag, init);
-<<<<<<< HEAD
-	else if ((g_flag & I_ERR) && !(g_flag & STEP))
-	{
-		pthread_mutex_unlock(&g_mutex_flag);
-		while (1)
-		{
-			usleep(3 * 100000);
-			pthread_mutex_lock(&g_mutex_flag);
-			if (g_flag & EXIT)
-				break ;
-			if (!(g_flag & I_ERR))
-				break ;
-			pthread_mutex_unlock(&g_mutex_flag);
-			usleep(3 * 100000);
-		}
-	}
-=======
->>>>>>> 2469cf7f8b601e243bddbbdd97e871d35f650893
 	(g_flag & STEP) ? g_flag ^= STEP : 0;
 	pthread_mutex_unlock(&g_mutex_flag);
 	usleep(g_sec * 10000);
