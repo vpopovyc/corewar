@@ -27,6 +27,10 @@
 # define DES_FIELD_X 195
 # define DES_BOT_S	 11
 # define DES_PANEL_S 40
+# define STDSCR_Y	 DES_FIELD_Y + DES_BOT_S
+# define STDSCR_X	 DES_FIELD_X + DES_PANEL_S
+
+# define WINDOW_SETTINGS "\e[3;0;0t\e[8;80;290t"
 
 # define TRACK "ncurses/sounds/background.wav"
 
@@ -138,6 +142,6 @@ void			update_while_paused(t_init_screen *init);
 void			check_resize(t_init_screen *init);
 void			stop(short *tmp_flag, t_init_screen *init);
 void			resize();
-void			extend_key_event(char c);
-void			extend_key_event_2(char c);
+void			extend_key_event(int c);
+void			extend_key_event_2(int c);
 #endif

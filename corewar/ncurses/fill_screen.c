@@ -116,23 +116,15 @@ void	fill_field(WINDOW *field, char *gamefield, char *mdata, t_carriage *crg)
 		}
 		++y;
 	}
-	wborder(field, ACS_VLINE, ACS_VLINE, ACS_HLINE,
-		ACS_HLINE, ACS_ULCORNER, ACS_URCORNER, ACS_LLCORNER, ACS_LRCORNER);
 }
 
 void	fill_screen(t_init_screen *init, t_corewar *src)
 {
-	if (!(g_flag & I_ERR))
-	{
-		pthread_mutex_lock(&g_lock);
-		g_meta_bold = src->meta_bold;
-		fill_field(FIELD, src->field, src->meta_data, src->carriage);
-		fill_bottom(BOTTOM, src->players, src->count_ply);
-		fill_panel(PANEL, src);
-		wrefresh(stdscr);
-		wrefresh(FIELD);
-		wrefresh(BOTTOM);
-		wrefresh(PANEL);
-		pthread_mutex_unlock(&g_lock);
-	}
+	pthread_mutex_lock(&g_lock);
+	g_meta_bold = src->meta_bold;
+	fill_field(FIELD, src->field, src->meta_data, src->carriage);
+	fill_bottom(BOTTOM, src->players, src->count_ply);
+	fill_panel(PANEL, src);
+	draw_borders(init);
+	pthread_mutex_unlock(&g_lock);
 }

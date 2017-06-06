@@ -58,13 +58,7 @@ void	new_size_calc(t_init_screen *init, int new_y, int new_x)
 		init->panel_size = panel_size;
 		init->field_x = DES_FIELD_X;
 		init->field_y = DES_FIELD_Y;
-		pthread_mutex_lock(&g_mutex_flag);
-		if (g_flag & I_ERR)
-			g_flag ^= I_ERR;
-		pthread_mutex_unlock(&g_mutex_flag);
 	}
-	else
-		resize();
 }
 
 void	init_screens(t_init_screen *init)
@@ -77,8 +71,4 @@ void	init_screens(t_init_screen *init)
 	FIELD = newwin(init->field_y, init->field_x, 0, 0);
 	BOTTOM = newwin(init->bottom_size, init->field_x, init->field_y, 0);
 	PANEL = newwin(y, init->panel_size, 0, init->field_x);
-	pthread_mutex_lock(&g_mutex_flag);
-	if (!(g_flag & I_ERR))
-		draw_borders(init);
-	pthread_mutex_unlock(&g_mutex_flag);
 }
