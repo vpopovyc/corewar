@@ -1,5 +1,5 @@
 .name "name_4"
 .comment "comment"
 
-ld	%10, r2
-st	r2, 5
+ld	%0, r2
+ld	%4, r3

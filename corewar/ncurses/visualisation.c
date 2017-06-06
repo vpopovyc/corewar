@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:30:23 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/06/02 19:11:38 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/06 15:00:58 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ pthread_mutex_t g_mutex_sec = PTHREAD_MUTEX_INITIALIZER;
 pthread_attr_t	g_atr;
 char			g_flag = A_STOP;
 char			g_mus = P_MUS;
-int				g_sec = 30;
+int				g_sec = 2;
 int				g_car = 0;
 pthread_t		g_music;
 pthread_t		g_key;
