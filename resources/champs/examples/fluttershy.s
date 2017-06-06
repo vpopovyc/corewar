@@ -47,7 +47,6 @@ ardefloop:
 	ld		%0, r16
 	zjmp	%:ardefwrite
 
-
 coregeni:
 	st		r1, 6
 

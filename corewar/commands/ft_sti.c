@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 13:38:41 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/02 18:03:59 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/06 15:42:27 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void		ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int i)
 		src->arg[3] <= REG_NUMBER)
 	{
 		i += src->reg[src->arg[2]] + src->reg[src->arg[3]];
-		data->field[ft_fix(i)] = (unsigned int)src->reg[1] >> 24;
-		data->field[ft_fix(i + 1)] = (unsigned int)src->reg[1] >> 16;
-		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[1] >> 8;
-		data->field[ft_fix(i + 3)] = (unsigned int)src->reg[1];
+		data->field[ft_fix(i)] = (unsigned int)src->reg[src->arg[1]] >> 24;
+		data->field[ft_fix(i + 1)] = (unsigned int)src->reg[src->arg[1]] >> 16;
+		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
+		data->field[ft_fix(i + 3)] = (unsigned int)src->reg[src->arg[1]];
 		ft_write_meta(data, src->name, i);
 		dk_field_meta(data->meta_bold, -50, i, 4);
 	}
