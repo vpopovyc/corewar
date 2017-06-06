@@ -12,7 +12,7 @@
 
 #include "visualisation.h"
 
-void	extend_key_event(char c)
+void	extend_key_event(int c)
 {
 	if (c == '1')
 	{
@@ -40,7 +40,7 @@ void	extend_key_event(char c)
 	}
 }
 
-void	extend_key_event_2(char c)
+void	extend_key_event_2(int c)
 {
 	if (c == 'p')
 	{
@@ -60,38 +60,6 @@ void	extend_key_event_2(char c)
 		g_flag |= STEP;
 		pthread_mutex_unlock(&g_mutex_flag);
 	}
-}
-
-void	check_resize(t_init_screen *init)
-{
-	int y;
-	int x;
-
-	getmaxyx(stdscr, y, x);
-	wattron(stdscr, A_ALTCHARSET);
-	mvwprintw(stdscr, 0, 1, "%c%c%c%c",
-	ACS_HLINE, ACS_HLINE, ACS_HLINE, ACS_HLINE);
-	wattroff(stdscr, A_ALTCHARSET);
-	if (y != init->parent_y || x != init->parent_x)
-	{
-		new_size_calc(init, y, x);
-		if (!(g_flag & I_ERR))
-		{
-			resize_screens(init);
-			draw_borders(init);
-		}
-	}
-}
-
-void	resize(void)
-{
-	wclear(stdscr);
-	mvwprintw(stdscr, 1, 0, "Resize, please");
-	wrefresh(stdscr);
-	pthread_mutex_lock(&g_mutex_flag);
-	g_flag |= I_ERR;
-	g_mus |= P_MUS;
-	pthread_mutex_unlock(&g_mutex_flag);
 }
 
 void	stop(short *tmp_flag, t_init_screen *init)
