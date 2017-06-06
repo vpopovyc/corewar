@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_algoritm_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/03 12:25:30 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/03 12:37:54 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/06 18:45:33 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	ft_algoritm(t_corewar *src)
 {
-	src->winer = src->carriage->name_p;
-	src->n_winer = src->carriage->name;
-	ft_bzero(src->players_live, 4 * src->count_ply);
 	while (src->carriage && src->cycle_to_die != 0 && src->fdump !=
 			(int)src->curent_cycle)
 	{

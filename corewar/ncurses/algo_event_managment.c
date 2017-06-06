@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visualisation.h                                    :+:      :+:    :+:   */
+/*   algo_event_managment.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 19:31:02 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/05/29 16:56:19 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/06 18:42:14 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	algo_event_managment(t_init_screen *init)
 			usleep(3 * 100000);
 		}
 	}
-	(g_flag & STEP) ? g_flag ^= STEP : 0; 
+	(g_flag & STEP) ? g_flag ^= STEP : 0;
 	pthread_mutex_unlock(&g_mutex_flag);
 	usleep(g_sec * 10000);
 }

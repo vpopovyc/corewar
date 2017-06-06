@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 13:04:15 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/03 11:54:56 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/06 19:06:03 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ void	ft_live(t_corewar *data, t_carriage *src)
 			ft_printf(" (%s) is alive\n", src->name_p);
 		}
 	}
-	src->live_in_cycle++;
 	ft_bzero(src->arg, 16);
 }

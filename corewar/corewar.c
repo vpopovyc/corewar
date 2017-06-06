@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 15:20:52 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/06/03 12:44:47 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/06 19:13:35 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ void		dk_dump(char *addr)
 	i = -1;
 	while (++i < MEM_SIZE)
 	{
-		if ((unsigned char)addr[i])
-			ft_printf("\x1b[32m");
 		ft_printf("%.2x ", (unsigned char)addr[i]);
-		ft_printf("\x1b[0m");
 		if ((i + 1) % 64 == 0)
 			ft_printf("\n");
 	}
@@ -108,6 +105,9 @@ int			main(int argc, char **argv)
 	ft_create_field_and_carriage(cor, 0, -2, cor->field);
 	cor->players_live = (int *)malloc(sizeof(int) * cor->count_ply);
 	ft_initialize_func_array();
-	(cor->verbose == 1) ? ft_algoritm_visual(cor) : ft_algoritm(cor);
+	cor->winer = cor->carriage->name_p;
+	cor->n_winer = cor->carriage->name;
+	ft_bzero(cor->players_live, 4 * cor->count_ply);
+	(cor->verbose == 1) ? ft_algoritm_visual(cor, NULL) : ft_algoritm(cor);
 	return (0);
 }

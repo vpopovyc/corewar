@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_algoritm.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/06 18:45:23 by dkosolap          #+#    #+#             */
+/*   Updated: 2017/06/06 19:09:47 by dkosolap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "corewar.h"
 #include "ncurses/visualisation.h"
-#include <time.h>
 
 void		ft_check_cycle_to_die(t_corewar *src, int n_live, int i)
 {
@@ -44,6 +54,8 @@ void		ft_check_mem_cell(t_carriage *head, char *field)
 			{
 				tmp->f = g_funcs[field[tmp->position] - 1];
 				tmp->comand_cycle = g_op[field[tmp->position] - 1].cycles;
+				if (field[tmp->position] == 1)
+					tmp->live_in_cycle++;
 			}
 		}
 		else
@@ -84,22 +96,15 @@ void		sub_meta_bold(char *src)
 	}
 }
 
-void		ft_algoritm_visual(t_corewar *src)
+void		ft_algoritm_visual(t_corewar *src, t_init_screen *init)
 {
-	t_init_screen	*init;
-
-	src->winer = src->carriage->name_p;
-	src->n_winer = src->carriage->name;
-	ft_bzero(src->players_live, 4 * src->count_ply);
 	init = init_ncurses();
-	while (src->carriage && src->cycle_to_die != 0 && src->fdump != (int)src->curent_cycle)
+	while (src->carriage && src->cycle_to_die != 0)
 	{
-		/****/
 		pthread_mutex_lock(&g_mutex_flag);
 		if (g_flag & EXIT)
 			break ;
 		pthread_mutex_unlock(&g_mutex_flag);
-		/****/
 		ft_check_mem_cell(src->carriage, src->field);
 		if (((int)src->last_cycle_to_die + 1) == (int)src->cycle_to_die)
 		{
@@ -111,13 +116,9 @@ void		ft_algoritm_visual(t_corewar *src)
 		ft_increment_cycle(src, src->carriage);
 		sub_meta_bold(src->meta_bold);
 		src->curent_cycle++;
-		/****/
 		g_car = src->n_processes;
 		fill_screen(init, src);
 		algo_event_managment(init);
-		/****/
 	}
-	/****/
 	end_ncurses(init, src);
-	/****/
 }

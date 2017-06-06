@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_field_and_carriage.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrutik <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/03 12:40:21 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/03 13:18:34 by mkrutik          ###   ########.fr       */
+/*   Updated: 2017/06/06 19:34:19 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ t_carriage	*ft_del_carriage(t_carriage *src, t_carriage *del)
 	return (head);
 }
 
-t_carriage	*ft_create_carriage(unsigned int posinion, int num, t_carriage *data, char *name)
+t_carriage	*ft_create_carriage(unsigned int posinion,
+			int num, t_carriage *data, char *name)
 {
 	t_carriage *new;
 
@@ -63,7 +64,7 @@ t_carriage	*ft_create_carriage(unsigned int posinion, int num, t_carriage *data,
 	new->live_in_cycle = 0;
 	new->position = posinion;
 	new->next = NULL;
-	ft_bzero(new->reg, (REG_NUMBER * 4));
+	ft_bzero(new->reg, 4 * REG_NUMBER);
 	if (data)
 	{
 		ft_memcpy(new->reg, data->reg, 4 * REG_NUMBER);
@@ -82,14 +83,15 @@ t_carriage	*ft_create_carriage(unsigned int posinion, int num, t_carriage *data,
 
 void		dk_field_meta(char *meta, int name, int start, int len)
 {
-	int	 i;
+	int		i;
 
 	i = -1;
 	while (++i < len)
 		meta[ft_fix(start + i)] = -name;
 }
 
-void		ft_create_field_and_carriage(t_corewar *src, int n, int num,  char *p)
+void		ft_create_field_and_carriage(t_corewar *src, int n,
+			int num, char *p)
 {
 	t_player		*point;
 	t_carriage		*carriage;
