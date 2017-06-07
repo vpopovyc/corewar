@@ -17,7 +17,7 @@ void	ft_ld(t_corewar *data, t_carriage *src)
 	if (data->field[src->position + 1] == -48)
 	{
 		ft_take_arg(data, src, 0, data->field[src->position]);
-		(src->arg[1] > IDX_MOD) ? (src->arg[1] %= IDX_MOD) : 0;
+		src->arg[1] %= IDX_MOD;
 		if (src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER)
 		{
 			src->reg[src->arg[2]] = ft_take_ind(data, (src->position - 5 +
