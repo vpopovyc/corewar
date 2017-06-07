@@ -17,7 +17,7 @@ static void		ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int i)
 	if (op_code == 88 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER &&
 		src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER)
 	{
-		i += src->reg[src->arg[2]] + src->arg[3];
+		i += (src->reg[src->arg[2]] + src->arg[3]) % IDX_MOD;
 		data->field[ft_fix(i)] = (unsigned int)src->reg[src->arg[1]] >> 24;
 		data->field[ft_fix(i + 1)] = (unsigned int)src->reg[src->arg[1]] >> 16;
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
@@ -29,7 +29,7 @@ static void		ft_sti_1(t_corewar *data, t_carriage *src, char op_code, int i)
 		src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER && src->arg[3] >= 0 &&
 		src->arg[3] <= REG_NUMBER)
 	{
-		i += src->reg[src->arg[2]] + src->reg[src->arg[3]];
+		i += (src->reg[src->arg[2]] + src->reg[src->arg[3]]) % IDX_MOD;
 		data->field[ft_fix(i)] = (unsigned int)src->reg[src->arg[1]] >> 24;
 		data->field[ft_fix(i + 1)] = (unsigned int)src->reg[src->arg[1]] >> 16;
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
@@ -43,7 +43,7 @@ static void		ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int i)
 {
 	if (op_code == 104 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER)
 	{
-		i += src->arg[2] + src->arg[3];
+		i += (src->arg[2] + src->arg[3]) % IDX_MOD;
 		data->field[ft_fix(i)] = (unsigned int)src->reg[src->arg[1]] >> 24;
 		data->field[ft_fix(i + 1)] = (unsigned int)src->reg[src->arg[1]] >> 16;
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
@@ -54,7 +54,7 @@ static void		ft_sti_2(t_corewar *data, t_carriage *src, char op_code, int i)
 	else if (op_code == 100 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER &&
 		src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
 	{
-		i += src->arg[2] + src->reg[src->arg[3]];
+		i += (src->arg[2] + src->reg[src->arg[3]]) % IDX_MOD;
 		data->field[ft_fix(i)] = (unsigned int)src->reg[src->arg[1]] >> 24;
 		data->field[ft_fix(i + 1)] = (unsigned int)src->reg[src->arg[1]] >> 16;
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
@@ -68,7 +68,8 @@ static void		ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int i)
 {
 	if (op_code == 120 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER)
 	{
-		i += data->field[ft_fix(src->arg[2])] + src->arg[3];
+		src->arg[2] = ft_take_ind(data, src->arg[2] % IDX_MOD);
+		i += (src->arg[2] + src->arg[3]) % IDX_MOD;
 		data->field[ft_fix(i)] = (unsigned int)src->reg[src->arg[1]] >> 24;
 		data->field[ft_fix(i + 1)] = (unsigned int)src->reg[src->arg[1]] >> 16;
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
@@ -79,7 +80,8 @@ static void		ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int i)
 	else if (op_code == 116 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER &&
 		src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
 	{
-		i += data->field[ft_fix(src->arg[2])] + src->reg[src->arg[3]];
+		src->arg[2] = ft_take_ind(data, src->arg[2] % IDX_MOD);
+			i += (src->arg[2] + src->reg[src->arg[3]]) % IDX_MOD;		
 		data->field[ft_fix(i)] = (unsigned int)src->reg[src->arg[1]] >> 24;
 		data->field[ft_fix(i + 1)] = (unsigned int)src->reg[src->arg[1]] >> 16;
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;
