@@ -19,7 +19,7 @@ void	ft_zjmp(t_corewar *data, t_carriage *src)
 	{
 		src->arg[1] = (short)((unsigned char)data->field[ft_inc_index(src)]
 			<< 8) | (unsigned char)data->field[ft_inc_index(src)];
-		src->position = ft_fix(src->position - 3 + src->arg[1]);
+		src->position = ft_fix(src->position - 3 + src->arg[1] % IDX_MOD);
 		ft_bzero(src->arg, 16);
 	}
 	else
