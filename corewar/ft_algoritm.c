@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 18:45:23 by dkosolap          #+#    #+#             */
-/*   Updated: 2017/06/06 19:09:47 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/07 18:06:19 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void		sub_meta_bold(char *src)
 void		ft_algoritm_visual(t_corewar *src, t_init_screen *init)
 {
 	init = init_ncurses();
-	while (src->carriage && src->cycle_to_die != 0)
+	while (src->carriage && src->cycle_to_die != 0 && src->fdump !=
+			(int)src->curent_cycle)
 	{
 		pthread_mutex_lock(&g_mutex_flag);
 		if (g_flag & EXIT)

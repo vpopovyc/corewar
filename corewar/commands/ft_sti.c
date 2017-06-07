@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 13:38:41 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/06 15:42:27 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:24:31 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void		ft_sti_3(t_corewar *data, t_carriage *src, char op_code, int i)
 		src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
 	{
 		src->arg[2] = ft_take_ind(data, i + src->arg[2] % IDX_MOD);
-		i += (src->arg[2] + src->reg[src->arg[3]]) % IDX_MOD;		
+		i += (src->arg[2] + src->reg[src->arg[3]]) % IDX_MOD;
 		data->field[ft_fix(i)] = (unsigned int)src->reg[src->arg[1]] >> 24;
 		data->field[ft_fix(i + 1)] = (unsigned int)src->reg[src->arg[1]] >> 16;
 		data->field[ft_fix(i + 2)] = (unsigned int)src->reg[src->arg[1]] >> 8;

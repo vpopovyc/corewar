@@ -6,7 +6,7 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 12:57:01 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/06 18:43:31 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:24:09 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_ldi_lldi_1(t_corewar *data, t_carriage *src, char op, char comd)
 		src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
 	{
 		index = src->position - 6;
-		index += (comd == 10) ? ((src->reg[src->arg[1]] + src->arg[2]) % IDX_MOD) : (src->reg[src->arg[1]] + src->arg[2]);
+		index += (comd == 10) ? ((src->reg[src->arg[1]] + src->arg[2])
+			% IDX_MOD) : (src->reg[src->arg[1]] + src->arg[2]);
 		ft_get_data(data, src, index, comd);
 	}
 	else if (op == 84 && src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER &&
@@ -38,7 +39,9 @@ void	ft_ldi_lldi_1(t_corewar *data, t_carriage *src, char op, char comd)
 		src->arg[2] <= REG_NUMBER)
 	{
 		index = src->position - 5;
-		index += (comd == 10) ? ((src->reg[src->arg[1]] + src->reg[src->arg[2]]) % IDX_MOD) : (src->reg[src->arg[1]] + src->reg[src->arg[2]]);
+		index += (comd == 10) ? ((src->reg[src->arg[1]] +
+		src->reg[src->arg[2]]) % IDX_MOD) :
+		(src->reg[src->arg[1]] + src->reg[src->arg[2]]);
 		ft_get_data(data, src, index, comd);
 	}
 }
@@ -50,14 +53,16 @@ void	ft_ldi_lldi_2(t_corewar *data, t_carriage *src, char op, char comd)
 	if (op == -92 && src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
 	{
 		index = src->position - 7;
-		index += (comd == 10) ? ((src->arg[1] + src->arg[2]) % IDX_MOD) : (src->arg[1] + src->arg[2]);
+		index += (comd == 10) ? ((src->arg[1] + src->arg[2]) % IDX_MOD) :
+		(src->arg[1] + src->arg[2]);
 		ft_get_data(data, src, index, comd);
 	}
 	else if (op == -108 && src->arg[2] >= 0 && src->arg[2] <= REG_NUMBER &&
 		src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
 	{
 		index = src->position - 6;
-		index += (comd == 10) ? ((src->arg[1] + src->reg[src->arg[2]]) % IDX_MOD) : (src->arg[1] + src->reg[src->arg[2]]);
+		index += (comd == 10) ? ((src->arg[1] + src->reg[src->arg[2]]) %
+		IDX_MOD) : (src->arg[1] + src->reg[src->arg[2]]);
 		ft_get_data(data, src, index, comd);
 	}
 }
@@ -73,7 +78,8 @@ void	ft_ldi_lldi_3(t_corewar *data, t_carriage *src, char op, char comd)
 		src->arg[1] = (comd == 10) ? (src->arg[1] % IDX_MOD) : (src->arg[1]);
 		src->arg[1] += index;
 		src->arg[1] = ft_take_ind(data, src->arg[1]);
-		index += (comd == 10) ? ((src->arg[1] + src->reg[src->arg[2]]) % IDX_MOD) : (src->arg[1] + src->reg[src->arg[2]]);
+		index += (comd == 10) ? ((src->arg[1] + src->reg[src->arg[2]]) %
+		IDX_MOD) : (src->arg[1] + src->reg[src->arg[2]]);
 		ft_get_data(data, src, index, comd);
 	}
 	else if (op == -28 && src->arg[3] >= 0 && src->arg[3] <= REG_NUMBER)
@@ -82,7 +88,8 @@ void	ft_ldi_lldi_3(t_corewar *data, t_carriage *src, char op, char comd)
 		src->arg[1] = (comd == 10) ? (src->arg[1] % IDX_MOD) : (src->arg[1]);
 		src->arg[1] += index;
 		src->arg[1] = ft_take_ind(data, src->arg[1]);
-		index += (comd == 10) ? ((src->arg[1] + src->arg[2]) % IDX_MOD) : (src->arg[1] + src->arg[2]);
+		index += (comd == 10) ? ((src->arg[1] + src->arg[2]) % IDX_MOD) :
+		(src->arg[1] + src->arg[2]);
 		ft_get_data(data, src, index, comd);
 	}
 }

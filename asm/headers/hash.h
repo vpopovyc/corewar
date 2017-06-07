@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvolovik <rvolovik@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/20 16:00:29 by rvolovik          #+#    #+#             */
-/*   Updated: 2017/06/05 20:17:20 by rvolovik         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:26:48 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ typedef struct						s_hash
 */
 
 int									key_exist(char *newkey, t_hash *table);
-/*t_hash								*append_key_hash(char *newkey,
-	t_hash *table, int id, int bytes);*/
-t_hash	*append_key_hash(char *newkey, t_hash *collision, int bytes);
+t_hash								*append_key_hash(char *newkey,
+									t_hash *collision, int bytes);
 void								add_key_hash(char *newkey, int bytes,
-	t_hash *table);
+									t_hash *table);
 t_hash								*get_item(char *key, t_hash *table);
 
 /*

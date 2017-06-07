@@ -6,12 +6,11 @@
 /*   By: dkosolap <dkosolap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/01 13:04:15 by mkrutik           #+#    #+#             */
-/*   Updated: 2017/06/06 19:06:03 by dkosolap         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:22:54 by dkosolap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../corewar.h"
-
 
 void	ft_rename(t_corewar *data, t_carriage *src, int name)
 {
