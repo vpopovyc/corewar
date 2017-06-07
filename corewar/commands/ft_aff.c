@@ -20,7 +20,7 @@ void	ft_aff(t_corewar *data, t_carriage *src)
 		ft_inc_index(src);
 		src->arg[1] = data->field[ft_inc_index(src)];
 		if (src->arg[1] >= 0 && src->arg[1] <= REG_NUMBER)
-			ft_printf("%c", src->reg[src->arg[1]] % 256);
+			ft_printf("%c\n", src->reg[src->arg[1]] % 256);
 	}
 	ft_bzero(src->arg, 16);
 }
