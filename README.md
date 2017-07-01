@@ -7,7 +7,7 @@ Main **objective** is to build virtual arena, where programs written in a simple
 
 Virtual Machine:
 
-![VM]({{site.baseurl}}/https://drive.google.com/open?id=0B8fY4yB6eC2jbUtWT2NhOS05Sk0)
+![VM](https://lh6.googleusercontent.com/8q_rgbqnjevoL5ryMo0tD1L6BehbaILrD1B9hFgON6TZcVrjPwUN3VPqBqmCximnh7mkttdvVgbKIbw=w2678-h2450)
 
 **Howto**
 
